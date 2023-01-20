@@ -132,7 +132,6 @@ function animate() {
         )
         
     let obstacle = false;
-    console.log(obstacle);
     if (keys.right.pressed && lastkey == 'right') {
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
