@@ -49,8 +49,6 @@ collisionMaps[0].forEach((row, i) =>{
     })
 })
 
-console.log(boundaries);
-
 let map = new Image();
 map.src = './res/img/maps/stage_0.png';
 
@@ -58,22 +56,30 @@ let playerImg = new Image();
 playerImg.src = './res/img/test/Bob_run_16x16.png';
 playerImg.style.scale = 4;
 
-map.onload = () => {
-    c.drawImage(map, offset.x, offset.y);
-    c.drawImage(playerImg, 0, 0,
-        playerImg.width/24, playerImg.height,
-        $canvas.width/4 - playerImg.width/24, $canvas.height/2 - playerImg.height/2,
-        playerImg.width/24, playerImg.height)
+function rectangularCollision({sprite1, sprite2}) {
+    return (sprite1.position.x + sprite1.width >= sprite2.position.x &&
+        sprite1.position.x <= sprite2.position.x + sprite2.width &&
+        sprite1.position.y + sprite1.height >= sprite2.position.y &&
+        sprite1.position.y <= sprite2.position.y - sprite2.height/2)
 }
 
 class Sprite {
-    constructor({position, velocity, image}) {
+    constructor({position, velocity, image, frames = 1 }) {
         this.position = position;
         this.image = image;
+        this.frames = frames;
+        this.image.onload = () =>{
+            this.width = this.image.width / this.frames;
+            this.height = this.image.height;
+        }
     }
 
     draw() {
-        c.drawImage(this.image, this.position.x, this.position.y);
+        c.drawImage(this.image,
+            0, 0,
+            this.image.width / this.frames, this.image.height,
+            this.position.x, this.position.y,
+            this.image.width / this.frames, this.image.height);
     }
 }
 
@@ -84,6 +90,18 @@ const stage = new Sprite({
     },
     image: map,
 })
+
+const player = new Sprite({
+    position: {
+        x: $canvas.width/2 - 1536/24/2,
+        y: $canvas.height/2 - 128/2,
+    },
+    image: playerImg,
+    frames: 24,
+})
+
+const movables = [stage, ...boundaries]
+
 const keys = {
     left:  {
         pressed: false,
@@ -103,7 +121,8 @@ function animate() {
     stage.draw();
     boundaries.forEach(boundaries => {
         boundaries.draw();
-    })
+    });
+    player.draw();
     c.drawImage(
         playerImg, 0, 0,
         playerImg.width/24, playerImg.height,
@@ -112,20 +131,97 @@ function animate() {
         )
 
     if (keys.right.pressed && lastkey == 'right') {
-        stage.position.x -= playerSpeed;
-        boundaries.position.x += playerSpeed;
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i];
+            if (
+                rectangularCollision({
+                    sprite1: player,
+                    sprite2: {
+                    ...boundary, 
+                    position: {
+                        x: boundary.position.x + playerSpeed,
+                        y: boundary.position.y
+                    }
+                    }
+                })
+            ) {
+                console.log('colliding');
+                break
+            }
+        }
+        movables.forEach((movable) => {
+            movable.position.x -= playerSpeed;
+        })
     } else if (keys.left.pressed && lastkey == 'left') {
-        stage.position.x += playerSpeed;
-        boundaries.position.x += playerSpeed;
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i];
+            if (
+                rectangularCollision({
+                    sprite1: player,
+                    sprite2: {
+                    ...boundary, 
+                    position: {
+                        x: boundary.position.x + playerSpeed,
+                        y: boundary.position.y
+                    }
+                    }
+                })
+            ) {
+                console.log('colliding');
+                break
+            }
+        }
+        movables.forEach((movable)=>{
+            movable.position.x += playerSpeed;
+        })
     } else if (keys.up.pressed && lastkey == 'up') {
-        stage.position.y += playerSpeed;
-        boundaries.position.y += playerSpeed;
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i];
+            if (
+                rectangularCollision({
+                    sprite1: player,
+                    sprite2: {
+                    ...boundary, 
+                    position: {
+                        x: boundary.position.x,
+                        y: boundary.position.y + playerSpeed,
+                    }
+                    }
+                })
+            ) {
+                console.log('colliding');
+                break
+            }
+        }
+        movables.forEach((movable)=>{
+            movable.position.y += playerSpeed;
+        })
     } else if (keys.down.pressed && lastkey == 'down') {
-        stage.position.y -= playerSpeed;
-        boundaries.position.y += playerSpeed;
+        for (let i = 0; i < boundaries.length; i++) {
+            const boundary = boundaries[i];
+            if (
+                rectangularCollision({
+                    sprite1: player,
+                    sprite2: {
+                    ...boundary, 
+                    position: {
+                        x: boundary.position.x,
+                        y: boundary.position.y - playerSpeed,
+                    }
+                    }
+                })
+            ) {
+                console.log('colliding');
+                break
+            }
+        }
+        movables.forEach((movable)=>{
+            movable.position.y -= playerSpeed;
+        })
     }
 }
-    animate();
+
+animate();
 
 let lastkey = '';
 window.addEventListener('keydown', (e) => {
@@ -155,19 +251,15 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     switch (e.key) {
         case 'ArrowRight':
-            console.log('right');
             keys.right.pressed = false;
             break;
         case 'ArrowLeft':
-            console.log('left');
             keys.left.pressed = false;
             break;
         case 'ArrowUp':
-            console.log('up');
             keys.up.pressed = false;
             break;
         case 'ArrowDown':
-            console.log('down');
             keys.down.pressed = false;
             break;
         default: console.log('not the right key');
