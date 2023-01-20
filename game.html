@@ -10,10 +10,30 @@
             margin: 0;
             padding: 0;
         }
+        body {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
+    <!--music is just to test-->
+    <audio id="music" loop autoplay src="./res/img/test/funky-wip-loop.ogg" type="audio/mp3"></audio>
     <canvas id="view"></canvas>
+    <button id="musicBtn" style="position: absolute; top: 0; right: 0; height: 48px; background: black; color:white;font-size: 48px; outline: none;">music</button>
     <script type="module" src="./start.mjs"></script>
+    <script>
+        const playStop = document.querySelector('#musicBtn');
+        const music = document.querySelector('#music');
+        let pause = false;
+        playStop.addEventListener('click', () => { 
+            if (!pause) {
+                music.pause();
+                pause = true;
+            } else {
+                music.play();
+                pause = false;
+            }
+        })
+    </script>
 </body>
 </html>

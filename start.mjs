@@ -2,8 +2,11 @@ import { collisions } from "./data/collisions.mjs";
 
 const $canvas = document.querySelector('#view');
 const c = $canvas.getContext('2d');
-$canvas.width = 1024;
-$canvas.height = 576;
+//$canvas.width = 1024;
+//$canvas.height = 576;
+
+$canvas.width = window.innerWidth;
+$canvas.height = window.innerHeight;
 c.fillStyle = 'black';
 c.fillRect(0, 0, $canvas.width, $canvas.height);
 let playerSpeed = 5
@@ -57,8 +60,8 @@ playerImg.src = './res/img/test/Bob_run_16x16.png';
 playerImg.style.scale = 4;
 
 function rectangularCollision({sprite1, sprite2}) {
-    return (sprite1.position.x + sprite1.width >= sprite2.position.x &&
-        sprite1.position.x <= sprite2.position.x + sprite2.width &&
+    return (sprite1.position.x + sprite1.width - 8 >= sprite2.position.x &&
+        sprite1.position.x <= sprite2.position.x + sprite2.width - 8 &&
         sprite1.position.y + sprite1.height >= sprite2.position.y &&
         sprite1.position.y <= sprite2.position.y - sprite2.height/2)
 }
@@ -115,9 +118,19 @@ const keys = {
     down:  {
         pressed: false,
     },
+    shift: {
+        pressed: false,
+    }
 }
 
 function animate() {
+    playerSpeed = 5
+    if (keys.shift.pressed) {
+        playerSpeed = 10;
+    };
+    if (!keys.shift.pressed) {
+        playerSpeed = 5;
+    }
     window.requestAnimationFrame(animate);
     stage.draw();
     boundaries.forEach(boundaries => {
@@ -141,7 +154,7 @@ function animate() {
                     sprite2: {
                     ...boundary, 
                     position: {
-                        x: boundary.position.x - playerSpeed,
+                        x: boundary.position.x - 10,
                         y: boundary.position.y
                     }
                     }
@@ -257,7 +270,10 @@ window.addEventListener('keydown', (e) => {
             keys.down.pressed = true;
             lastkey = 'down';
             break;
-        default: console.log('not the right key');
+        case 'Shift':
+            keys.shift.pressed = true;
+            break;
+        default: console.log(e);
         lastkey = '';
             break;
     }
@@ -277,7 +293,10 @@ window.addEventListener('keyup', (e) => {
         case 'ArrowDown':
             keys.down.pressed = false;
             break;
-        default: console.log('not the right key');
+        case 'Shift':
+            keys.shift.pressed = false;
+            break;
+        default: console.log('e');
             break;
     }
 });
