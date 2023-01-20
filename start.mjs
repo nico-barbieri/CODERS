@@ -24,7 +24,7 @@ class Boundary {
     }
 
     draw() {
-        c.fillStyle = 'red';
+        c.fillStyle = 'transparent';
         c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
@@ -116,6 +116,7 @@ const keys = {
         pressed: false,
     },
 }
+
 function animate() {
     window.requestAnimationFrame(animate);
     stage.draw();
@@ -129,7 +130,9 @@ function animate() {
         $canvas.width/2 - playerImg.width/24/2, $canvas.height/2 - playerImg.height/2,
         playerImg.width/24, playerImg.height
         )
-
+        
+    let obstacle = false;
+    console.log(obstacle);
     if (keys.right.pressed && lastkey == 'right') {
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -139,19 +142,23 @@ function animate() {
                     sprite2: {
                     ...boundary, 
                     position: {
-                        x: boundary.position.x + playerSpeed,
+                        x: boundary.position.x - playerSpeed,
                         y: boundary.position.y
                     }
                     }
                 })
             ) {
+                obstacle = true;
                 console.log('colliding');
                 break
             }
         }
-        movables.forEach((movable) => {
-            movable.position.x -= playerSpeed;
-        })
+        if (!obstacle){
+            movables.forEach((movable) => {
+                movable.position.x -= playerSpeed;
+            })
+        }
+        
     } else if (keys.left.pressed && lastkey == 'left') {
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -167,13 +174,16 @@ function animate() {
                     }
                 })
             ) {
+                obstacle = true;
                 console.log('colliding');
                 break
             }
         }
-        movables.forEach((movable)=>{
-            movable.position.x += playerSpeed;
-        })
+        if (!obstacle) {
+            movables.forEach((movable) => {
+                movable.position.x += playerSpeed;
+            })
+        }
     } else if (keys.up.pressed && lastkey == 'up') {
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -181,21 +191,24 @@ function animate() {
                 rectangularCollision({
                     sprite1: player,
                     sprite2: {
-                    ...boundary, 
-                    position: {
+                        ...boundary,
+                        position: {
                         x: boundary.position.x,
                         y: boundary.position.y + playerSpeed,
                     }
                     }
                 })
             ) {
+                obstacle = true;
                 console.log('colliding');
                 break
             }
         }
-        movables.forEach((movable)=>{
-            movable.position.y += playerSpeed;
-        })
+        if (!obstacle) {
+            movables.forEach((movable) => {
+                movable.position.y += playerSpeed;
+            })
+        }
     } else if (keys.down.pressed && lastkey == 'down') {
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
@@ -211,13 +224,16 @@ function animate() {
                     }
                 })
             ) {
+                obstacle = true;
                 console.log('colliding');
                 break
             }
         }
-        movables.forEach((movable)=>{
-            movable.position.y -= playerSpeed;
-        })
+        if (!obstacle) {
+            movables.forEach((movable)=>{
+                movable.position.y -= playerSpeed;
+            })
+        }
     }
 }
 
