@@ -13,10 +13,11 @@ export class Sprite {
     }
 
     draw() {
-        c.drawImage(this.image, 
-            this.frames.val * this.width, 
+        c.drawImage(
+            this.image, 
+            this.frames.val * this.width + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
             0,
-            this.image.width / this.frames.max, this.image.height,
+            (this.image.width / this.frames.max) - 0.5, this.image.height, 
             this.position.x, this.position.y,
             this.image.width / this.frames.max, this.image.height,
         );
