@@ -18,8 +18,8 @@ export class Sprite {
             0,
             this.image.width / this.frames.max, this.image.height,
             this.position.x, this.position.y,
-            this.image.width / this.frames.max, this.image.height
-            );
+            this.image.width / this.frames.max, this.image.height,
+        );
 
        
         if (this.frames.max > 1) {

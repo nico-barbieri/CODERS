@@ -286,8 +286,6 @@ function animate() {
             })
         }
     }
-
-    console.log(player.frames.hold);
 }
 
 animate();
