@@ -1,6 +1,27 @@
-import { c, globalScale } from "../start.mjs";
+import { /*c,*/ globalScale } from "../start.mjs";
+
+export class Stage {
+    constructor(config) {
+        this.canvas = config.canvas;
+        this.c = this.canvas.getContext('2d');
+    }
+
+    fullscreen(){
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    init(){
+        console.log('Hello coder!');
+        this.c.fillStyle = 'black';
+        this.c.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+}
+
 export class Sprite {
-    constructor({position, velocity, image, frames = {max:1}, sprites = {}}) {
+    constructor({stage, position, velocity, image, frames = {max:1}, sprites = {}, shadow = {active: false}}) {
+        this.stage = stage;
+        this.c = this.stage.c;
         this.position = position;
         this.image = image;
         this.frames = {...frames, val: 0, elapsed: 0};
@@ -10,10 +31,17 @@ export class Sprite {
         }
         this.moving = false;
         this.sprites = sprites;
+        this.shadow = shadow;
     }
 
     draw() {
-        c.drawImage(
+        if (this.shadow.active) {
+            this.c.drawImage(
+                this.shadow.src,
+                this.stage.canvas.width/2 - 32, this.stage.canvas.height/2,
+            )
+        }
+        this.c.drawImage(
             this.image, 
             this.frames.val * this.width + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
             0,
@@ -35,14 +63,16 @@ export class Sprite {
 }
 
 export class Boundary {
-    constructor({position}) {
+    constructor({stage, position}) {
+        this.stage = stage;
+        this.c = this.stage.c
         this.position = position;
         this.width = 16 * globalScale
         this.height = 16 * globalScale
     }
 
     draw() {
-        c.fillStyle = 'transparent';
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        this.c.fillStyle = 'transparent';
+        this.c.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
 }
