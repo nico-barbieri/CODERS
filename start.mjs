@@ -1,41 +1,30 @@
 import { collisions } from "./data/collisions.mjs";
+import { Sprite, Boundary } from "./js/classes.mjs";
 
 const $canvas = document.querySelector('#view');
-const c = $canvas.getContext('2d');
-//$canvas.width = 1024;
-//$canvas.height = 576;
+
+export const c = $canvas.getContext('2d');
+export const globalScale = 4;
 
 $canvas.width = window.innerWidth;
 $canvas.height = window.innerHeight;
 c.fillStyle = 'black';
 c.fillRect(0, 0, $canvas.width, $canvas.height);
 let playerSpeed = 5
+let lastkey = 'down';
 
 let collisionMaps = {
     0: [],
 } 
 
-for (let i = 0; i < collisions.stage0.length; i+=70) {
-    collisionMaps[0].push(collisions.stage0.slice(i,70 +i));    
-}
-
-class Boundary {
-    constructor({position}) {
-        this.position = position;
-        this.width = 64
-        this.height = 64
-    }
-
-    draw() {
-        c.fillStyle = 'transparent';
-        c.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
+for (let i = 0; i < collisions.stage0.length; i+=90) {
+    collisionMaps[0].push(collisions.stage0.slice(i,90 +i));    
 }
 
 const boundaries = [];
 let offset = {
-    x: -50,
-    y: -3250,
+    x: -600,
+    y: -3750,
 }
 collisionMaps[0].forEach((row, i) =>{
     row.forEach((symbol, j) =>{
@@ -55,9 +44,29 @@ collisionMaps[0].forEach((row, i) =>{
 let map = new Image();
 map.src = './res/img/maps/stage_0.png';
 
-let playerImg = new Image();
-playerImg.src = './res/img/test/Bob_run_16x16.png';
-playerImg.style.scale = 4;
+let mapForeground = new Image();
+mapForeground.src = './res/img/maps/stage_0_foreground.png';
+
+let playerUp = new Image();
+playerUp.src = './res/img/sprites/player_0_up.png';
+let playerWalkingUp = new Image();
+playerWalkingUp.src = './res/img/sprites/player_0_walk_up.png';
+
+let playerDown = new Image();
+playerDown.src = './res/img/sprites/player_0_down.png';
+let playerWalkingDown = new Image();
+playerWalkingDown.src = './res/img/sprites/player_0_walk_down.png';
+
+let playerRight = new Image();
+playerRight.src = './res/img/sprites/player_0_right.png';
+let playerWalkingRight = new Image();
+playerWalkingRight.src = './res/img/sprites/player_0_walk_right.png';
+
+let playerLeft = new Image();
+playerLeft.src = './res/img/sprites/player_0_left.png';
+let playerWalkingLeft = new Image();
+playerWalkingLeft.src = './res/img/sprites/player_0_walk_left.png';
+
 
 function rectangularCollision({sprite1, sprite2}) {
     return (sprite1.position.x + sprite1.width - 8 >= sprite2.position.x &&
@@ -66,25 +75,7 @@ function rectangularCollision({sprite1, sprite2}) {
         sprite1.position.y <= sprite2.position.y - sprite2.height/2)
 }
 
-class Sprite {
-    constructor({position, velocity, image, frames = 1 }) {
-        this.position = position;
-        this.image = image;
-        this.frames = frames;
-        this.image.onload = () =>{
-            this.width = this.image.width / this.frames;
-            this.height = this.image.height;
-        }
-    }
 
-    draw() {
-        c.drawImage(this.image,
-            0, 0,
-            this.image.width / this.frames, this.image.height,
-            this.position.x, this.position.y,
-            this.image.width / this.frames, this.image.height);
-    }
-}
 
 const stage = new Sprite({
     position: {
@@ -94,16 +85,39 @@ const stage = new Sprite({
     image: map,
 })
 
-const player = new Sprite({
+const stageForeground = new Sprite({
     position: {
-        x: $canvas.width/2 - 1536/24/2,
-        y: $canvas.height/2 - 128/2,
+        x: offset.x,
+        y: offset.y,
     },
-    image: playerImg,
-    frames: 24,
+    image: mapForeground,
 })
 
-const movables = [stage, ...boundaries]
+const player = new Sprite({
+    position: {
+        x: $canvas.width/2 - 384/6/2,
+        y: $canvas.height/2 - 128/2,
+    },
+    image: playerDown,
+    frames: {
+        max: 6,
+        hold: 7,
+    },
+    sprites: {
+        up: playerUp,
+        down: playerDown,
+        right: playerRight,
+        left: playerLeft,
+        walk: {
+            up: playerWalkingUp,
+            down: playerWalkingDown,
+            right: playerWalkingRight,
+            left: playerWalkingLeft,
+        }
+    }
+})
+
+const movables = [stage, ...boundaries, stageForeground]
 
 const keys = {
     left:  {
@@ -124,28 +138,45 @@ const keys = {
 }
 
 function animate() {
+    
+    window.requestAnimationFrame(animate);
+    //reset player speed every frame based on shift.pressed value
     playerSpeed = 5
     if (keys.shift.pressed) {
         playerSpeed = 10;
-    };
+        player.frames.hold = 5;
+    }
     if (!keys.shift.pressed) {
         playerSpeed = 5;
+        if (player.moving) {
+            player.frames.hold = 7;
+        } else {
+            player.frames.hold = 27;
+        }
     }
-    window.requestAnimationFrame(animate);
+    
+    //draw map
     stage.draw();
+    //draw boundaries for collisions
     boundaries.forEach(boundaries => {
         boundaries.draw();
     });
+    //draw player
     player.draw();
-    c.drawImage(
-        playerImg, 0, 0,
-        playerImg.width/24, playerImg.height,
-        $canvas.width/2 - playerImg.width/24/2, $canvas.height/2 - playerImg.height/2,
-        playerImg.width/24, playerImg.height
-        )
+    //draw foreground
+    stageForeground.draw()
         
     let obstacle = false;
+    player.moving = false;
+    //STILL 
+    if (lastkey == 'right') player.image = player.sprites.right
+    else if (lastkey == 'left') player.image = player.sprites.left
+    else if (lastkey == 'up') player.image = player.sprites.up
+    else if (lastkey == 'down') player.image = player.sprites.down
+    //MOVING
     if (keys.right.pressed && lastkey == 'right') {
+        player.moving = true;
+        player.image = player.sprites.walk.right;
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
             if (
@@ -172,6 +203,9 @@ function animate() {
         }
         
     } else if (keys.left.pressed && lastkey == 'left') {
+        player.moving = true;
+        player.image = player.sprites.walk.left;
+
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
             if (
@@ -197,6 +231,9 @@ function animate() {
             })
         }
     } else if (keys.up.pressed && lastkey == 'up') {
+        player.moving = true;
+        player.image = player.sprites.walk.up;
+
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
             if (
@@ -222,6 +259,8 @@ function animate() {
             })
         }
     } else if (keys.down.pressed && lastkey == 'down') {
+        player.moving = true;
+        player.image = player.sprites.walk.down;
         for (let i = 0; i < boundaries.length; i++) {
             const boundary = boundaries[i];
             if (
@@ -247,11 +286,13 @@ function animate() {
             })
         }
     }
+
+    console.log(player.frames.hold);
 }
 
 animate();
 
-let lastkey = '';
+
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
         case 'ArrowRight':
@@ -296,7 +337,7 @@ window.addEventListener('keyup', (e) => {
         case 'Shift':
             keys.shift.pressed = false;
             break;
-        default: console.log('e');
+        default:
             break;
     }
 });
