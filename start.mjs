@@ -8,7 +8,7 @@ let map = new Image();
 map.src = './res/img/maps/stage_0.png';
 
 let mapForeground = new Image();
-mapForeground.src = './res/img/maps/stage_0_foreground.png';
+mapForeground.src = './res/img/maps/stage_0_foreground_REFINED.png';
 
 let playerUp = new Image();
 playerUp.src = './res/img/sprites/player_0_up.png';
@@ -116,7 +116,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                             },
                             offset: {
                                 x: 0,
-                                y: 12,
+                                y: 6,
                             }
                         })
                     )
