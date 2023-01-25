@@ -1,10 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: white;
+}
+
+.header {
+  height: 9.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+}
+.header .header-inner {
+  height: 100%;
+}
+.header .header-logo {
+  width: 145px;
+  pointer-events: visible;
+}
+.header .header-logo img {
+  width: 100%;
+}
+.header .header-nav li ~ li {
+  margin-left: 1rem;
+}
+.header .header-nav a {
+  display: inline-block;
+  padding: 0.5rem;
+  text-transform: uppercase;
+  position: relative;
+  pointer-events: visible;
+}
+.header .header-nav a::before, .header .header-nav a::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 0;
+  background-color: #d0a85c;
+  transition: width 0.3s ease;
+}
+.header .header-nav a:hover::before, .header .header-nav a:hover::after {
+  width: 50%;
+}
+.header .header-nav a::before {
+  left: 0;
+  top: 0;
+}
+.header .header-nav a::after {
+  right: 0;
+  bottom: 0;
 }
 
 .main-header {
@@ -23,4 +75,22 @@ html, body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.main-header .start button {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  padding: 1.5rem 5rem;
+  font-family: "Rowdies", cursive;
+  border-top-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+.main-header .start button-main {
+  background-color: #d0a85c;
+}
+.main-header .start button-second {
+  background-color: #4267b2;
 }/*# sourceMappingURL=App.css.map */
