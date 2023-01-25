@@ -35,7 +35,7 @@ playerShadow.src =  './res/img/sprites/shadow.png';
 
 //offset of the map
 let offset = {
-    x: -600,
+    x: -620,
     y: -3750,
 }
 
@@ -163,7 +163,7 @@ function rectangularCollision({sprite1, sprite2}) {
     return (sprite1.position.x + sprite1.width - 8 >= sprite2.position.x &&
         sprite1.position.x <= sprite2.position.x + sprite2.width - 8 &&
         sprite1.position.y + sprite1.height >= sprite2.position.y &&
-        sprite1.position.y <= sprite2.position.y - sprite2.height/2)
+        sprite1.position.y <= sprite2.position.y - (sprite2.offset.y * globalScale) - sprite2.height/2)
 }
 
 
