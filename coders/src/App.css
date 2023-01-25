@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.header-wrapper{
+  height: 100vh;
+}
+
+.background-img{
+  height: 100vh;
+  background-image: url(../res/img/maps/background.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100vw
+  
+
+}
