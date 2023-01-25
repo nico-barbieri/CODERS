@@ -44,7 +44,6 @@ body {
   position: absolute;
   height: 2px;
   width: 0;
-  background-color: #d0a85c;
   transition: width 0.3s ease;
 }
 .header .header-nav a:hover::before, .header .header-nav a:hover::after {
@@ -64,13 +63,13 @@ body {
   background-image: url(../res/img/maps/background.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 100vw;
+  background-size: 150%;
 }
 .main-header .start {
   z-index: 2;
   width: 400px;
   height: 300px;
-  background-color: white;
+  background-color: #4267b2;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -79,12 +78,16 @@ body {
 .main-header .start button {
   font-weight: 700;
   font-size: 1.5rem;
-  color: #fff;
   border: 0;
   outline: 0;
+  background-color: #d0a85c;
   cursor: pointer;
-  padding: 1.5rem 5rem;
   font-family: "Rowdies", cursive;
-  border-top-left-radius: 30px;
-  border-bottom-right-radius: 30px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.main-header .start button:hover {
+  background-color: rgba(208, 167, 92, 0.7568627451);
+  transform: scale(0.9);
+  transition: 0.3s;
 }/*# sourceMappingURL=App.css.map */
