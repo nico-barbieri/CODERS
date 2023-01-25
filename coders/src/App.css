@@ -42,6 +42,7 @@ body {
 .header .header-nav a::before, .header .header-nav a::after {
   content: "";
   position: absolute;
+  background-color: #4267b2;
   height: 2px;
   width: 0;
   transition: width 0.3s ease;
