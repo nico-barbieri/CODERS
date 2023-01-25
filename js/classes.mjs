@@ -63,16 +63,25 @@ export class Sprite {
 }
 
 export class Boundary {
-    constructor({stage, position}) {
+    constructor({stage, position, scale = {x: 1, y: 1}, offset = {x: 0, y: 0}}) {
         this.stage = stage;
         this.c = this.stage.c
-        this.position = position;
-        this.width = 16 * globalScale
-        this.height = 16 * globalScale
+        this.scale = scale;
+        this.offset = offset;
+        this.position = {...position}
+        this.position.x += (this.offset.x * globalScale);
+        this.position.y += (this.offset.y * globalScale);
+        this.width = 16 * globalScale * this.scale.x;
+        this.height = 16 * globalScale * this.scale.y;
     }
 
     draw() {
         this.c.fillStyle = 'transparent';
-        this.c.fillRect(this.position.x, this.position.y, this.width, this.height);
+        this.c.fillRect(
+            this.position.x, 
+            this.position.y, 
+            this.width, 
+            this.height,
+            );
     }
 }

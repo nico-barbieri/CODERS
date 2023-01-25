@@ -87,17 +87,73 @@ for (let i = 0; i < collisions.stage0.length; i+=90) {
 //create boundaries array and populate it
 let boundaries = [];
 collisionMaps.level_0.forEach((row, i) =>{
-    row.forEach((symbol, j) =>{
+    row.forEach((symbol, j) => {
         if (symbol !== 0) {
-            boundaries.push(
-                new Boundary({
-                    stage: level_0,
-                    position: {
-                        x: (64 * j) + offset.x,
-                        y: (64 * i) + offset.y,
-                    }
-                })
-            )
+            switch (symbol) {
+                case 1387:
+                    boundaries.push(
+                        new Boundary({
+                            stage: level_0,
+                            position: {
+                                x: (64 * j) + offset.x,
+                                y: (64 * i) + offset.y,
+                            }
+                        })
+                    )
+                    break;
+
+                case 1388:
+                    boundaries.push(
+                        new Boundary({
+                            stage: level_0,
+                            position: {
+                                x: (64 * j) + offset.x,
+                                y: (64 * i) + offset.y,
+                            },
+                            scale: {
+                                x: 1,
+                                y: .25,
+                            },
+                            offset: {
+                                x: 0,
+                                y: 12,
+                            }
+                        })
+                    )
+                    break;
+
+                case 1389:
+                    boundaries.push(
+                        new Boundary({
+                            stage: level_0,
+                            position: {
+                                x: (64 * j) + offset.x,
+                                y: (64 * i) + offset.y,
+                            },
+                            scale: {
+                                x: 1,
+                                y: 1,
+                            },
+                            offset: {
+                                x: 0,
+                                y: 0,
+                            }
+                        })
+                    )
+                    break;
+
+                default:
+                    boundaries.push(
+                        new Boundary({
+                            stage: level_0,
+                            position: {
+                                x: (64 * j) + offset.x,
+                                y: (64 * i) + offset.y,
+                            }
+                        })
+                    )
+                    break;
+            }
         }
     })
 })
