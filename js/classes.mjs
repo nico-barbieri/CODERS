@@ -39,13 +39,13 @@ export class Sprite {
         if (this.shadow.active) {
             this.c.drawImage(
                 this.shadow.src,
-                this.stage.canvas.width/2 - 32 - this.cutBorder.y, this.stage.canvas.height/2 - this.cutBorder.y,
+                this.stage.canvas.width/2 - 32, this.stage.canvas.height/2,
             )
         }
         this.c.drawImage(
             this.image, 
-            this.frames.val * this.width + 0.5 + this.cutBorder.x, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
-            0 + this.cutBorder.y,
+            this.frames.val * this.width + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
+            0,
             (this.image.width / this.frames.max) - 0.5, this.image.height, 
             this.position.x, this.position.y,
             this.image.width / this.frames.max, this.image.height,

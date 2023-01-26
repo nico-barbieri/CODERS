@@ -116,7 +116,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                             },
                             offset: {
                                 x: 0,
-                                y: 7.751,
+                                y: 8,
                             }
                         })
                     )
@@ -132,11 +132,11 @@ collisionMaps.level_0.forEach((row, i) =>{
                             },
                             scale: {
                                 x: 1,
-                                y: 11/16 - 0.001,
+                                y: 11/16 - 0.01,
                             },
                             offset: {
                                 x: 0,
-                                y: 0,
+                                y: -0.001,
                             }
                         })
                     )
@@ -178,10 +178,10 @@ collisionMaps.level_0.forEach((row, i) =>{
 
 //function to detect collisions ("-8" is added to adjust collision distance)
 function rectangularCollision({sprite1, sprite2}) {
-    return (sprite1.position.x + sprite1.width - 8 >= sprite2.position.x &&
-        sprite1.position.x <= sprite2.position.x + sprite2.width - 8 &&
-        sprite1.position.y + sprite1.height >= sprite2.position.y &&
-        sprite1.position.y + sprite1.height/1.6<= sprite2.position.y + sprite2.height)
+    return (sprite1.position.x + sprite1.width - 8 > sprite2.position.x &&
+        sprite1.position.x < sprite2.position.x + sprite2.width - 8 &&
+        sprite1.position.y + sprite1.height > sprite2.position.y &&
+        sprite1.position.y + sprite1.height/1.6< sprite2.position.y + sprite2.height)
 }
 
 
