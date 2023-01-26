@@ -7,8 +7,8 @@ export class Stage {
     }
 
     fullscreen(){
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.canvas.width = Math.ceil(window.innerWidth);
+        this.canvas.height = Math.ceil(window.innerHeight);
     }
 
     init(){
@@ -19,15 +19,16 @@ export class Stage {
 }
 
 export class Sprite {
-    constructor({stage, position, velocity, image, frames = {max:1}, sprites = {}, shadow = {active: false}}) {
+    constructor({stage, position, cutBorder={x: 0, y: 0}, velocity, image, frames = {max:1}, sprites = {}, shadow = {active: false}}) {
         this.stage = stage;
         this.c = this.stage.c;
         this.position = position;
         this.image = image;
         this.frames = {...frames, val: 0, elapsed: 0};
+        this.cutBorder = cutBorder;
         this.image.onload = () =>{
-            this.width = this.image.width / this.frames.max;
-            this.height = this.image.height;
+            this.width = (this.image.width / this.frames.max);
+            this.height = (this.image.height);
         }
         this.moving = false;
         this.sprites = sprites;
@@ -38,13 +39,13 @@ export class Sprite {
         if (this.shadow.active) {
             this.c.drawImage(
                 this.shadow.src,
-                this.stage.canvas.width/2 - 32, this.stage.canvas.height/2,
+                this.stage.canvas.width/2 - 32 - this.cutBorder.y, this.stage.canvas.height/2 - this.cutBorder.y,
             )
         }
         this.c.drawImage(
             this.image, 
-            this.frames.val * this.width + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
-            0,
+            this.frames.val * this.width + 0.5 + this.cutBorder.x, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
+            0 + this.cutBorder.y,
             (this.image.width / this.frames.max) - 0.5, this.image.height, 
             this.position.x, this.position.y,
             this.image.width / this.frames.max, this.image.height,

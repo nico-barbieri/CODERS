@@ -112,11 +112,11 @@ collisionMaps.level_0.forEach((row, i) =>{
                             },
                             scale: {
                                 x: 1,
-                                y: .25,
+                                y: 11/16 - 0.01,
                             },
                             offset: {
                                 x: 0,
-                                y: 6,
+                                y: 7.751,
                             }
                         })
                     )
@@ -132,7 +132,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                             },
                             scale: {
                                 x: 1,
-                                y: 1,
+                                y: 11/16 - 0.001,
                             },
                             offset: {
                                 x: 0,
@@ -141,7 +141,25 @@ collisionMaps.level_0.forEach((row, i) =>{
                         })
                     )
                     break;
-
+                case 1390:
+                    boundaries.push(
+                        new Boundary({
+                            stage: level_0,
+                            position: {
+                                x: (64 * j) + offset.x,
+                                y: (64 * i) + offset.y,
+                            },
+                            scale: {
+                                x: .25,
+                                y: 1,
+                            },
+                            offset: {
+                                x: 12,
+                                y: 0,
+                            }
+                        })
+                    )
+                    break;
                 default:
                     boundaries.push(
                         new Boundary({
@@ -163,7 +181,7 @@ function rectangularCollision({sprite1, sprite2}) {
     return (sprite1.position.x + sprite1.width - 8 >= sprite2.position.x &&
         sprite1.position.x <= sprite2.position.x + sprite2.width - 8 &&
         sprite1.position.y + sprite1.height >= sprite2.position.y &&
-        sprite1.position.y <= sprite2.position.y - (sprite2.offset.y * globalScale) - sprite2.height/2)
+        sprite1.position.y + sprite1.height/1.6<= sprite2.position.y + sprite2.height)
 }
 
 
@@ -189,6 +207,10 @@ const stageForeground = new Sprite({
 const player = new Sprite({
     stage: level_0,
     image: playerDown,
+    cutBorder: {
+        x: 0,
+        y: 1,
+    },
     position: {
         x: level_0.canvas.width/2 - 32,
         y: level_0.canvas.height/2 - 64,
