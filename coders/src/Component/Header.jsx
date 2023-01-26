@@ -1,7 +1,7 @@
 export function Header() {
 
     return (
-        <div className="header">
+        <nav className="header">
             <div className="header-inner container flex items-center justify-around">
                 <div className="header-logo ">
                     LOGO
@@ -12,6 +12,6 @@ export function Header() {
                     <li><a href="#">support</a></li>
                 </ul>
             </div>
-        </div>
+        </nav>
     )
 }
