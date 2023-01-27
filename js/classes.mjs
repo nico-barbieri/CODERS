@@ -1,11 +1,12 @@
-import { /*c,*/ globalScale } from "../start.mjs";
-
 export class Stage {
     constructor(config) {
         this.canvas = config.canvas;
         this.c = this.canvas.getContext('2d');
     }
-
+    setDimensions(width, height){
+        this.canvas.width = width;
+        this.canvas.height = height;
+    }
     fullscreen(){
         this.canvas.width = Math.ceil(window.innerWidth);
         this.canvas.height = Math.ceil(window.innerHeight);
@@ -19,16 +20,17 @@ export class Stage {
 }
 
 export class Sprite {
-    constructor({stage, position, cutBorder={x: 0, y: 0}, velocity, image, frames = {max:1}, sprites = {}, shadow = {active: false}}) {
+    constructor({stage, position, cutBorder={x: 0, y: 0}, scaleDown = 1, velocity, image, frames = {max:1}, sprites = {}, shadow = {active: false}}) {
         this.stage = stage;
         this.c = this.stage.c;
         this.position = position;
         this.image = image;
         this.frames = {...frames, val: 0, elapsed: 0};
         this.cutBorder = cutBorder;
+        this.scaleDown = scaleDown;
         this.image.onload = () =>{
-            this.width = (this.image.width / this.frames.max);
-            this.height = (this.image.height);
+            this.width = (this.image.width / this.frames.max / scaleDown);
+            this.height = (this.image.height / scaleDown);
         }
         this.moving = false;
         this.sprites = sprites;
@@ -46,7 +48,7 @@ export class Sprite {
             this.image, 
             this.frames.val * this.width + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
             0,
-            (this.image.width / this.frames.max) - 0.5, this.image.height, 
+            ((this.image.width / this.frames.max) * this.scaleDown) - 0.5, this.image.height * this.scaleDown, 
             this.position.x, this.position.y,
             this.image.width / this.frames.max, this.image.height,
         );
@@ -64,9 +66,10 @@ export class Sprite {
 }
 
 export class Boundary {
-    constructor({stage, position, scale = {x: 1, y: 1}, offset = {x: 0, y: 0}}) {
+    constructor({globalScale, stage, position, scale = {x: 1, y: 1}, offset = {x: 0, y: 0}}) {
         this.stage = stage;
-        this.c = this.stage.c
+        this.c = this.stage.c;
+        this.globalScale = globalScale;
         this.scale = scale;
         this.offset = offset;
         this.position = {...position}
@@ -77,7 +80,7 @@ export class Boundary {
     }
 
     draw() {
-        this.c.fillStyle = 'transparent';
+        this.c.fillStyle = 'red';
         this.c.fillRect(
             this.position.x, 
             this.position.y, 

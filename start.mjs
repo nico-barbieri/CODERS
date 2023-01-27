@@ -2,7 +2,7 @@ import { collisions } from "./data/collisions.mjs";
 import { Sprite, Boundary, Stage } from "./js/classes.mjs";
 
 //variables initialization
-export const globalScale = 4; //scale of pixel art (400%)
+const globalScale = 4; //scale of pixel art (400%)
 //create images
 let map = new Image();
 map.src = './res/img/maps/stage_0.png';
@@ -36,7 +36,7 @@ playerShadow.src =  './res/img/sprites/shadow.png';
 //offset of the map
 let offset = {
     x: -620,
-    y: -3750,
+    y: -3700,
 }
 
 //create "keys" object
@@ -93,6 +93,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                 case 1387:
                     boundaries.push(
                         new Boundary({
+                            globalScale,
                             stage: level_0,
                             position: {
                                 x: (64 * j) + offset.x,
@@ -105,6 +106,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                 case 1388:
                     boundaries.push(
                         new Boundary({
+                            globalScale,
                             stage: level_0,
                             position: {
                                 x: (64 * j) + offset.x,
@@ -125,6 +127,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                 case 1389:
                     boundaries.push(
                         new Boundary({
+                            globalScale,
                             stage: level_0,
                             position: {
                                 x: (64 * j) + offset.x,
@@ -144,6 +147,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                 case 1390:
                     boundaries.push(
                         new Boundary({
+                            globalScale,
                             stage: level_0,
                             position: {
                                 x: (64 * j) + offset.x,
@@ -163,6 +167,7 @@ collisionMaps.level_0.forEach((row, i) =>{
                 default:
                     boundaries.push(
                         new Boundary({
+                            globalScale,
                             stage: level_0,
                             position: {
                                 x: (64 * j) + offset.x,
