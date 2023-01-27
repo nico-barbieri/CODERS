@@ -91,12 +91,14 @@ body {
 
   .start {
     z-index: 2;
-    width: 400px;
-    height: 300px;
+    width: 194px;
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
+    .logo-container{
+      
+    }
 
     button {
       font-weight: 700;
