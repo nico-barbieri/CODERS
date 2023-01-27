@@ -55,6 +55,8 @@ export class Sprite {
         this.moving = false;
         this.sprites = sprites;
         this.shadow = shadow;
+        this.random = 0;
+        this.interval= 0;
     }
 
     draw() {
@@ -64,13 +66,7 @@ export class Sprite {
                 this.stage.canvas.width/2 - 32, this.stage.canvas.height/2,
             )
         }
-        this.c.fillStyle = 'red';
-        this.c.fillRect(
-            this.position.x, 
-            this.position.y, 
-            this.width, 
-            this.height,
-            );
+        
         this.c.drawImage(
             this.image, 
             this.frames.val * (this.width / this.scaleDown) + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders
@@ -88,7 +84,8 @@ export class Sprite {
             if (this.frames.val < this.frames.max - 1) this.frames.val++
             else this.frames.val = 0;    
         }   
-        
+        if (this.interval%100===0) this.random = Math.floor(Math.random() * 8 + 1);
+        this.interval++
     }
 }
 
@@ -108,7 +105,7 @@ export class Boundary {
     }
 
     draw() {
-        this.c.fillStyle = 'red';
+        this.c.fillStyle = 'transparent';
         this.c.fillRect(
             this.position.x, 
             this.position.y, 
@@ -350,9 +347,9 @@ const stageForeground = new Background({
     image: mapForeground,
 })
 
-const player = new Sprite({
+const player1 = new Sprite({
     stage: level_0,
-    image: playerDown,
+    image: playerLeft,
     cutBorder: {
         x: 0,
         y: 1,
@@ -382,23 +379,97 @@ const player = new Sprite({
         active: false,
         src: playerShadow,
     }
+});
+
+const player2 = new Sprite({
+    stage: level_0,
+    image: playerRight,
+    cutBorder: {
+        x: 0,
+        y: 1,
+    },
+    scaleDown: scaleRatio,
+    position: {
+        x: level_0.canvas.width/1.5 - 32,
+        y: level_0.canvas.height/2.5 - 64,
+    },
+    frames: {
+        max: 6,
+        hold: 7,
+    },
+    sprites: {
+        up: playerUp,
+        down: playerDown,
+        right: playerRight,
+        left: playerLeft,
+        walk: {
+            up: playerWalkingUp,
+            down: playerWalkingDown,
+            right: playerWalkingRight,
+            left: playerWalkingLeft,
+        }
+    },
+    shadow: {
+        active: false,
+        src: playerShadow,
+    }
+})
+const player3 = new Sprite({
+    stage: level_0,
+    image: playerDown,
+    cutBorder: {
+        x: 0,
+        y: 1,
+    },
+    scaleDown: scaleRatio,
+    position: {
+        x: level_0.canvas.width/4 - 32,
+        y: level_0.canvas.height/2 - 64,
+    },
+    frames: {
+        max: 6,
+        hold: 7,
+    },
+    sprites: {
+        up: playerUp,
+        down: playerDown,
+        right: playerRight,
+        left: playerLeft,
+        walk: {
+            up: playerWalkingUp,
+            down: playerWalkingDown,
+            right: playerWalkingRight,
+            left: playerWalkingLeft,
+        }
+    },
+    shadow: {
+        active: false,
+        src: playerShadow,
+    }
 })
 //create array of movables object
-const movables = [player]
+const players = [player1, player2, player3]
 
 
+
+let delay=0;
+let random=0;
 function animate() {
     window.requestAnimationFrame(animate);
     //reset player speed every frame based on shift.pressed value
-    playerSpeed = 5
+    playerSpeed = 1
     if (keys.shift.pressed) {
         playerSpeed = 10;
-        player.frames.hold = 5;
+        players.forEach(player => {
+            player.frames.hold = 5;
+        })
     }
     if (!keys.shift.pressed) {
-        playerSpeed = 5;
-        player.frames.hold = 7;
-        if (!player.moving) player.frames.hold = 27;
+        playerSpeed = 1;
+        players.forEach(player => {
+            player.frames.hold = 7;
+            if (!player.moving) player.frames.hold = 27;
+        }) 
     }
     
     //draw map
@@ -408,130 +479,139 @@ function animate() {
         boundaries.draw();
     });
     //draw player
-    player.draw();
+    players.forEach(player =>{
+        player.draw();
+        player.moving = false;
+    })
     //draw foreground
     stageForeground.draw()
         
     let obstacle = false;
-    player.moving = false;
-    //STILL 
-    if (lastkey == 'right') player.image = player.sprites.right
-    else if (lastkey == 'left') player.image = player.sprites.left
-    else if (lastkey == 'up') player.image = player.sprites.up
-    else if (lastkey == 'down') player.image = player.sprites.down
-    //MOVING
-    if (keys.right.pressed && lastkey == 'right') {
-        player.moving = true;
-        player.image = player.sprites.walk.right;
-        for (let i = 0; i < boundaries.length; i++) {
-            const boundary = boundaries[i];
-            if (
-                rectangularCollision({
-                    sprite1: player,
-                    sprite2: {
-                    ...boundary, 
-                    position: {
-                        x: boundary.position.x - 10,
-                        y: boundary.position.y
+
+    players.forEach(player =>{
+        //STILL 
+        if (lastkey == 'right') player.image = player.sprites.right
+        else if (lastkey == 'left') player.image = player.sprites.left
+        else if (lastkey == 'up') player.image = player.sprites.up
+        else if (lastkey == 'down') player.image = player.sprites.down
+    
+        //MOVING
+        if (player.random>0 && player.random<5) {
+            if (player.random === 1) {
+                player.moving = true;
+                player.image = player.sprites.walk.right;
+                for (let i = 0; i < boundaries.length; i++) {
+                    const boundary = boundaries[i];
+                    if (
+                        rectangularCollision({
+                            sprite1: player,
+                            sprite2: {
+                            ...boundary, 
+                            position: {
+                                x: boundary.position.x - 10,
+                                y: boundary.position.y
+                            }
+                            }
+                        })
+                    ) {
+                        obstacle = true;
+                        console.log('colliding');
+                        break
                     }
-                    }
-                })
-            ) {
-                obstacle = true;
-                console.log('colliding');
-                break
-            }
-        }
-        if (!obstacle){
-            movables.forEach((movable) => {
-                movable.position.x += playerSpeed;
-            })
-        }
+                }
+                if (!obstacle){
+                    
+                        player.position.x += playerSpeed;
+                    
+                }
+                
+            } else if (player.random === 2) {
+                player.moving = true;
+                player.image = player.sprites.walk.left;
         
-    } else if (keys.left.pressed && lastkey == 'left') {
-        player.moving = true;
-        player.image = player.sprites.walk.left;
+                for (let i = 0; i < boundaries.length; i++) {
+                    const boundary = boundaries[i];
+                    if (
+                        rectangularCollision({
+                            sprite1: player,
+                            sprite2: {
+                            ...boundary, 
+                            position: {
+                                x: boundary.position.x + playerSpeed,
+                                y: boundary.position.y
+                            }
+                            }
+                        })
+                    ) {
+                        obstacle = true;
+                        console.log('colliding');
+                        break
+                    }
+                }
+                if (!obstacle) {
+                    
+                        player.position.x -= playerSpeed;
+                    
+                }
+            } else if (player.random === 3) {
+                player.moving = true;
+                player.image = player.sprites.walk.up;
+        
+                for (let i = 0; i < boundaries.length; i++) {
+                    const boundary = boundaries[i];
+                    if (
+                        rectangularCollision({
+                            sprite1: player,
+                            sprite2: {
+                                ...boundary,
+                                position: {
+                                x: boundary.position.x,
+                                y: boundary.position.y + playerSpeed,
+                            }
+                            }
+                        })
+                    ) {
+                        obstacle = true;
+                        console.log('colliding');
+                        break
+                    }
+                }
+                if (!obstacle) {
+                    
+                        player.position.y -= playerSpeed;
+                    
+                }
+            } else if (player.random === 4) {
+                player.moving = true;
+                player.image = player.sprites.walk.down;
+                for (let i = 0; i < boundaries.length; i++) {
+                    const boundary = boundaries[i];
+                    if (
+                        rectangularCollision({
+                            sprite1: player,
+                            sprite2: {
+                            ...boundary, 
+                            position: {
+                                x: boundary.position.x,
+                                y: boundary.position.y - playerSpeed,
+                            }
+                            }
+                        })
+                    ) {
+                        obstacle = true;
+                        console.log('colliding');
+                        break
+                    }
+                }
+                if (!obstacle) {
+                    
+                        player.position.y += playerSpeed;
+                    
+                }
+            }
+        }
 
-        for (let i = 0; i < boundaries.length; i++) {
-            const boundary = boundaries[i];
-            if (
-                rectangularCollision({
-                    sprite1: player,
-                    sprite2: {
-                    ...boundary, 
-                    position: {
-                        x: boundary.position.x + playerSpeed,
-                        y: boundary.position.y
-                    }
-                    }
-                })
-            ) {
-                obstacle = true;
-                console.log('colliding');
-                break
-            }
-        }
-        if (!obstacle) {
-            movables.forEach((movable) => {
-                movable.position.x -= playerSpeed;
-            })
-        }
-    } else if (keys.up.pressed && lastkey == 'up') {
-        player.moving = true;
-        player.image = player.sprites.walk.up;
-
-        for (let i = 0; i < boundaries.length; i++) {
-            const boundary = boundaries[i];
-            if (
-                rectangularCollision({
-                    sprite1: player,
-                    sprite2: {
-                        ...boundary,
-                        position: {
-                        x: boundary.position.x,
-                        y: boundary.position.y + playerSpeed,
-                    }
-                    }
-                })
-            ) {
-                obstacle = true;
-                console.log('colliding');
-                break
-            }
-        }
-        if (!obstacle) {
-            movables.forEach((movable) => {
-                movable.position.y -= playerSpeed;
-            })
-        }
-    } else if (keys.down.pressed && lastkey == 'down') {
-        player.moving = true;
-        player.image = player.sprites.walk.down;
-        for (let i = 0; i < boundaries.length; i++) {
-            const boundary = boundaries[i];
-            if (
-                rectangularCollision({
-                    sprite1: player,
-                    sprite2: {
-                    ...boundary, 
-                    position: {
-                        x: boundary.position.x,
-                        y: boundary.position.y - playerSpeed,
-                    }
-                    }
-                })
-            ) {
-                obstacle = true;
-                console.log('colliding');
-                break
-            }
-        }
-        if (!obstacle) {
-            movables.forEach((movable)=>{
-                movable.position.y += playerSpeed;
-            })
-        }
-    }
+    })
 }
 
 window.addEventListener('keydown', (e) => {
