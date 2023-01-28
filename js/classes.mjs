@@ -80,7 +80,7 @@ export class Boundary {
     }
 
     draw() {
-        this.c.fillStyle = 'red';
+        this.c.fillStyle = 'transparent';
         this.c.fillRect(
             this.position.x, 
             this.position.y, 

@@ -1,4 +1,5 @@
-import { collisions } from "./data/collisions.mjs";
+import { getCollision } from "./data/collisions.mjs";
+const collisions = await getCollision('./data/page_bkg_collisions.json');
 export class Stage {
     constructor(config) {
         this.canvas = config.canvas;
@@ -84,7 +85,9 @@ export class Sprite {
             if (this.frames.val < this.frames.max - 1) this.frames.val++
             else this.frames.val = 0;    
         }   
-        if (this.interval%100===0) this.random = Math.floor(Math.random() * 8 + 1);
+        if (this.interval%100===0 || this.interval % (Math.floor(Math.random()*100)=== 0)) {
+            this.random = Math.floor(Math.random() * 8 + 1);
+        }
         this.interval++
     }
 }
@@ -98,10 +101,10 @@ export class Boundary {
         this.scale = scale;
         this.offset = offset;
         this.position = {...position}
-        this.position.x += (this.offset.x * this.globalScale * this.scaleRatio);
-        this.position.y += (this.offset.y * this.globalScale * this.scaleRatio);
-        this.width = 16 * globalScale * this.scale.x * this.scaleRatio;
-        this.height = 16 * globalScale * this.scale.y * this.scaleRatio;
+        this.position.x += (this.offset.x * this.globalScale * this.scaleRatio.x);
+        this.position.y += (this.offset.y * this.globalScale * this.scaleRatio.y);
+        this.width = 16 * globalScale * this.scale.x * this.scaleRatio.x;
+        this.height = 16 * globalScale * this.scale.y * this.scaleRatio.y;
     }
 
     draw() {
@@ -136,7 +139,12 @@ let playerDown = new Image();
 playerDown.src = './res/img/sprites/player_0_down.png';
 let playerWalkingDown = new Image();
 playerWalkingDown.src = './res/img/sprites/player_0_walk_down.png';
-
+let NPCs = [];
+for (let i = 0; i < 6; i++) {
+    let npc = new Image();
+    npc.src = './res/img/sprites/player_0_down.png';
+    npc.onload = () => NPCs.push(npc);
+}
 let playerRight = new Image();
 playerRight.src = './res/img/sprites/player_0_right.png';
 let playerWalkingRight = new Image();
@@ -151,7 +159,10 @@ let playerShadow = new Image();
 playerShadow.src =  './res/img/sprites/shadow.png';
 
 map.onload = () =>{
-    scaleRatio = ((body.offsetWidth)/map.width).toFixed(3)
+    scaleRatio = {
+        x:((body.offsetWidth)/map.width).toFixed(10),
+        y:((body.offsetHeight)/map.height).toFixed(10),
+    }
     setBoundaries();
 };
 
@@ -202,27 +213,28 @@ let collisionMaps = {
     level_0: [],
 } 
 //populate level_0 collision map
-for (let i = 0; i < collisions.homeBkg.length; i+=48) {
-    collisionMaps.level_0.push(collisions.homeBkg.slice(i,48 +i));    
+for (let i = 0; i < collisions.length; i+=48) {
+    collisionMaps.level_0.push(collisions.slice(i,48 +i));    
 }
+
 //create boundaries array and populate it
 let boundaries = [];
 const setBoundaries = () => {
     collisionMaps.level_0.forEach((row, i) =>{
         row.forEach((symbol, j) => {
             if (symbol !== 0) {
-                const code = collisions.homeBkg[0]
+                const code = collisionMaps.level_0[0][0];
                 switch (symbol) {
                     case code:
-                        console.log(scaleRatio);
+                        console.log('here');
                         boundaries.push(
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
                                 stage: level_0,
                                 position: {
-                                    x: (16 * globalScale * scaleRatio * j) + offset.x,
-                                    y: (16 * globalScale * scaleRatio * i) + offset.y,
+                                    x: (16 * globalScale * scaleRatio.x * j) + offset.x,
+                                    y: (16 * globalScale * scaleRatio.y * i) + offset.y,
                                 }
                             })
                         )
@@ -235,8 +247,8 @@ const setBoundaries = () => {
                                 globalScale,
                                 stage: level_0,
                                 position: {
-                                    x: (16 * globalScale * scaleRatio * j) + offset.x,
-                                    y: (16 * globalScale * scaleRatio * i) + offset.y,
+                                    x: (16 * globalScale * scaleRatio.x * j) + offset.x,
+                                    y: (16 * globalScale * scaleRatio.y * i) + offset.y,
                                 },
                                 scale: {
                                     x: 1,
@@ -257,8 +269,8 @@ const setBoundaries = () => {
                                 globalScale,
                                 stage: level_0,
                                 position: {
-                                    x: (16 * globalScale * scaleRatio * j) + offset.x,
-                                    y: (16 * globalScale * scaleRatio * i) + offset.y,
+                                    x: (16 * globalScale * scaleRatio.x * j) + offset.x,
+                                    y: (16 * globalScale * scaleRatio.y * i) + offset.y,
                                 },
                                 scale: {
                                     x: 1,
@@ -278,8 +290,8 @@ const setBoundaries = () => {
                                 globalScale,
                                 stage: level_0,
                                 position: {
-                                    x: (16 * globalScale * scaleRatio * j) + offset.x,
-                                    y: (16 * globalScale * scaleRatio * i) + offset.y,
+                                    x: (16 * globalScale * scaleRatio.x * j) + offset.x,
+                                    y: (16 * globalScale * scaleRatio.y * i) + offset.y,
                                 },
                                 scale: {
                                     x: .25,
@@ -299,8 +311,8 @@ const setBoundaries = () => {
                                 globalScale,
                                 stage: level_0,
                                 position: {
-                                    x: (16 * globalScale * scaleRatio * j) + offset.x,
-                                    y: (16 * globalScale * scaleRatio * i) + offset.y,
+                                    x: (16 * globalScale * scaleRatio.x * j) + offset.x,
+                                    y: (16 * globalScale * scaleRatio.y * i) + offset.y,
                                 }
                             })
                         )
@@ -313,8 +325,8 @@ const setBoundaries = () => {
 
 //function to detect collisions ("-8" is added to adjust collision distance)
 function rectangularCollision({sprite1, sprite2}) {
-    return (sprite1.position.x + sprite1.width - 8 > sprite2.position.x &&
-        sprite1.position.x < sprite2.position.x + sprite2.width - 8 &&
+    return (sprite1.position.x + sprite1.width > sprite2.position.x &&
+        sprite1.position.x < sprite2.position.x + sprite2.width &&
         sprite1.position.y + sprite1.height > sprite2.position.y &&
         sprite1.position.y + sprite1.height/1.6< sprite2.position.y + sprite2.height)
 }
@@ -329,7 +341,7 @@ const stageBackground = new Background({
     },
     dimensions: {
         x:window.innerWidth,
-        y:window.innerWidth/(16/9)
+        y:window.innerHeight//window.innerWidth/(16/9)
     },
     image: map,
 })
@@ -342,14 +354,13 @@ const stageForeground = new Background({
     },
     dimensions: {
         x:window.innerWidth,
-        y:window.innerWidth/(16/9)
+        y:window.innerHeight//window.innerWidth/(16/9)
     },
     image: mapForeground,
 })
-
-const player1 = new Sprite({
+let playerConfig = {
     stage: level_0,
-    image: playerLeft,
+    image: playerDown,
     cutBorder: {
         x: 0,
         y: 1,
@@ -379,77 +390,80 @@ const player1 = new Sprite({
         active: false,
         src: playerShadow,
     }
+}
+const player1 = new Sprite({...playerConfig});
+
+const player2 = new Sprite({...playerConfig, image: playerRight, 
+position: {
+    x: level_0.canvas.width/4 - 32,
+    y: level_0.canvas.height/2 - 64, 
+}});
+
+const player3 = new Sprite({...playerConfig, image: playerLeft, 
+position: {
+    x: level_0.canvas.width/3.5 - 32,
+    y: level_0.canvas.height/4 - 64,
+}});
+
+const player4 = new Sprite({
+    ...playerConfig, image: playerUp,
+    position: {
+        x: level_0.canvas.width / 1.4 - 32,
+        y: level_0.canvas.height / 1.6 - 64,
+    }
 });
 
-const player2 = new Sprite({
-    stage: level_0,
-    image: playerRight,
-    cutBorder: {
-        x: 0,
-        y: 1,
-    },
-    scaleDown: scaleRatio,
+const player5 = new Sprite({
+    ...playerConfig, image: playerWalkingDown,
     position: {
-        x: level_0.canvas.width/1.5 - 32,
-        y: level_0.canvas.height/2.5 - 64,
-    },
-    frames: {
-        max: 6,
-        hold: 7,
-    },
-    sprites: {
-        up: playerUp,
-        down: playerDown,
-        right: playerRight,
-        left: playerLeft,
-        walk: {
-            up: playerWalkingUp,
-            down: playerWalkingDown,
-            right: playerWalkingRight,
-            left: playerWalkingLeft,
-        }
-    },
-    shadow: {
-        active: false,
-        src: playerShadow,
+        x: level_0.canvas.width / 4 - 32,
+        y: level_0.canvas.height / 1.15 - 64,
     }
-})
-const player3 = new Sprite({
-    stage: level_0,
-    image: playerDown,
-    cutBorder: {
-        x: 0,
-        y: 1,
-    },
-    scaleDown: scaleRatio,
+});
+const player6 = new Sprite({
+    ...playerConfig, image: playerWalkingUp,
     position: {
-        x: level_0.canvas.width/4 - 32,
-        y: level_0.canvas.height/2 - 64,
-    },
-    frames: {
-        max: 6,
-        hold: 7,
-    },
-    sprites: {
-        up: playerUp,
-        down: playerDown,
-        right: playerRight,
-        left: playerLeft,
-        walk: {
-            up: playerWalkingUp,
-            down: playerWalkingDown,
-            right: playerWalkingRight,
-            left: playerWalkingLeft,
-        }
-    },
-    shadow: {
-        active: false,
-        src: playerShadow,
+        x: level_0.canvas.width / 1.06 - 32,
+        y: level_0.canvas.height / 1.2 - 64,
     }
+});
+const players = [player1, player2, player3, player4, player5, player6]
+/*
+const players = [];
+NPCs.forEach(npc => {
+    players.push(
+        new Sprite({
+            stage: level_0,
+            image: npc,
+            cutBorder: {
+                x: 0,
+                y: 1,
+            },
+            scaleDown: scaleRatio,
+            position: {
+                x: level_0.canvas.width / (Math.random()*6 + 1) - 32,
+                y: level_0.canvas.height / (Math.random()*6 + 1) - 64,
+            },
+            frames: {
+                max: 6,
+                hold: 7,
+            },
+            sprites: {
+                up: playerUp,
+                down: playerDown,
+                right: playerRight,
+                left: playerLeft,
+                walk: {
+                    up: playerWalkingUp,
+                    down: playerWalkingDown,
+                    right: playerWalkingRight,
+                    left: playerWalkingLeft,
+                }
+            },
+        })
+    )
 })
-//create array of movables object
-const players = [player1, player2, player3]
-
+*/
 
 
 let delay=0;
@@ -515,7 +529,7 @@ function animate() {
                         })
                     ) {
                         obstacle = true;
-                        console.log('colliding');
+                        //console.log('colliding');
                         break
                     }
                 }
@@ -544,7 +558,7 @@ function animate() {
                         })
                     ) {
                         obstacle = true;
-                        console.log('colliding');
+                        //console.log('colliding');
                         break
                     }
                 }
@@ -572,7 +586,7 @@ function animate() {
                         })
                     ) {
                         obstacle = true;
-                        console.log('colliding');
+                        //console.log('colliding');
                         break
                     }
                 }
@@ -599,7 +613,7 @@ function animate() {
                         })
                     ) {
                         obstacle = true;
-                        console.log('colliding');
+                        //console.log('colliding');
                         break
                     }
                 }
