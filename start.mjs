@@ -1,5 +1,7 @@
-import { collisions } from "./data/collisions.mjs";
+
 import { Sprite, Boundary, Stage } from "./js/classes.mjs";
+import { getCollision } from "./data/collisions.mjs";
+const collisions = await getCollision('./data/stage_0_collisions.json');
 
 //variables initialization
 const globalScale = 4; //scale of pixel art (400%)
@@ -81,8 +83,8 @@ let collisionMaps = {
     level_0: [],
 } 
 //populate level_0 collision map
-for (let i = 0; i < collisions.stage0.length; i+=90) {
-    collisionMaps.level_0.push(collisions.stage0.slice(i,90 +i));    
+for (let i = 0; i < collisions.length; i+=90) {
+    collisionMaps.level_0.push(collisions.slice(i,90 +i));    
 }
 //create boundaries array and populate it
 let boundaries = [];
