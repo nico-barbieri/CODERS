@@ -8,6 +8,14 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: white;
+  background-color: rgb(58, 58, 80);
+}
+
+.App {
+  width: 100vw;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .header {
@@ -61,18 +69,25 @@ body {
 
 .main-header {
   height: 100vh;
-  background-image: url(../res/img/maps/CanvasBackGround.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
 }
 .main-header .start {
   z-index: 2;
-  width: 194px;
+  width: 30rem;
   position: absolute;
-  top: 60%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.main-header .start .logo-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.main-header .start .logo-container img {
+  width: 100%;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: pixelated;
 }
 .main-header .start button {
   font-weight: 700;
@@ -89,4 +104,8 @@ body {
   background-color: rgba(208, 167, 92, 0.7568627451);
   transform: scale(0.9);
   transition: 0.3s;
+}
+
+#view {
+  position: absolute;
 }/*# sourceMappingURL=App.css.map */

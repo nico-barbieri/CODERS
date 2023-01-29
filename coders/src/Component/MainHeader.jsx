@@ -6,7 +6,7 @@ export function MainHeader() {
             <div className="start-wrapper">
                 <div className="start text-center flex flex-col justify-around rounded-3xl drop-shadow-lg">
                     <div className='logo-container'>
-                        <img src={logo} alt="Logo" />
+                        {<img src={logo} alt="Logo" />}
                     </div>
                     <div>
                         <button className= "text-6xl p-7 ">Start</button>
