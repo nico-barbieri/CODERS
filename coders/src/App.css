@@ -1,9 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Pixel";
+  src: url(font/visitor1.ttf) format("truetype");
+}
 html,
 body {
+  overflow-x: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -19,6 +27,8 @@ body {
 }
 
 .header {
+  font-family: "Pixel";
+  font-size: 1.75rem;
   height: 9.5rem;
   position: fixed;
   top: 0;
@@ -51,7 +61,7 @@ body {
   content: "";
   position: absolute;
   background-color: #4267b2;
-  height: 2px;
+  height: 4px;
   width: 0;
   transition: width 0.3s ease;
 }
@@ -61,10 +71,12 @@ body {
 .header .header-nav a::before {
   left: 0;
   top: 0;
+  transform: translateY(0.5rem);
 }
 .header .header-nav a::after {
   right: 0;
   bottom: 0;
+  transform: translateY(-0.5rem);
 }
 
 .main-header {
@@ -72,9 +84,9 @@ body {
 }
 .main-header .start {
   z-index: 2;
-  width: 30rem;
+  width: 42rem;
   position: absolute;
-  top: 50%;
+  top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -82,6 +94,7 @@ body {
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-bottom: 1rem;
 }
 .main-header .start .logo-container img {
   width: 100%;
@@ -90,20 +103,40 @@ body {
       image-rendering: pixelated;
 }
 .main-header .start button {
-  font-weight: 700;
-  font-size: 1.5rem;
+  overflow: hidden;
+  padding: 0.25rem 1rem;
+  font-size: 2rem;
   border: 0;
   outline: 0;
   background-color: #d0a85c;
   cursor: pointer;
-  font-family: "Rowdies", cursive;
-  border-top-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  font-family: "Pixel";
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  will-change: scale;
+  outline: 0rem;
+  transition: all ease 0.3s;
+  border: solid 0.25rem rgb(247, 251, 234);
+}
+.main-header .start button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1rem;
+  rotate: -60deg;
+  background-color: #d0a85c;
+  mix-blend-mode: overlay;
+  transform: translateY(-450%);
+  transition: all ease 0.3s;
 }
 .main-header .start button:hover {
-  background-color: rgba(208, 167, 92, 0.7568627451);
   transform: scale(0.9);
-  transition: 0.3s;
+  box-shadow: 0 0 0 0.25rem rgb(168, 3, 47), 0 0 0 0.5rem rgb(58, 58, 80);
+}
+.main-header .start button:hover::after {
+  transform: translateY(550%);
 }
 
 #view {

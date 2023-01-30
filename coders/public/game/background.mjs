@@ -1,5 +1,5 @@
 import { getCollision } from "./data/collisions.mjs";
-const collisions = getCollision('./game/data/page_bkg_collisions.json');
+const collisions = await getCollision('./game/data/page_bkg_collisions.json');
 export class Stage {
     constructor(config) {
         this.canvas = config.canvas;
@@ -148,6 +148,7 @@ let playerRight = new Image();
 playerRight.src = './game/res/img/sprites/player_0_right.png';
 let playerWalkingRight = new Image();
 playerWalkingRight.src = './game/res/img/sprites/player_0_walk_right.png';
+
 let playerLeft = new Image();
 playerLeft.src = './game/res/img/sprites/player_0_left.png';
 let playerWalkingLeft = new Image();
@@ -418,6 +419,7 @@ const player5 = new Sprite({...playerConfig, image: playerWalkingDown});
 const player6 = new Sprite({...playerConfig, image: playerWalkingUp});
 
 const players = [player1, player2, player3, player4, player5, player6, controlled];
+
 function animate() { 
     window.requestAnimationFrame(animate);
     //reset player speed every frame based on shift.pressed value
@@ -444,18 +446,17 @@ function animate() {
     });
     //draw players
     players.forEach(player =>{
-        console.log(player);
         if (player.frames.elapsed === 0) player.position = randomPick(walkableTiles)
     })
         
     let uniques = new Set (players.map(player => player.position))
-    /* while(uniques.size !== players.length) {
+    while(uniques.size !== players.length) {
         console.log('repositioning players...');
         players.forEach(player =>{
             player.position = randomPick(walkableTiles)
         })
         uniques = new Set (players.map(player => player.position))
-    } */
+    }
 
     players.forEach(player =>{
         player.draw();
@@ -771,4 +772,3 @@ window.addEventListener('keyup', (e) => {
             break;
     }
 });
-
