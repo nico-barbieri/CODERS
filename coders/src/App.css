@@ -29,23 +29,35 @@ body {
 .header {
   font-family: "Pixel";
   font-size: 1.75rem;
-  height: 9.5rem;
+  height: 5rem;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
   pointer-events: none;
+  margin: 1rem 0rem;
 }
 .header .header-inner {
   height: 100%;
+  margin: 0 3rem;
 }
-.header .header-logo {
-  width: 145px;
+.header .header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 3.5rem;
+}
+.header .header-logo-container .header-logo {
+  display: flex;
+  height: 4rem;
   pointer-events: visible;
 }
-.header .header-logo img {
-  width: 100%;
+.header .header-logo-container .header-logo img {
+  height: 100%;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: pixelated;
 }
 .header .header-nav li ~ li {
   margin-left: 1rem;

@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css'
-import { Canva } from './Component/Canva';
 import { Header } from './Component/Header';
 import { MainHeader } from './Component/MainHeader';
 

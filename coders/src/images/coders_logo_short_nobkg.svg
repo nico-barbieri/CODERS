@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.2.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg class="face-logo" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 128 128" style="enable-background:new 0 0 128 128;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#464656;}
+	.st1{fill:#282838;}
+	.st2{fill:#FFFFFF;}
+	.st3{fill:#FBCCAA;}
+	.st4{fill:#DDA683;}
+	.face-logo {
+
+	image-rendering: pixelated;
+	}
+
+	.face-logo:hover #palpebra_3_, .face-logo:hover #palpebra_2_ {
+		animation: blink normal .6s ease forwards;
+	}
+	#palpebra, #palpebra_1_ {
+		opacity: 0;
+	}
+	.face-logo:hover #palpebra, .face-logo:hover #palpebra_1_ {
+		opacity: 1;
+	}
+
+    @keyframes blink {
+        0% {
+			transform: translateY(0%)
+		}
+		50% {
+			transform: translateY(6.25%)
+		}
+    }
+</style>
+<g id="logo-face">
+	<path class="st0" d="M32,0h8v8h-8V0z"/>
+	<rect x="40" class="st1" width="48" height="8"/>
+	<path class="st0" d="M88,0h8v8h-8V0z"/>
+	<path class="st0" d="M24,8h8v8h-8V8z"/>
+	<rect x="32" y="8" class="st1" width="8" height="8"/>
+	<rect x="88" y="8" class="st1" width="8" height="8"/>
+	<path class="st0" d="M16,16h8v8h-8V16z"/>
+	<rect x="24" y="16" class="st1" width="8" height="8"/>
+	<rect x="96" y="16" class="st1" width="8" height="8"/>
+	<path class="st0" d="M104,16h8v8h-8V16z"/>
+	<rect x="16" y="24" class="st1" width="8" height="40"/>
+	<rect x="104" y="24" class="st1" width="8" height="40"/>
+	<path class="st0" d="M8,48h8v16H8V48z"/>
+	<path class="st0" d="M112,48h8v16h-8V48z"/>
+	<polygon class="st1" points="24,80 24,104 16,104 16,88 8,88 8,64 16,64 16,80 	"/>
+	<rect x="40" y="64" class="st1" width="16" height="8"/>
+	<rect x="72" y="64" class="st1" width="16" height="8"/>
+	<polygon class="st1" points="120,64 120,88 112,88 112,104 104,104 104,80 112,80 112,64 	"/>
+	<polygon class="st1" points="56,80 56,96 40,96 40,88 32,88 32,80 	"/>
+	<polygon class="st1" points="96,80 96,88 88,88 88,96 72,96 72,80 	"/>
+	<rect x="32" y="88" class="st2" width="8" height="8"/>
+	<rect x="88" y="88" class="st2" width="8" height="8"/>
+	<rect x="24" y="104" class="st1" width="8" height="8"/>
+	<rect x="56" y="104" class="st1" width="16" height="8"/>
+	<rect x="96" y="104" class="st1" width="8" height="8"/>
+	<rect x="32" y="112" class="st1" width="8" height="8"/>
+	<rect x="88" y="112" class="st1" width="8" height="8"/>
+	<path class="st3" d="M104,64V24h-8v-8h-8V8H40v8h-8v8h-8v40h-8v16h8v24h8v8h8v8h48v-8h8v-8h8V80h8V64H104z M72,64h16v8H72V64z
+		 M40,64h16v8H40V64z M32,96V80h24v16H32z M72,112H56v-8h16V112z M96,96H72V80h24V96z"/>
+	<rect x="40" y="120" class="st1" width="48" height="8"/>
+	<rect x="88" y="16" class="st4" width="8" height="8"/>
+	<rect x="96" y="24" class="st4" width="8" height="40"/>
+	<polygon class="st4" points="112,64 112,88 104,88 104,104 96,104 96,80 104,80 104,64 	"/>
+	<rect x="88" y="104" class="st4" width="8" height="8"/>
+</g>
+<g id="eyelids">
+	<rect id="palpebra" x="32" y="80" class="st4" width="24" height="7"/>
+	<rect id="palpebra_1_" x="72" y="80" class="st4" width="24" height="7"/>
+	<rect id="palpebra_3_" x="32" y="80" class="st1" width="24" height="8"/>
+	<rect id="palpebra_2_" x="72" y="80" class="st1" width="24" height="8"/>
+</g>
+
+
+</svg>
