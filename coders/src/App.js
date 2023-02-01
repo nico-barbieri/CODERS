@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css'
+import { FullscreenSection } from './Component/FullscreenSection';
 import { Header } from './Component/Header';
 import { MainHeader } from './Component/MainHeader';
 
@@ -11,6 +12,8 @@ render() {
     <div className="App">
       <Header />
       <MainHeader />
+      <FullscreenSection />
+      <FullscreenSection />
     </div>
   );
 

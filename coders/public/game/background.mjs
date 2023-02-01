@@ -1,5 +1,7 @@
 import { getCollision } from "./data/collisions.mjs";
 const collisions = await getCollision('./game/data/page_bkg_collisions.json');
+
+//CLASSES
 export class Stage {
     constructor(config) {
         this.canvas = config.canvas;
@@ -11,8 +13,9 @@ export class Stage {
         this.canvas.height = height;
     }
     fullscreen(){
-        this.canvas.width = Math.ceil(document.body.scrollHeight) * this.proportions;
+        this.canvas.width = Math.ceil(document.body.scrollWidth);
         this.canvas.height = Math.ceil(document.body.scrollHeight);
+        console.log(this.canvas.width, this.canvas.height);
     }
 
     init(){
@@ -36,7 +39,7 @@ export class Background {
     draw() {
         this.c.drawImage(
             this.image, 
-            0,
+            this.stage.canvas.width/2 - (this.dimensions.y*this.proportions)/2,
             0,
             this.dimensions.y*this.proportions, this.dimensions.y
         );        
@@ -124,12 +127,20 @@ export class Boundary {
 }
 
 
-let scaleRatio = .5
 //variables initialization
+let scaleRatio = .5
 const globalScale = 4; //scale of pixel art (400%)
+const numberOfSections = 3;
+
 //create images
 let map = new Image();
 map.src = './game/res/img/maps/page_bkg.png';
+
+map.onload = () =>{
+    scaleRatio = document.body.scrollHeight/map.height;
+    setBoundaries();
+    animate();
+};
 
 let mapForeground = new Image();
 mapForeground.src = './game/res/img/maps/page_bkg_foreground_REFINED.png';
@@ -157,17 +168,6 @@ playerWalkingLeft.src = './game/res/img/sprites/player_0_walk_left.png';
 let playerShadow = new Image();
 playerShadow.src =  './game/res/img/sprites/shadow.png';
 
-map.onload = () =>{
-    scaleRatio = document.body.scrollHeight/map.height;
-    setBoundaries();
-    animate();
-};
-
-//offset of the map
-let offset = {
-    x: 0,
-    y: 0,
-}
 
 //create "keys" object
 const keys = {
@@ -187,6 +187,7 @@ const keys = {
         pressed: false,
     }
 }
+
 let lastkey = 'down'; // the game starts with the frontal view of the player
 
 //player normal speed
@@ -194,42 +195,44 @@ let playerSpeed = 5
 
 
 //create stage
-let level_0 = new Stage({
+let page_bkg = new Stage({
     canvas: document.querySelector('#view'),
-    proportions: 48/28,
+    proportions: 48/(28 * numberOfSections),
 });
 //init stage
-level_0.fullscreen();
-level_0.init();
+page_bkg.fullscreen();
+page_bkg.init();
 
-//////////////
-//COLLISIONS//
-//////////////
+/************/
+/*COLLISIONS*/
+/************/
 
 //collection of collisions maps as arrays of arrays based on number map width in tiles
 let collisionMaps = {
-    level_0: [],
+    page_bkg: [],
 } 
-//populate level_0 collision map
+
+//populate page_bkg collision map
 for (let i = 0; i < collisions.length; i+=48) {
-    collisionMaps.level_0.push(collisions.slice(i,48 +i));    
+    collisionMaps.page_bkg.push(collisions.slice(i,48 +i));    
 }
 
-//create boundaries array and populate it
+//create boundaries/walkables array and populate it
 let boundaries = [];
 let walkableTiles = [];
+
 const setBoundaries = () => {
-    collisionMaps.level_0.forEach((row, i) =>{
+    collisionMaps.page_bkg.forEach((row, i) =>{
         row.forEach((symbol, j) => {
             if (symbol !== 0) {
-                const code = collisionMaps.level_0[0][0];
+                const code = collisionMaps.page_bkg[0][0];
                 switch (symbol) {
                     case code:
                         boundaries.push(
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
-                                stage: level_0,
+                                stage: page_bkg,
                                 position: {
                                     x: (16 * globalScale * scaleRatio * j) + offset.x,
                                     y: (16 * globalScale * scaleRatio * i) + offset.y,
@@ -243,7 +246,7 @@ const setBoundaries = () => {
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
-                                stage: level_0,
+                                stage: page_bkg,
                                 position: {
                                     x: (16 * globalScale * scaleRatio * j) + offset.x,
                                     y: (16 * globalScale * scaleRatio * i) + offset.y,
@@ -265,7 +268,7 @@ const setBoundaries = () => {
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
-                                stage: level_0,
+                                stage: page_bkg,
                                 position: {
                                     x: (16 * globalScale * scaleRatio * j) + offset.x,
                                     y: (16 * globalScale * scaleRatio * i) + offset.y,
@@ -286,7 +289,7 @@ const setBoundaries = () => {
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
-                                stage: level_0,
+                                stage: page_bkg,
                                 position: {
                                     x: (16 * globalScale * scaleRatio * j) + offset.x,
                                     y: (16 * globalScale * scaleRatio * i) + offset.y,
@@ -302,12 +305,21 @@ const setBoundaries = () => {
                             })
                         )
                         break;
-                    default:
+                    case code + 4:
+                        walkableTiles.push(
+                            {
+                                x: (16 * globalScale * scaleRatio * j) + offset.x,
+                                y: (16 * globalScale * scaleRatio * i) + offset.y - 32*globalScale*scaleRatio/3,
+                            }                      
+                        )
+                        break;
+                    
+                        default:
                         boundaries.push(
                             new Boundary({
                                 scaleRatio,
                                 globalScale,
-                                stage: level_0,
+                                stage: page_bkg,
                                 position: {
                                     x: (16 * globalScale * scaleRatio * j) + offset.x,
                                     y: (16 * globalScale * scaleRatio * i) + offset.y,
@@ -316,19 +328,12 @@ const setBoundaries = () => {
                         )
                         break;
                 }
-            } else {
-                walkableTiles.push(
-                    {
-                        x: (16 * globalScale * scaleRatio * j),
-                        y: (16 * globalScale * scaleRatio * i) + offset.y - 32*globalScale*scaleRatio/2,
-                    }                      
-                )
             }
         })
     })
 }
 
-//function to detect collisions ("-8" is added to adjust collision distance)
+//function to detect collisions
 function rectangularCollision({sprite1, sprite2}) {
     return (sprite1.position.x + sprite1.width > sprite2.position.x &&
         sprite1.position.x < sprite2.position.x + sprite2.width &&
@@ -336,10 +341,32 @@ function rectangularCollision({sprite1, sprite2}) {
         sprite1.position.y + sprite1.height/1.6< sprite2.position.y + sprite2.height)
 }
 
+/* function npcCollision({players, player}) {
+    let colliding = false;
+    players.forEach((otherPlayer) => {
+        if (rectangularCollision({
+            sprite1: player,
+            sprite2: otherPlayer
+        })) {
+            colliding = true;
+        }
+    })
+    return colliding;
+} */
+
+//function to pick a random element from an array
+const randomPick = (array) => {
+    return array[Math.floor(Math.random()*array.length)];
+}
+//offset of the map
+let offset = {
+    x: page_bkg.canvas.width/2 - (document.body.scrollHeight*48/(28 * numberOfSections))/2,
+    y: 0,
+}
 
 //create sprites
 const stageBackground = new Background({
-    stage: level_0,
+    stage: page_bkg,
     position: {
         x: offset.x,
         y: offset.y,
@@ -348,12 +375,12 @@ const stageBackground = new Background({
         x:window.innerWidth,
         y:document.body.scrollHeight//window.innerWidth/(16/9)
     },
-    proportions: 48/28,
+    proportions: 48/(28 * numberOfSections),
     image: map,
 })
 
 const stageForeground = new Background({
-    stage: level_0,
+    stage: page_bkg,
     position: {
         x: offset.x,
         y: offset.y,
@@ -362,16 +389,12 @@ const stageForeground = new Background({
         x:window.innerWidth,
         y:document.body.scrollHeight//window.innerWidth/(16/9)
     },
-    proportions: 48/28,
+    proportions: 48/(28 * numberOfSections),
     image: mapForeground,
 })
 
-const randomPick = (array) => {
-    return array[Math.floor(Math.random()*array.length)];
-}
-
 let playerConfig = {
-    stage: level_0,
+    stage: page_bkg,
     image: playerDown,
     cutBorder: {
         x: 0,
@@ -399,8 +422,8 @@ let playerConfig = {
         src: playerShadow,
     },
     position: {
-        x: level_0.canvas.width/2 - 32,
-        y: level_0.canvas.height/2 - 64,
+        x: page_bkg.canvas.width/2 - 32,
+        y: page_bkg.canvas.height/2 - 64,
     },
     obstacle: false,
 }
@@ -418,7 +441,9 @@ const player5 = new Sprite({...playerConfig, image: playerWalkingDown});
 
 const player6 = new Sprite({...playerConfig, image: playerWalkingUp});
 
-const players = [player1, player2, player3, player4, player5, player6, controlled];
+const player7 = new Sprite({...playerConfig, image: playerWalkingLeft});
+
+const players = [player1, player2, player3, player4, player5, player6, player7, controlled];
 
 function animate() { 
     window.requestAnimationFrame(animate);
@@ -445,18 +470,22 @@ function animate() {
         boundaries.draw();
     });
     //draw players
-    players.forEach(player =>{
-        if (player.frames.elapsed === 0) player.position = randomPick(walkableTiles)
-    })
-        
-    let uniques = new Set (players.map(player => player.position))
-    while(uniques.size !== players.length) {
-        console.log('repositioning players...');
+
+    if (controlled.frames.elapsed === 0) {
         players.forEach(player =>{
             player.position = randomPick(walkableTiles)
         })
-        uniques = new Set (players.map(player => player.position))
+            
+        let uniques = new Set (players.map(player => player.position))
+        while(uniques.size !== players.length) {
+            console.log('repositioning players...');
+            players.forEach(player =>{
+                player.position = randomPick(walkableTiles)
+            })
+            uniques = new Set (players.map(player => player.position))
+        }
     }
+    players.sort((a,b) => a.position.y - b.position.y)
 
     players.forEach(player =>{
         player.draw();
@@ -494,7 +523,7 @@ function animate() {
                                 y: boundary.position.y
                             }
                             }
-                        })
+                        } )
                     ) {
                         obstacle = true;
                         ////console.log('colliding');
