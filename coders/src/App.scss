@@ -10,6 +10,29 @@
   font-family: 'Pixel';
   src: url(font/visitor1.ttf) format('truetype');
 }
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d0a85c;
+  transition: all ease .3s;
+  &:hover {
+    background: #c22751;
+  }
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+  transition: all ease .3s;
+  &:active {
+    background: rgba(0, 0, 0, .2);
+  }
+}
 
 html,
 body {

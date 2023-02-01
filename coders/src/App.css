@@ -6,6 +6,34 @@
   font-family: "Pixel";
   src: url(font/visitor1.ttf) format("truetype");
 }
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d0a85c;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c22751;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+::-webkit-scrollbar-track:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
 html,
 body {
   overflow-x: hidden;
