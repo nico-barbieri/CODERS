@@ -11,7 +11,6 @@
   src: url(font/visitor1.ttf) format('truetype');
 }
 
-html,
 body {
   overflow-x: hidden;
   display: flex;
@@ -26,15 +25,13 @@ body {
 
 .App {
   width: 100vw;
+  height: 300vh;
   //display: flex;
   //align-items: flex-start;
   //justify-content: center;
 }
 
-.fullscreen-section {
-  height: 100vh;
-  width: 100vw;
-}
+
 
 //-------HEADER---------//
 
@@ -154,8 +151,6 @@ body {
       outline: 0rem;
       transition: all ease 0.3s;
       border: solid .25rem rgb(247, 251, 234);
-      //border-top-left-radius: $border-radius;
-      //border-bottom-right-radius: $border-radius;
 
       &::after{
         position: absolute;
@@ -185,4 +180,21 @@ body {
 //-------CANVA-------------// 
 #view {
   position: absolute;
+  z-index: -1;
+}
+
+//-------RULES-------------// 
+
+.rule-title{
+  position: absolute;
+  top: 48%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+.rule-content{
+  width: 35%;
+  position: absolute;
+  top:48%;
+  left: 78%;
+  transform: translate(-50%, -50%);
 }

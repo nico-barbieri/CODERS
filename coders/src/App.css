@@ -6,7 +6,6 @@
   font-family: "Pixel";
   src: url(font/visitor1.ttf) format("truetype");
 }
-html,
 body {
   overflow-x: hidden;
   display: flex;
@@ -21,11 +20,7 @@ body {
 
 .App {
   width: 100vw;
-}
-
-.fullscreen-section {
-  height: 100vh;
-  width: 100vw;
+  height: 300vh;
 }
 
 .header {
@@ -155,4 +150,20 @@ body {
 
 #view {
   position: absolute;
+  z-index: -1;
+}
+
+.rule-title {
+  position: absolute;
+  top: 48%;
+  left: 35%;
+  transform: translate(-50%, -50%);
+}
+
+.rule-content {
+  width: 35%;
+  position: absolute;
+  top: 48%;
+  left: 78%;
+  transform: translate(-50%, -50%);
 }/*# sourceMappingURL=App.css.map */

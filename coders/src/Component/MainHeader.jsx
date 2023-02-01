@@ -2,7 +2,7 @@ import logo from '../images/CODERS_extended_logo.svg'
 
 export function MainHeader() {
     return (
-        <header className="main-header">
+        <header className="main-header h-screen">
             <div className="start-wrapper">
                 <div className="start text-center flex flex-col justify-around rounded-3xl drop-shadow-lg">
                     <div className='logo-container'>
