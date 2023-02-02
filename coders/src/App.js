@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css'
+import { Champions } from './Component/champions';
 import { Header } from './Component/Header';
 import { MainHeader } from './Component/MainHeader';
 import { Rule } from './Component/rule';
@@ -13,6 +14,7 @@ render() {
       <Header />
       <MainHeader  />
       <Rule />
+      <Champions />
     </div>
   );
 

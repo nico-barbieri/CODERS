@@ -10,16 +10,29 @@
   font-family: 'Pixel';
   src: url(font/visitor1.ttf) format('truetype');
 }
+
+//general
+
+h3{
+  font-size: $sub-title;
+}
+h2{
+  font-size: $small-title;
+}
+
 ::-webkit-scrollbar {
   width: 16px;
   height: 16px;
 }
+
 ::-webkit-scrollbar-button {
   width: 0px;
   height: 0px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #d0a85c;
+
   &:hover {
     background: #c22751;
   }
@@ -27,12 +40,14 @@
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0);
+
   &:active {
     background: rgba(0, 0, 0, .2);
   }
 }
 
 body {
+  font-family: $font-family;
   overflow-x: hidden;
   display: flex;
   align-items: flex-start;
@@ -57,86 +72,87 @@ body {
 //-------HEADER---------//
 
 .header {
-  font-family: $font-family;
   font-size: 1.75rem;
-    height: $header-height;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-    pointer-events: none;
-    margin: 1rem 0rem;
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  pointer-events: none;
+  margin: 1rem 0rem;
 
-    .header-inner{
-        height: 100%;
-        margin: 0 3rem;
-    }
-    .header-logo-container {
+  .header-inner {
+    height: 100%;
+    margin: 0 3rem;
+  }
+
+  .header-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 3.5rem;
+
+    .header-logo {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      font-size: 3.5rem;
-      .header-logo{
-           display: flex;
-           height: 4rem;
-           pointer-events: visible;
-   
-           img {
-               height: 100%;
-               image-rendering: pixelated;
-           }
-       }
+      height: 4rem;
+      pointer-events: visible;
+
+      img {
+        height: 100%;
+        image-rendering: pixelated;
+      }
+    }
+  }
+
+  .header-nav {
+    li~li {
+      margin-left: 1rem;
     }
 
-    .header-nav{
-        li ~ li {
-            margin-left: 1rem;
-        }
+    a {
+      display: inline-block;
+      padding: 0.5rem;
+      text-transform: uppercase;
+      position: relative;
+      pointer-events: visible;
 
-        a {
-            display: inline-block;
-            padding: 0.5rem;
-            text-transform: uppercase;
-            position: relative;
-            pointer-events: visible;
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        background-color: #4267b2;
+        height: 4px;
+        width: 0;
+        transition: width 0.3s ease;
+      }
 
-            &::before,
-            &::after {
-                content: "";
-                position: absolute;
-                background-color: #4267b2;
-                height: 4px;
-                width: 0;
-                transition: width 0.3s ease;
-            }
+      &:hover::before,
+      &:hover::after {
+        width: 50%;
+      }
 
-            &:hover::before,
-            &:hover::after {
-                width: 50%;
-            }
+      &::before {
+        left: 0;
+        top: 0;
+        transform: translateY(.5rem);
+      }
 
-            &::before {
-                left: 0;
-                top: 0;
-                transform: translateY(.5rem);
-            }
+      &::after {
+        right: 0;
+        bottom: 0;
+        transform: translateY(-.5rem);
 
-            &::after {
-                right: 0;
-                bottom: 0;
-                transform: translateY(-.5rem);
-
-            }
-        }
+      }
     }
+  }
 }
 
 //-------Main-Header---------//
 
 .main-header {
   height: 100vh;
-  
+
 
   .start {
     z-index: 2;
@@ -145,11 +161,13 @@ body {
     top: 52%;
     left: 50%;
     transform: translate(-50%, -50%);
-    .logo-container{
+
+    .logo-container {
       display: flex;
       justify-content: center;
       width: 100%;
       margin-bottom: 1rem;
+
       img {
         width: 100%;
         image-rendering: pixelated;
@@ -173,7 +191,7 @@ body {
       transition: all ease 0.3s;
       border: solid .25rem rgb(247, 251, 234);
 
-      &::after{
+      &::after {
         position: absolute;
         top: 0;
         left: 0;
@@ -186,10 +204,12 @@ body {
         transform: translateY(-450%);
         transition: all ease .3s;
       }
-      &:hover{
+
+      &:hover {
         transform: scale(0.9);
         box-shadow: 0 0 0 .25rem rgb(168, 3, 47), 0 0 0 .5rem rgb(58, 58, 80);
-        &::after{
+
+        &::after {
           transform: translateY(550%);
 
         }
@@ -204,18 +224,34 @@ body {
   z-index: 0;
 }
 
-//-------RULES-------------// 
 
-.rule-title{
+.absolute-traslate {
   position: absolute;
-  top: 48%;
-  left: 35%;
   transform: translate(-50%, -50%);
 }
-.rule-content{
+
+//-------RULES-------------// 
+
+.rule-title {
+  top: 48vh;
+  left: 35vw;
+}
+
+.rule-content {
   width: 35%;
-  position: absolute;
-  top:48%;
+  top: 48%;
   left: 78%;
-  transform: translate(-50%, -50%);
+}
+
+//-------CHAMPIONS-------------// 
+
+.champion-title {
+  top: 48vh;
+  left: 60vw;
+}
+
+.champion-content {
+  width: 35%;
+  top: 48vh;
+  left: 20vw;
 }
