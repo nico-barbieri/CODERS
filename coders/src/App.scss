@@ -258,6 +258,16 @@ body {
 
 //-------CHAMPIONS CARD-------------// 
 
+.sprite-wrapper{
+  width: 250px;
+  height: 300px;
+  .sprite-img{
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+  }
+}
+
 .random-button-card{
   background-color: blue;
   &:hover{

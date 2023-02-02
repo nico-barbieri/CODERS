@@ -25,7 +25,7 @@ export function ChampionsCard() {
 
 
     return (
-    <div className=' ml-8 w-[50%]'>
+    <div className=' w-[fit-content]'>
         <div className='champions-card border-2 border-black mb-2  '>
             {
                 sprite && (
@@ -33,8 +33,8 @@ export function ChampionsCard() {
                         <div>
                             <h4>{sprite.name}</h4>
                         </div>
-                        <div>
-                            <img src={sprite.img} alt="immagine sprite" />
+                        <div className='sprite-wrapper'>
+                            <img src={sprite.img} alt="immagine sprite" className='sprite-img' />
                         </div>
                         <div>
                             <p>Speed: {sprite.speed}</p>

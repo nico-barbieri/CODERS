@@ -212,6 +212,17 @@ body {
   left: 25vw;
 }
 
+.sprite-wrapper {
+  width: 250px;
+  height: 300px;
+}
+.sprite-wrapper .sprite-img {
+  width: 250px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .random-button-card {
   background-color: blue;
 }
