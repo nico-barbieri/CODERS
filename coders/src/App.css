@@ -6,6 +6,7 @@
   font-family: "Pixel";
   src: url(font/visitor1.ttf) format("truetype");
 }
+html,
 body {
   overflow-x: hidden;
   display: flex;
