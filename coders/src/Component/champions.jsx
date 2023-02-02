@@ -8,9 +8,7 @@ export function Champions() {
                     </div>
                     <div className="champion-title absolute-traslate ">
                         <div>
-                            <h2>Coders Rules
-                            <br/>&<br/>
-                            Controls</h2>
+                            <h2>Champions</h2>
                         </div>
                     </div>
             </div>

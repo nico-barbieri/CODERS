@@ -24,9 +24,9 @@ export function ChampionsCard() {
 
 
 
-    return (<div>
-
-        <div className='champions-card border-2 border-black w-[50%] '>
+    return (
+    <div className=' ml-8 w-[50%]'>
+        <div className='champions-card border-2 border-black mb-2  '>
             {
                 sprite && (
                     <div key={sprite.id}>
@@ -43,8 +43,9 @@ export function ChampionsCard() {
                 )
             }
         </div>
-        <button onClick={() => randomID()} >Get random champion </button>
-
+        <div>
+            <button className='border-2 p-2 border-black random-button-card' onClick={() => randomID()} >Show random champion </button>
+        </div>
     </div>
     )
 }

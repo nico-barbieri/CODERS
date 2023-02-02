@@ -234,7 +234,7 @@ body {
 
 .rule-title {
   top: 48vh;
-  left: 35vw;
+  left: 40vw;
 }
 
 .rule-content {
@@ -247,16 +247,25 @@ body {
 
 .champion-title {
   top: 48vh;
-  left: 60vw;
+  left: 50vw;
 }
 
 .champion-content {
   width: 35%;
   top: 48vh;
-  left: 20vw;
+  left: 25vw;
 }
 
 //-------CHAMPIONS CARD-------------// 
 
+.random-button-card{
+  background-color: blue;
+  &:hover{
+    transform: scale(1.1);
+  }
+  &:active{
+    transform: scale(0.9);
+  }
+}
 
 

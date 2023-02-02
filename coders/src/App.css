@@ -192,7 +192,7 @@ body {
 
 .rule-title {
   top: 48vh;
-  left: 35vw;
+  left: 40vw;
 }
 
 .rule-content {
@@ -203,11 +203,21 @@ body {
 
 .champion-title {
   top: 48vh;
-  left: 60vw;
+  left: 50vw;
 }
 
 .champion-content {
   width: 35%;
   top: 48vh;
-  left: 20vw;
+  left: 25vw;
+}
+
+.random-button-card {
+  background-color: blue;
+}
+.random-button-card:hover {
+  transform: scale(1.1);
+}
+.random-button-card:active {
+  transform: scale(0.9);
 }/*# sourceMappingURL=App.css.map */

@@ -3,18 +3,18 @@
         "id": 1,
         "name": "francesco",
         "img": "https://www.pngitem.com/pimgs/m/493-4932729_8-bit-character-sprites-hd-png-download.png",
-        "speed": 7
+        "speed": 10
     },
     {
         "id": 2,
-        "name": "pluto",
+        "name": "alessandro",
         "img": "https://www.pngitem.com/pimgs/m/493-4932729_8-bit-character-sprites-hd-png-download.png",
         "speed": 10
     },
     {
         "id": 3,
-        "name": "topolino",
+        "name": "pippo",
         "img": "https://www.pngitem.com/pimgs/m/493-4932729_8-bit-character-sprites-hd-png-download.png",
-        "speed": 9
+        "speed": 15
     }
 ]
