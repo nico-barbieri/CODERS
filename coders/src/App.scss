@@ -283,9 +283,11 @@ body {
   background-color: blue;
   &:hover{
     transform: scale(1.1);
+    transition: 0.3s;
   }
   &:active{
     transform: scale(0.9);
+    transition: 0.1s;
   }
 }
 

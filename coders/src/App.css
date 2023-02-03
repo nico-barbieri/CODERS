@@ -238,7 +238,9 @@ body {
 }
 .random-button-card:hover {
   transform: scale(1.1);
+  transition: 0.3s;
 }
 .random-button-card:active {
   transform: scale(0.9);
+  transition: 0.1s;
 }/*# sourceMappingURL=App.css.map */
