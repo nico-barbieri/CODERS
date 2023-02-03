@@ -11,7 +11,8 @@ h3 {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 6rem;
+  line-height: 1;
 }
 
 ::-webkit-scrollbar {
@@ -193,17 +194,26 @@ body {
 .rule-title {
   top: 48vh;
   left: 40vw;
+  text-shadow: -0.15rem 0.15rem #d0a85c, -0.3rem 0.3rem rgb(168, 3, 47);
 }
 
 .rule-content {
+  max-height: 30%;
+  overflow-y: auto;
   width: 35%;
   top: 48%;
   left: 78%;
+  padding: 1rem;
+  box-shadow: 0 0 0 1rem rgb(168, 3, 47);
+  font-size: 2rem;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .champion-title {
   top: 48vh;
   left: 50vw;
+  text-shadow: -0.15rem 0.15rem #d0a85c, -0.3rem 0.3rem rgb(168, 3, 47);
 }
 
 .champion-content {

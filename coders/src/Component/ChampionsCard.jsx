@@ -11,9 +11,10 @@ export function ChampionsCard() {
         const random = Math.floor(Math.random() * 3);
         setId(random)
 
-        console.log(id)
+        //console.log(id)
     }
     useEffect(() => {
+        console.log(sprite);
         setSprite(champions[id])
     }, [id])
 
@@ -25,8 +26,8 @@ export function ChampionsCard() {
 
 
     return (
-    <div className=' w-[fit-content]'>
-        <div className='champions-card border-2 border-black mb-2  '>
+    <div className='w-[fit-content]'>
+        <div className='champions-card border-2 border-black mb-2'>
             {
                 sprite && (
                     <div key={sprite.id}>

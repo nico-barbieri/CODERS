@@ -3,7 +3,7 @@ import { ChampionsCard } from "./ChampionsCard";
 export function Champions() {
         return (
             <div className=' champion-section h-screen relative text-center'>
-                    <div className="champion-content flex flex-col gap-10 absolute-traslate">
+                    <div className="champion-content flex flex-col justify-center gap-10 absolute-traslate">
                        <ChampionsCard />
                     </div>
                     <div className="champion-title absolute-traslate ">

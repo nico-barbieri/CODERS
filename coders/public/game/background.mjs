@@ -133,11 +133,11 @@ const globalScale = 4; //scale of pixel art (400%)
 const numberOfSections = 3;
 
 //create images
-let map = new Image();
-map.src = './game/res/img/maps/page_bkg.png';
+let gameMap = new Image();
+gameMap.src = './game/res/img/maps/page_bkg.png';
 
-map.onload = () =>{
-    scaleRatio = document.body.scrollHeight/map.height;
+gameMap.onload = () =>{
+    scaleRatio = document.body.scrollHeight/gameMap.height;
     setBoundaries();
     animate();
 };
@@ -376,7 +376,7 @@ const stageBackground = new Background({
         y:document.body.scrollHeight//window.innerWidth/(16/9)
     },
     proportions: 48/(28 * numberOfSections),
-    image: map,
+    image: gameMap,
 })
 
 const stageForeground = new Background({
