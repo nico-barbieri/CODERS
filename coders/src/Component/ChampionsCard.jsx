@@ -5,18 +5,18 @@ import champions from '../champions.json';
 export function ChampionsCard() {
 
     const [sprite, setSprite] = useState(null)
-    const [id, setId] = useState(1)
+    const [index, setIndex] = useState(1)
 
     function randomID() {
         const random = Math.floor(Math.random() * 3);
-        setId(random)
+        setIndex(random)
 
         //console.log(id)
     }
     useEffect(() => {
         console.log(sprite);
-        setSprite(champions[id])
-    }, [id])
+        setSprite(champions[index])
+    }, [index])
 
 
 
