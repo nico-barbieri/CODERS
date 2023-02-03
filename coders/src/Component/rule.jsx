@@ -14,7 +14,9 @@ export function Rule() {
                     </p>
                 </div>
                 <div className="rules">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et repellat sunt dolorum, saepe possimus sequi quia aspernatur doloremque nemo explicabo rem libero illo? Ut numquam amet tempore quia, cupiditate sunt!</p>
+                    <p>
+                        The game is a TBS(turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the tough will survive!! 
+                    </p>
                 </div>
             </div>
         </div>
