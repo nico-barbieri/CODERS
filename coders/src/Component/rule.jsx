@@ -15,7 +15,7 @@ export function Rule() {
                 </div>
                 <div className="rules">
                     <p>
-                        The game is a TBS(turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the tough will survive!! 
+                        The game is a TBS(turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! 
                     </p>
                 </div>
             </div>
