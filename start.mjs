@@ -397,18 +397,22 @@ function animate() {
 
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
+        case 'd':
         case 'ArrowRight':
             keys.right.pressed = true;
             lastkey = 'right';
             break;
+        case 'a':
         case 'ArrowLeft':
             keys.left.pressed = true;
             lastkey = 'left';
             break;
+        case 'w':
         case 'ArrowUp':
             keys.up.pressed = true;
             lastkey = 'up';
             break;
+        case 's':
         case 'ArrowDown':
             keys.down.pressed = true;
             lastkey = 'down';
@@ -417,22 +421,26 @@ window.addEventListener('keydown', (e) => {
             keys.shift.pressed = true;
             break;
         default: console.log(e);
-        lastkey = '';
+            lastkey = '';
             break;
     }
 });
 
 window.addEventListener('keyup', (e) => {
     switch (e.key) {
+        case 'd':
         case 'ArrowRight':
             keys.right.pressed = false;
             break;
+        case 'a':
         case 'ArrowLeft':
             keys.left.pressed = false;
             break;
+        case 'w':
         case 'ArrowUp':
             keys.up.pressed = false;
             break;
+        case 's':
         case 'ArrowDown':
             keys.down.pressed = false;
             break;
