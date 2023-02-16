@@ -224,7 +224,7 @@ body {
 //-------CANVA-------------// 
 #view {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
 }
 
 
@@ -306,4 +306,44 @@ body {
 
 .footer {
   height: 50vh;
+  z-index: 100;
+  .footer-wrapper{
+    width: 60vw;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* filter: drop-shadow(.2rem .25rem rgb(0,0,0,.1)); */
+    .social-link-container {
+      display: flex;
+      gap: 2rem;
+      font-size: 2rem;
+    }
+    .footer-link-wrapper {
+      display: flex;
+      width: 100%;
+      margin-bottom: 8rem;
+      justify-content: space-between;
+      .footer-link-container {
+        text-align: center;
+        flex: 1;
+
+        &:first-child {
+          text-align: start;
+        }
+        &:last-child {
+          text-align: end;
+        }
+        h3 {
+          font-size: 2rem;
+        }
+        li {
+          font-size: 1.5rem;
+          line-height: 1;
+        }
+      }
+    }
+  }
 }

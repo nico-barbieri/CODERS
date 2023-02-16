@@ -4,7 +4,7 @@ import { Champions } from './Component/champions';
 import { Header } from './Component/Header';
 import { MainHeader } from './Component/MainHeader';
 import { Rule } from './Component/rule';
-import Canvas from './Component/Canvas';
+/* import Canvas from './Component/Canvas'; */
 import { FullscreenSection } from './Component/FullscreenSection';
 import Footer from './Component/Footer';
 
@@ -21,7 +21,7 @@ render() {
       <Champions />
       <FullscreenSection/>
       {/* <Canvas /> */}
-      <Footer/>
+      <Footer />
     </div>
   );
 
