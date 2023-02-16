@@ -41,7 +41,9 @@ h2 {
 
 body {
   font-family: "Pixel";
+  overflow: scroll;
   overflow-x: hidden;
+  overflow-y: overlay;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -179,7 +181,7 @@ body {
 
 #view {
   position: absolute;
-  z-index: 0;
+  z-index: -1;
 }
 
 .absolute-traslate {
@@ -248,4 +250,43 @@ body {
 
 .footer {
   height: 50vh;
+  z-index: 100;
+}
+.footer .footer-wrapper {
+  width: 60vw;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* filter: drop-shadow(.2rem .25rem rgb(0,0,0,.1)); */
+}
+.footer .footer-wrapper .social-link-container {
+  display: flex;
+  gap: 2rem;
+  font-size: 2rem;
+}
+.footer .footer-wrapper .footer-link-wrapper {
+  display: flex;
+  width: 100%;
+  margin-bottom: 8rem;
+  justify-content: space-between;
+}
+.footer .footer-wrapper .footer-link-wrapper .footer-link-container {
+  text-align: center;
+  flex: 1;
+}
+.footer .footer-wrapper .footer-link-wrapper .footer-link-container:first-child {
+  text-align: start;
+}
+.footer .footer-wrapper .footer-link-wrapper .footer-link-container:last-child {
+  text-align: end;
+}
+.footer .footer-wrapper .footer-link-wrapper .footer-link-container h3 {
+  font-size: 2rem;
+}
+.footer .footer-wrapper .footer-link-wrapper .footer-link-container li {
+  font-size: 1.5rem;
+  line-height: 1;
 }/*# sourceMappingURL=App.css.map */
