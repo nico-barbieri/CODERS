@@ -253,18 +253,18 @@ body {
   background: rgba(0, 0, 0, .2);
 }
 
-//-------CHAMPIONS-------------// 
+// //-------CHAMPIONS-------------// 
 
 .champion-title {
-  top: 48vh;
-  left: 50vw;
   text-shadow: -.15rem .15rem #d0a85c, -.3rem .3rem rgb(168, 3, 47);
 }
-
-.champion-content {
-  width: 35%;
-  top: 48vh;
-  left: 25vw;
+.champion-section{
+  width: 40%;
+ 
+}
+.champion-content{
+  max-width: 250px;
+  margin: 0 auto;
 }
 
 //-------CHAMPIONS CARD-------------// 
@@ -291,16 +291,29 @@ body {
   }
 }
 
+//-------TOP PLAYER-------------// 
+
+.classification-section{
+  width: 40%;
+
+}
+
+//-------LAST SECTION-------------// 
+
+
+.last-section-container{
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+
+}
+
 
 
 
 
 
 /*WIP*/
-.fullscreen-section {
-  height: 100vh;
-}
-
 
 .footer {
   height: 50vh;

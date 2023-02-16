@@ -27,7 +27,7 @@ export function ChampionsCard() {
 
     return (
     <div className='w-[fit-content]'>
-        <div className='champions-card border-2 border-black mb-2'>
+        <div className='champions-card border-2 border-black mb-2 mx'>
             {
                 sprite && (
                     <div key={sprite.id}>

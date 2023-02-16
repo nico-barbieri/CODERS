@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css'
-import { Champions } from './Component/champions';
 import { Header } from './Component/Header';
 import { MainHeader } from './Component/MainHeader';
 import { Rule } from './Component/rule';
 import Canvas from './Component/Canvas';
-import { FullscreenSection } from './Component/FullscreenSection';
+import { LastSection } from './Component/LastSection';
+
 import Footer from './Component/Footer';
 import { Presentation } from './Component/Presentation';
 
@@ -20,7 +20,7 @@ render() {
       <MainHeader  />
       <Presentation />
       <Rule />
-      <Champions />
+      <LastSection />
       {/* <Canvas /> */}
       <Footer/>
     </div>
