@@ -7,6 +7,7 @@ import { Rule } from './Component/rule';
 import Canvas from './Component/Canvas';
 import { FullscreenSection } from './Component/FullscreenSection';
 import Footer from './Component/Footer';
+import { Presentation } from './Component/Presentation';
 
 
 
@@ -17,9 +18,9 @@ render() {
     <div className="App">
       <Header />
       <MainHeader  />
+      <Presentation />
       <Rule />
       <Champions />
-      <FullscreenSection/>
       {/* <Canvas /> */}
       <Footer/>
     </div>
