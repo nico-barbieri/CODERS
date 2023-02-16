@@ -209,15 +209,16 @@ body {
 }
 
 .champion-title {
-  top: 48vh;
-  left: 50vw;
   text-shadow: -0.15rem 0.15rem #d0a85c, -0.3rem 0.3rem rgb(168, 3, 47);
 }
 
+.champion-section {
+  width: 30%;
+}
+
 .champion-content {
-  width: 35%;
-  top: 48vh;
-  left: 25vw;
+  max-width: 250px;
+  margin: 0 auto;
 }
 
 .sprite-wrapper {
@@ -243,11 +244,21 @@ body {
   transition: 0.1s;
 }
 
-/*WIP*/
-.fullscreen-section {
-  height: 100vh;
+.classification-section {
+  width: 30%;
+}
+.classification-section .top-player > ul > * {
+  border-bottom: 1px solid black;
 }
 
+.last-section-container {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+/*WIP*/
 .footer {
   height: 50vh;
   z-index: 100;

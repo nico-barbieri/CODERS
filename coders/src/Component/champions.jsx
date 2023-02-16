@@ -2,14 +2,12 @@ import { ChampionsCard } from "./ChampionsCard";
 
 export function Champions() {
         return (
-            <div className=' champion-section h-screen relative text-center' id="champions">
-                    <div className="champion-content flex flex-col justify-center gap-10 absolute-traslate">
-                       <ChampionsCard />
+            <div className=' champion-section text-center relative' id="champions">
+                    <div className="champion-title">
+                        <h2>Champions</h2>
                     </div>
-                    <div className="champion-title absolute-traslate ">
-                        <div>
-                            <h2>Champions</h2>
-                        </div>
+                    <div className="champion-content">
+                       <ChampionsCard />
                     </div>
             </div>
         )
