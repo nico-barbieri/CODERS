@@ -211,7 +211,7 @@ body {
 }
 
 .champion-section {
-  width: 40%;
+  width: 30%;
 }
 
 .champion-content {
@@ -243,10 +243,14 @@ body {
 }
 
 .classification-section {
-  width: 40%;
+  width: 30%;
+}
+.classification-section .top-player > ul > * {
+  border-bottom: 1px solid black;
 }
 
 .last-section-container {
+  width: 100%;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);

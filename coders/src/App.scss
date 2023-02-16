@@ -259,7 +259,7 @@ body {
   text-shadow: -.15rem .15rem #d0a85c, -.3rem .3rem rgb(168, 3, 47);
 }
 .champion-section{
-  width: 40%;
+  width: 30%;
  
 }
 .champion-content{
@@ -294,14 +294,17 @@ body {
 //-------TOP PLAYER-------------// 
 
 .classification-section{
-  width: 40%;
-
+  width: 30%;
+  .top-player > ul > *{
+    border-bottom: 1px solid black;
+  }
 }
 
 //-------LAST SECTION-------------// 
 
 
 .last-section-container{
+  width: 100%;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
