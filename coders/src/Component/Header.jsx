@@ -16,7 +16,7 @@ export function Header() {
                 </div>
                 <ul className="header-nav flex items-center justify-around ">
                     <li><a href="#">overview</a></li>
-                    <li><a href="#">champions</a></li>
+                    <li><a href="#champions">champions</a></li>
                     <li><a href="#">support</a></li>
                 </ul>
             </div>

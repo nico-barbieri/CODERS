@@ -11,7 +11,8 @@ h3 {
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 6rem;
+  line-height: 1;
 }
 
 ::-webkit-scrollbar {
@@ -48,7 +49,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: white;
-  background-color: rgb(58, 58, 80);
+  background-color: rgb(42, 42, 55);
 }
 
 .App {
@@ -192,22 +193,63 @@ body {
 
 .rule-title {
   top: 48vh;
-  left: 35vw;
+  left: 40vw;
+  text-shadow: -0.15rem 0.15rem #d0a85c, -0.3rem 0.3rem rgb(168, 3, 47);
 }
 
 .rule-content {
+  max-height: 30%;
+  overflow-y: auto;
   width: 35%;
   top: 48%;
   left: 78%;
+  padding: 1rem;
+  box-shadow: 0 0 0 1rem rgb(168, 3, 47);
+  font-size: 2rem;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .champion-title {
   top: 48vh;
-  left: 60vw;
+  left: 50vw;
+  text-shadow: -0.15rem 0.15rem #d0a85c, -0.3rem 0.3rem rgb(168, 3, 47);
 }
 
 .champion-content {
   width: 35%;
   top: 48vh;
-  left: 20vw;
+  left: 25vw;
+}
+
+.sprite-wrapper {
+  width: 250px;
+  height: 300px;
+}
+.sprite-wrapper .sprite-img {
+  width: 250px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.random-button-card {
+  background-color: blue;
+}
+.random-button-card:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+.random-button-card:active {
+  transform: scale(0.9);
+  transition: 0.1s;
+}
+
+/*WIP*/
+.fullscreen-section {
+  height: 100vh;
+}
+
+.footer {
+  height: 50vh;
 }/*# sourceMappingURL=App.css.map */
