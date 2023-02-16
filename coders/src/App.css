@@ -87,7 +87,9 @@ body {
 }
 .header .header-logo-container .header-logo img {
   height: 100%;
-  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: pixelated;
 }
 .header .header-nav li ~ li {
   margin-left: 1rem;
@@ -140,7 +142,9 @@ body {
 }
 .main-header .start .logo-container img {
   width: 100%;
-  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: pixelated;
 }
 .main-header .start button {
   overflow: hidden;
