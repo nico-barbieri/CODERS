@@ -71,12 +71,12 @@ class Sprite {
         this.position = randomPick(walkableTiles);
     }
     draw() {
-        if (this.shadow.active) {
+        /* if (this.shadow.active) {
             this.c.drawImage(
                 this.shadow.src,
                 this.stage.canvas.width/2 - 32, this.stage.canvas.height/2,
             )
-        }
+        } */
         this.c.drawImage(
             this.image, 
             this.frames.val * (this.width / this.scaleDown) + 0.5, //"+0.5&-0.5" to slightly crop the frame and avoid flickering borders

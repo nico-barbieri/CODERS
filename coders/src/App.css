@@ -41,7 +41,9 @@ h2 {
 
 body {
   font-family: "Pixel";
+  overflow: scroll;
   overflow-x: hidden;
+  overflow-y: overlay;
   display: flex;
   align-items: flex-start;
   justify-content: center;
