@@ -11,7 +11,7 @@ h3 {
 }
 
 h2 {
-  font-size: 6rem;
+  font-size: 4rem;
   line-height: 1;
 }
 
@@ -69,11 +69,11 @@ body {
   z-index: 100;
   pointer-events: none;
   margin: 0rem 0rem;
-  background: linear-gradient(130deg, rgb(42, 42, 55) 0%, rgba(42, 42, 55, 0.5) 64.95%, rgb(42, 42, 55) 65%, rgb(58, 58, 80) 100%);
+  background: linear-gradient(130deg, rgba(42, 42, 55, 0.9) 20%, rgba(42, 42, 55, 0.9) 64.95%, rgb(42, 42, 55) 65%, rgb(58, 58, 80) 100%);
+  -webkit-backdrop-filter: invert(1) hue-rotate(180deg);
+          backdrop-filter: invert(1) hue-rotate(180deg);
   box-shadow: 0 0 1rem 1rem rgba(42, 42, 55, 0.3);
   transition: all 0.3s ease;
-  -webkit-animation: hue-cycle 10s steps(1) infinite;
-          animation: hue-cycle 10s steps(1) infinite;
 }
 .header.show {
   position: fixed;
@@ -223,7 +223,7 @@ body {
 }
 
 .rule-content {
-  max-height: 35%;
+  height: 24rem;
   overflow-y: auto;
   width: 45%;
   top: 50%;
@@ -232,6 +232,23 @@ body {
   font-size: 2rem;
   line-height: 1;
   background: rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.rule-content.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+.rule-content.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.rule-content .rule-header {
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  font-size: 4rem;
+}
+.rule-content .rule-header h3 {
+  font-size: 4rem;
 }
 
 .champion-title {
