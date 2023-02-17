@@ -77,13 +77,32 @@ body {
 .header {
   font-size: 1.75rem;
   height: $header-height;
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
   pointer-events: none;
-  margin: 1rem 0rem;
+  margin: 0rem 0rem;
+  background: linear-gradient(130deg, 
+  rgb(42,42,55,1) 0%,
+  rgba(42,42,55,.5) 64.95%, 
+  rgba(42,42,55,1) 65%, 
+  rgba(58,58,80,1) 100%);
+  //backdrop-filter: invert(1) hue-rotate(180deg);
+  box-shadow: 0 0 1rem 1rem rgba(42, 42, 55, .3);
+  transition: all .3s ease;
+  animation: hue-cycle 10s steps(1) infinite;
+
+  &.show {
+    position: fixed;
+    top: 0;
+  }
+
+  &.hide {
+    position: fixed;
+    top: -7rem
+  }
 
   .header-inner {
     height: 100%;
@@ -119,8 +138,13 @@ body {
       text-transform: uppercase;
       position: relative;
       pointer-events: visible;
+      transition: all .3s ease-out;
 
-      &::before,
+      &:hover {
+        color: #4267b2;
+      }
+
+      /* &::before,
       &::after {
         content: "";
         position: absolute;
@@ -146,7 +170,7 @@ body {
         bottom: 0;
         transform: translateY(-.5rem);
 
-      }
+      } */
     }
   }
 }
@@ -249,7 +273,7 @@ body {
   top: 50%;
   left: 50%;
   padding: 1rem;
-  box-shadow: 0 0 0 1rem rgb(168, 3, 47);
+  //box-shadow: 0 0 0 1rem rgb(168, 3, 47);
   font-size: 2rem;
   line-height: 1;
   background: rgba(0, 0, 0, .2);
@@ -331,6 +355,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    color: rgb(58, 58, 80);
     /* filter: drop-shadow(.2rem .25rem rgb(0,0,0,.1)); */
     .social-link-container {
       display: flex;
@@ -362,4 +387,50 @@ body {
       }
     }
   }
+}
+
+@keyframes hue-cycle {
+  0% {
+    backdrop-filter: invert(0) hue-rotate(0deg);
+  }
+  
+  10% {
+    backdrop-filter: invert(0) hue-rotate(180deg);
+  }
+  20% {
+    backdrop-filter: invert(0) hue-rotate(120deg);
+  }
+  
+  30% {
+    backdrop-filter: invert(0) hue-rotate(40deg);
+  }
+  40% {
+    backdrop-filter: invert(0) hue-rotate(270deg);
+  }
+  
+  50% {
+    backdrop-filter: invert(0) hue-rotate(210deg);
+  }
+  60% {
+    backdrop-filter: invert(0) hue-rotate(340deg);
+  }
+  
+  70% {
+    backdrop-filter: invert(0) hue-rotate(80deg);
+  }
+  80% {
+    backdrop-filter: invert(0) hue-rotate(150deg);
+  }
+  
+  90% {
+    backdrop-filter: invert(0) hue-rotate(200deg);
+  }
+  100% {
+    backdrop-filter: invert(0) hue-rotate(300deg);
+  }
+  
+  100% {
+    backdrop-filter: invert(0) hue-rotate(40deg);
+  }
+
 }
