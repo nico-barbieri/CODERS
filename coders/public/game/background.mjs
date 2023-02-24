@@ -195,6 +195,15 @@ let playerSpeed = 5
 
 
 //create stage
+let view = () => {
+    let canva;
+    while (!canva) {
+        canva = document.querySelector('#view'),
+        'loading'
+    }
+    return document.querySelector('#view')
+}
+
 let page_bkg = new Stage({
     canvas: document.querySelector('#view'),
     proportions: 48/(28 * numberOfSections),

@@ -122,7 +122,7 @@ export function Rule() {
 
     return (<>
 
-        <div className="rule-section h-screen relative text-center">
+        <div id="rule" className="rule-section h-screen relative text-center">
             {slides}
         </div>
         {/* <div className='rule-section h-screen relative text-center'>

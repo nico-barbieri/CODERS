@@ -1,6 +1,6 @@
 import logo from '../images/CODERS_extended_logo.svg'
 
-export function MainHeader() {
+export function StartSection() {
     return (
         <header className="main-header h-screen">
             <div className="start-wrapper">
@@ -9,7 +9,7 @@ export function MainHeader() {
                         {<img src={logo} alt="Logo" />}
                     </div>
                     <div>
-                        <button className= "text-6xl p-7 ">Start</button>
+                        <button className= "text-6xl p-7 start-button ">Start</button>
                     </div>
                 </div>
             </div>

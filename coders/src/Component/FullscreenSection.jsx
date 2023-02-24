@@ -1,5 +1,7 @@
-export function FullscreenSection() {
+export function FullscreenSection(props) {
     return (
-        <div className="fullscreen-section">ciao</div>
+        <div className="fullscreen-section">
+            {props.children}
+        </div>
     )
 }

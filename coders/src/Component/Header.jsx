@@ -2,32 +2,9 @@ import {ReactComponent as ShortLogo} from '../images/coders_logo_short_nobkg.svg
 import {ReactComponent as LogoTitle} from '../images/CODERS_extended_logo-nosub.svg'
 import { PowerGlitch } from 'powerglitch';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export function Header() {
-const [state, setState] = useState({
-    visible: true,
-})
-
-    const nav = document.getElementById('navbar');
-
-let prevScrollpos = window.pageYOffset;
-window.onscroll = function () {
-    let currentScrollPos = window.pageYOffset;
-    if (currentScrollPos >= 150) {
-
-        if (prevScrollpos >= currentScrollPos) {
-            setState({
-                visible: true,
-            })
-        }
-        else {
-            setState({
-                visible: false,
-            })
-        } 
-    }
-    prevScrollpos = currentScrollPos;
-}
+export function Header({top}) {
 
  const handleHover = (e) => {
     PowerGlitch.glitch(e.target, {
@@ -61,7 +38,7 @@ window.onscroll = function () {
 
 
     return (
-        <nav className={'header ' + (state.visible? 'show' : 'hide')}  id='navbar'>
+        <nav className={'header ' + (top? 'show' : 'hide')}  id='navbar'>
             <div className="header-inner flex items-center justify-between">
                 <div className="header-logo-container">
                     <div className='header-logo'>
@@ -72,9 +49,12 @@ window.onscroll = function () {
                     </div>
                 </div>
                 <ul className="header-nav flex items-center justify-around ">
-                    <li onMouseEnter={handleHover}><a href="#">overview</a></li>
-                    <li onMouseEnter={handleHover}><a href="#champions">champions</a></li>
-                    <li onMouseEnter={handleHover}><a href="#">support</a></li>
+                    <li onMouseEnter={handleHover}><a href="#who-are-coders">Who are<br/>Coders?</a></li>
+                    <li onMouseEnter={handleHover}><a href="#rule">Controls<br/>& Rules</a></li>
+                    <li onMouseEnter={handleHover}><a href="#board">Collection<br/>& Champions</a></li>
+                    <li onMouseEnter={handleHover}>
+                        <Link to={'/login'}>Login</Link>
+                    </li>
                 </ul>
             </div>
         </nav>
