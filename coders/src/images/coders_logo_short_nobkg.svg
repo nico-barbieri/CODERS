@@ -9,28 +9,11 @@
 	.st3{fill:#FBCCAA;}
 	.st4{fill:#DDA683;}
 	.face-logo {
-
-	image-rendering: pixelated;
-	}
-
-	.face-logo:hover #palpebra_3_, .face-logo:hover #palpebra_2_ {
-		animation: blink normal 0s ease forwards;
+		image-rendering: pixelated;
 	}
 	#palpebra, #palpebra_1_ {
-		opacity: 0;
-	}
-	.face-logo:hover #palpebra, .face-logo:hover #palpebra_1_ {
-		opacity: 1;
-	}
-
-    @keyframes blink {
-        0% {
-			transform: translateY(0%)
-		}
-		100% {
-			transform: translateY(6.25%)
-		}
-    }
+    opacity: 0;
+  }
 </style>
 <g id="logo-face">
 	<path class="st0" d="M32,0h8v8h-8V0z"/>

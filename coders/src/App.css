@@ -44,11 +44,11 @@ h2 {
 }
 
 body {
-  position: static;
-  font-family: "Pixel";
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: overlay;
+  position: static;
+  font-family: "Pixel";
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -57,6 +57,9 @@ body {
   box-sizing: border-box;
   color: white;
   background-color: rgb(42, 42, 55);
+}
+body:has(.loading-screen) {
+  overflow: hidden;
 }
 body .App .to-top {
   position: fixed;
@@ -357,10 +360,16 @@ body .start-button:hover::after {
   transform: translate(0, -50%);
 }
 
-/*WIP*/
 .footer {
   height: 50vh;
   z-index: 100;
+}
+.footer a {
+  color: inherit;
+  transition: all 0.15s ease-out;
+}
+.footer a:hover {
+  color: #4267b2;
 }
 .footer .footer-wrapper {
   width: 60vw;
@@ -508,4 +517,50 @@ body .start-button:hover::after {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.loading-screen {
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: rgb(42, 42, 55);
+  width: 100vw;
+  height: 400vh;
+  z-index: 10000;
+}
+.loading-screen .loading-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-screen .loading-wrapper .loading-animation {
+  height: 8rem;
+}
+
+.header-logo-container:hover .face-logo #palpebra_3_, .header-logo-container:hover .face-logo #palpebra_2_ {
+  -webkit-animation: blink normal 0s ease forwards;
+          animation: blink normal 0s ease forwards;
+}
+.header-logo-container:hover .face-logo #palpebra, .header-logo-container:hover .face-logo #palpebra_1_ {
+  opacity: 1;
+}
+
+@-webkit-keyframes blink {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(6.25%);
+  }
+}
+
+@keyframes blink {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(6.25%);
+  }
 }/*# sourceMappingURL=App.css.map */

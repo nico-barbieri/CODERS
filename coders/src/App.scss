@@ -14,13 +14,12 @@
 //general
 html {
   scroll-behavior: smooth;
-
 }
 
-h3{
+h3 {
   font-size: $sub-title;
 }
-h2{
+h2 {
   font-size: 4rem;
   line-height: 1;
 }
@@ -52,11 +51,11 @@ h2{
 }
 
 body {
-  position: static;
-  font-family: $font-family;
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: overlay;
+  position: static;
+  font-family: $font-family;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -65,6 +64,9 @@ body {
   box-sizing: border-box;
   color: white;
   background-color: rgb(42, 42, 55);
+  &:has(.loading-screen){
+    overflow: hidden;
+  }
   .App{
     //position: relative;
     .to-top {
@@ -132,6 +134,7 @@ body {
   //align-items: flex-start;
   //justify-content: center;
 }
+
 
 
 
@@ -421,15 +424,16 @@ body {
 }
 
 
-
-
-
-
-/*WIP*/
-
 .footer {
   height: 50vh;
   z-index: 100;
+  a {
+    color: inherit;
+    transition: all .15s ease-out;
+    &:hover {
+      color: #4267b2;
+    }
+  }
   .footer-wrapper{
     width: 60vw;
     height: 100%;
@@ -524,3 +528,45 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.loading-screen {
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background: rgb(42, 42, 55);
+  width: 100vw;
+  height: 100vh * 4;
+  z-index: 10000;
+  .loading-wrapper{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+      .loading-animation{
+        height: 8rem;
+      }
+  }
+}
+
+
+
+//LOGO ANIMATION
+.header-logo-container:hover {
+  .face-logo #palpebra_3_, .face-logo #palpebra_2_ {
+    animation: blink normal 0s ease forwards;
+  }
+  
+  .face-logo #palpebra, .face-logo #palpebra_1_ {
+    opacity: 1;
+  }
+}
+
+  @keyframes blink {
+      0% {
+    transform: translateY(0%)
+  }
+  100% {
+    transform: translateY(6.25%)
+  }
+  }

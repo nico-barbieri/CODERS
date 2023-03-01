@@ -1,9 +1,9 @@
-import { Canva } from "../Component/Canva"
-import { LastSection } from "../Component/LastSection"
-import { Presentation } from "../Component/Presentation"
-import { Rule } from "../Component/rule"
-import { StartSection } from "../Component/StartSection"
-import ToTop from "../Component/ToTop"
+import { Canva } from "../components/Canva"
+import { LastSection } from "../components/LastSection"
+import { Presentation } from "../components/Presentation"
+import { Rule } from "../components/rule"
+import { StartSection } from "../components/StartSection"
+import ToTop from "../components/ToTop"
 
 const Home = () => {
     return <div className="body-wrapper">

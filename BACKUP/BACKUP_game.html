@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CODERS</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!--music is just to test-->
+    <audio id="music" loop autoplay src="./res/img/test/funky-wip-loop.ogg" type="audio/mp3"></audio>
+    <!-- <?xml version="1.0" encoding="utf-8"?> -->
+<!-- generated at drububu.com  -->
+<!-- <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> -->
+    <canvas id="view"></canvas>
+    <button id="musicBtn" style="position: absolute; top: 0; right: 0; height: 48px; background: black; color:white;font-size: 48px; outline: none;">music</button>
+    <script type="module" src="./start.mjs"></script>
+    <script>
+        const playStop = document.querySelector('#musicBtn');
+        const music = document.querySelector('#music');
+        let pause = false;
+        playStop.addEventListener('click', () => { 
+            if (!pause) {
+                music.pause();
+                pause = true;
+            } else {
+                music.play();
+                pause = false;
+            }
+        })
+    </script>
+</body>
+</html>

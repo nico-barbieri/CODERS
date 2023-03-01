@@ -1,3 +1,5 @@
+window.loaded = false;
+
 
 import { Sprite, Boundary, Stage } from "./js/classes.mjs";
 import { getCollision } from "./data/collisions.mjs";
@@ -185,8 +187,8 @@ collisionMaps.level_0.forEach((row, i) =>{
 
 //function to detect collisions ("-8" is added to adjust collision distance)
 function rectangularCollision({sprite1, sprite2}) {
-    return (sprite1.position.x + sprite1.width > sprite2.position.x &&
-        sprite1.position.x < sprite2.position.x + sprite2.width &&
+    return (sprite1.position.x + sprite1.width - 8 > sprite2.position.x &&
+        sprite1.position.x < sprite2.position.x + sprite2.width - 8 &&
         sprite1.position.y + sprite1.height > sprite2.position.y &&
         sprite1.position.y + sprite1.height/1.6< sprite2.position.y + sprite2.height)
 }
@@ -248,6 +250,7 @@ const movables = [stageBackground, ...boundaries, stageForeground]
 
 
 function animate() {
+    if (window.loaded = false) window.loaded = true;
     window.requestAnimationFrame(animate);
 
     //reset player speed every frame based on shift.pressed value
@@ -397,22 +400,18 @@ function animate() {
 
 window.addEventListener('keydown', (e) => {
     switch (e.key) {
-        case 'd':
         case 'ArrowRight':
             keys.right.pressed = true;
             lastkey = 'right';
             break;
-        case 'a':
         case 'ArrowLeft':
             keys.left.pressed = true;
             lastkey = 'left';
             break;
-        case 'w':
         case 'ArrowUp':
             keys.up.pressed = true;
             lastkey = 'up';
             break;
-        case 's':
         case 'ArrowDown':
             keys.down.pressed = true;
             lastkey = 'down';
@@ -421,26 +420,22 @@ window.addEventListener('keydown', (e) => {
             keys.shift.pressed = true;
             break;
         default: console.log(e);
-            lastkey = '';
+        lastkey = '';
             break;
     }
 });
 
 window.addEventListener('keyup', (e) => {
     switch (e.key) {
-        case 'd':
         case 'ArrowRight':
             keys.right.pressed = false;
             break;
-        case 'a':
         case 'ArrowLeft':
             keys.left.pressed = false;
             break;
-        case 'w':
         case 'ArrowUp':
             keys.up.pressed = false;
             break;
-        case 's':
         case 'ArrowDown':
             keys.down.pressed = false;
             break;
