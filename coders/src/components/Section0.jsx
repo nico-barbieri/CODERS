@@ -1,8 +1,9 @@
+import React from 'react';
 import logo from '../images/CODERS_extended_logo.svg'
 
-export function StartSection() {
+function StartSection() {
     return (
-        <header className="main-header h-screen">
+        <header className="start-section fullscreen-section h-screen">
             <div className="start-wrapper">
                 <div className="start text-center flex flex-col justify-around rounded-3xl drop-shadow-lg">
                     <div className='logo-container'>
@@ -18,3 +19,5 @@ export function StartSection() {
         </header>
     )
 }
+
+export default StartSection;

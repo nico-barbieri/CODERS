@@ -2,7 +2,7 @@ import { ChampionsCard } from "./ChampionsCard";
 
 export function Champions() {
         return (
-            <div className=' champion-section text-center relative' id="champions">
+            <div className='champion-section text-center relative' id="champions">
                     <div className="champion-title">
                         <h2>Champions</h2>
                     </div>

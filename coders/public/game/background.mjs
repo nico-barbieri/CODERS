@@ -134,7 +134,7 @@ class Boundary {
 
 //variables initialization
 let scaleRatio = .5
-const globalScale = 4; //scale of pixel art (400%)
+const globalScale = 4; //scale of pixel art (100%)
 const numberOfSections = 4.5;
 
 //create images
@@ -197,7 +197,6 @@ let lastkey = 'down'; // the game starts with the frontal view of the player
 
 //player normal speed
 let playerSpeed = 5 
-
 
 //create stage
 /* let view = () => {

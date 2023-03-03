@@ -1,10 +1,9 @@
 import {ReactComponent as ShortLogo} from '../images/coders_logo_short_nobkg.svg'
 import {ReactComponent as LogoTitle} from '../images/CODERS_extended_logo-nosub.svg'
 import { PowerGlitch } from 'powerglitch';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export function Header({top}) {
+function Header({show, handleClick}) {
 
  const handleHover = (e) => {
     PowerGlitch.glitch(e.target, {
@@ -36,9 +35,8 @@ export function Header({top}) {
       })
  }
 
-
     return (
-        <nav className={'header ' + (top? 'show' : 'hide')}  id='navbar'>
+        <nav className={'header ' + (show? 'show' : 'hide')}  id='navbar'>
             <div className="header-inner flex items-center justify-between">
                 <Link to={'/'}>
                   <div className="header-logo-container">
@@ -51,9 +49,9 @@ export function Header({top}) {
                   </div>
                 </Link>
                 <ul className="header-nav flex items-center justify-around ">
-                    <li onMouseEnter={handleHover}><a href="#who-are-coders">Who are<br/>Coders?</a></li>
-                    <li onMouseEnter={handleHover}><a href="#rule">Controls<br/>& Rules</a></li>
-                    <li onMouseEnter={handleHover}><a href="#board">Collection<br/>& Champions</a></li>
+                    <li onMouseEnter={handleHover}><a href="#who-are-coders" onClick={handleClick} >Who are<br/>Coders?</a></li>
+                    <li onMouseEnter={handleHover}><a href="#rule" onClick={handleClick} >Controls<br/>& Rules</a></li>
+                    <li onMouseEnter={handleHover}><a href="#board" onClick={handleClick} >Collection<br/>& Champions</a></li>
                     <li onMouseEnter={handleHover}>
                         <Link to={'/login'}>Login</Link>
                     </li>
@@ -62,3 +60,5 @@ export function Header({top}) {
         </nav>
     )
 }
+
+export default Header;

@@ -1,9 +1,9 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { PowerGlitch } from 'powerglitch';
 import { useEffect } from "react";
 
 
-export function Rule() {
+function ControlsAndRules(props, ref) {
     const [state, setState] = useState({
         i: 1,
     })
@@ -37,21 +37,21 @@ export function Rule() {
         {
             id: 1,
             title: 'how to play',
-            text: <div style={{textAlign: 'start'}}>Move player pressing WASD or arrows on your keyboard.
-            <br/>
-                <br />Press Shift to move faster.
+            text: <p style={{textAlign: 'start'}}>Move player pressing WASD or arrows on your keyboard.
                 <br/>
-                <br />Press SPACE to interact with objects and characters.</div>,
+                <br/>Press Shift to move faster.
+                <br/>
+                <br/>Press SPACE to interact with objects and characters.</p>,
         },
         {
             id: 2,
             title: 'a tbs game',
-            text: <>The game is a TBS(turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! </>,
+            text: <p>The game is a TBS (turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! </p>,
         },
         {
             id: 3,
             title: 'become invincible!',
-            text: <>Gain points and get stronger collecting special chips and rare characters from the shop</>,
+            text: <p>Gain points and get stronger collecting special chips and rare characters from the shop</p>,
         },
     ]
 
@@ -122,9 +122,12 @@ export function Rule() {
 
     return (<>
 
-        <div id="rule" className="rule-section h-screen relative text-center">
+        <div id="rule" ref={ref} className="rule-section h-screen relative text-center">
+        {(props.inRange) && <div className={"section-title " + (props.titleVisible && !props.stopAnimation? 'show' : 'hide')}><h3>CONTROLS &<br/>RULES</h3></div>}
             {slides}
         </div>
         </>
     )
 }
+
+export default React.forwardRef(ControlsAndRules);

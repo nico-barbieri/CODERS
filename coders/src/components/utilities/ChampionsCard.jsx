@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import champions from '../champions.json';
+import champions from '../../champions.json';
 
 export function ChampionsCard() {
 
