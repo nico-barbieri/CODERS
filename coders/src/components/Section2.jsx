@@ -122,8 +122,13 @@ function ControlsAndRules(props, ref) {
 
     return (<>
 
-        <div id="rule" ref={ref} className="rule-section h-screen relative text-center">
-        {(props.inRange) && <div className={"section-title " + (props.titleVisible && !props.stopAnimation? 'show' : 'hide')}><h3>CONTROLS &<br/>RULES</h3></div>}
+        <div id="rule" ref={ref} data-background='hsl(344, 67%, 46%)' 
+        data-title='CONTROLS & RULES' className="rule-section h-screen relative text-center">
+        <div className={"section-title " + (props.titleVisible && !props.stopAnimation? 'show' : 'hide')}>
+            <h3>
+                <span className="animated-title baffle">CONTROLS &</span>
+            </h3>
+        </div>
             {slides}
         </div>
         </>

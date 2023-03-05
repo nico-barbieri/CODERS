@@ -1,30 +1,62 @@
 import { useEffect, useState } from "react";
+import baffle from "baffle"
 
-const useCompareScrollOffset = (el) => {
-    const [inRange, setInRange] = useState(true)
+const useCompareScrollOffset = (el, oneAtATime = '') => {
+    const scrollOffset = 450;
+    const visibleTime = 1500;
+
+    const visibleElements = oneAtATime? document.querySelectorAll(oneAtATime + '.show') : 0;
+    
+
+    const [prevScrollPos, setPrevScrollPos] = useState(window.screenY +100)
     const [visible, setVisible] = useState(false)
 
+    const delayedSetVisible = (value, delay) => setTimeout(() => {
+        setVisible(value);
+    }, delay);
+
     const checkScrollRange = () => {
+        
         if (
-            window.scrollY >= el.current.offsetTop - 550 && 
-            window.scrollY <= el.current.offsetTop + 150
+            prevScrollPos <= el.current.offsetTop - scrollOffset &&
+            window.scrollY >= el.current.offsetTop - scrollOffset
             ) {
-            setInRange(true);
-
-            if (
-                window.scrollY >= el.current.offsetTop - 350 && 
-                window.scrollY <= el.current.offsetTop - 0
-                ) {
+            const b = baffle(document.querySelectorAll('.baffle'), {
+                speed: 50,
+            });
+            if (visibleElements.length === 0){
+                el.current.children[0].style.animationDuration = '.3s';
                 setVisible(true);
+                b.text(() => el.current.dataset.title)
+                b.reveal(1000)
+                
+                delayedSetVisible(false, visibleTime)
+
             } else {
-                setVisible(false);
+                visibleElements.forEach((visibleElement)=> {
+                    visibleElement.classList.remove('show')
+                    visibleElement.classList.remove('hide')
+                    visibleElement.style.animationDuration = '0s';
+                })
+                el.current.children[0].style.animationDuration = '.3s';
+
+                setVisible(true);
+                b.text(() => el.current.dataset.title)
+                b.reveal(1000)
+
+                delayedSetVisible(false, visibleTime)
             }
+        } 
 
-        } else {
-            setInRange(false);
-        }
+        if (window.scrollY >= el.current.offsetTop - scrollOffset &&
+            window.scrollY <= el.current.offsetTop + el.current.offsetHeight - scrollOffset
+            ) {
+            document.body.style.background = el.current.dataset.background
+        } 
+
+        setPrevScrollPos(window.scrollY)
     }
-
+    
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.addEventListener('scroll', checkScrollRange);
@@ -36,7 +68,7 @@ const useCompareScrollOffset = (el) => {
         }
     }, [window.scrollY]);
 
-    return [inRange, visible]
+    return [visible]
 }
 
 export default useCompareScrollOffset;

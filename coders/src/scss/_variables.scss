@@ -2,12 +2,15 @@
 $white: #fff;
 $black: #000;
 
-$primary: #2a2a37;
+$primary: hsl(240, 13%, 19%);
 $secondary: #f1ede9;
-$tertiary: #36a6ce;
+$tertiary: hsl(196, 61%, 51%);
+$darker-tertiary: #294c59;
 $tertiary-alt: #4267b2;
-$accent-soft: #d1a85c;
-$accent-strong: #c22751;
+$accent-soft: hsl(39, 56%, 59%);
+$darker-accent-soft: #5f4c29;
+$accent-strong: hsl(344, 67%, 46%);
+$darker-accent-strong: #5a1b2c;
 
 $header-height: 5rem;
 $border-radius: 20px;

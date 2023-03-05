@@ -20,7 +20,7 @@ class Stage {
 
     init(){
         console.log('Hello coder!');
-        this.c.fillStyle = 'rgb(42, 42, 55)';
+        this.c.fillStyle = 'rgb(0, 0, 0, 0)';
         this.c.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }

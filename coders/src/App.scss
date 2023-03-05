@@ -114,7 +114,18 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: $secondary;
-  background-color: $primary;
+  background: $primary;
+  transition: background .3s ease-in-out;
+
+  /* &:has(.section-title.show){
+    animation: toYellow .3s ease forwards;
+  }
+  &:has{
+    
+  }
+  &:has{
+    
+  } */
 
   &:has(.loading-screen) {
     overflow: hidden;
@@ -491,6 +502,7 @@ body {
 #view {
   position: absolute;
   z-index: -1;
+  filter: drop-shadow(0rem .75rem 0 rgba(0 ,0 ,0 , .3));
 }
 
 //LOADING SCREEN
@@ -547,32 +559,97 @@ body {
 
 .section-title {
   overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  z-index: 50;
+  pointer-events: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(130deg,
-  rgb(42, 42, 55, .9) 20%,
-  rgba(58, 58, 80, 1) 100%);;
-  color: $secondary;
-  font-family: NewRodin;
-  line-height: 1;
-  font-weight: 600;
-  font-size: 4rem;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  mix-blend-mode: multiply;
-  backdrop-filter: blur(.5rem) grayscale(1);
-  transition: all ease-in-out .5s;
+
+  
+  padding: 2rem;
+
+
+  width: 100vw;
+  height: 100vh;
+  //center
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  opacity: 0;
+  background: transparent;
+  color: $tertiary;
+  font-family: Pixel/* NewRodin */;
+  
+  line-height: 1;
+  font-weight: 600;
+  font-size: 4rem;
+
+  mix-blend-mode: normal;
+  z-index: 50;
+
+  transition: opacity .3s ease-out;
+  backdrop-filter: blur(6px);
+
+  &.show{
+    opacity: 1;
+    animation: title-in ease-in-out forwards;
+    animation-duration: 0s;
+  }
 
   &.hide {
-    font-size: 12rem;
-    top: 50%;
-    height: 0;
-    backdrop-filter: blur(0rem);
+    opacity: 1;
+    animation: title-out ease-in-out forwards;
+    animation-duration: 0s;
+  }
+
+  h3 {
+    text-shadow: 
+    -1px 0 $secondary, 0px -1px $secondary, 1px 0 $secondary, 0px 1px $secondary,
+    -3px 0 $secondary, 0px -3px $secondary, 3px 0 $secondary, 0px 3px $secondary;
+    filter: drop-shadow(-4px 4px $accent-strong); 
+    width: 28rem;
+    text-align: center;
+    span {
+      text-overflow: clip;
+    }
+  }
+
+}
+
+@keyframes title-in {
+  0% {
+    opacity: 0;
+    //transform: translate(-100%, -50%);
+    //width: 60rem;
+    background: transparent;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes title-out {
+  0% {
+    //transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+  }
+  100% {
+    opacity: 0;
+    //transform: translate(100%, -50%);
+    //width: 60rem;
+    background: transparent;  
+  }
+}
+
+@keyframes toYellow {
+  0% {
+    background: inherit;
+  }
+  100% {
+    background: $accent-soft;
   }
 }

@@ -67,10 +67,10 @@ p {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1a85c;
+  background: hsl(39deg, 56%, 59%);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c22751;
+  background: hsl(344deg, 67%, 46%);
 }
 
 ::-webkit-scrollbar-track {
@@ -103,7 +103,17 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: #f1ede9;
-  background-color: #2a2a37;
+  background: hsl(240deg, 13%, 19%);
+  transition: background 0.3s ease-in-out;
+  /* &:has(.section-title.show){
+    animation: toYellow .3s ease forwards;
+  }
+  &:has{
+
+  }
+  &:has{
+
+  } */
 }
 body:has(.loading-screen) {
   overflow: hidden;
@@ -214,7 +224,7 @@ body .App .header .header-nav a {
   } */
 }
 body .App .header .header-nav a:hover {
-  color: #d1a85c;
+  color: hsl(39deg, 56%, 59%);
 }
 body .App .start-button {
   overflow: hidden;
@@ -223,7 +233,7 @@ body .App .start-button {
   font-size: 2rem;
   border: 0;
   outline: 0;
-  background-color: #d1a85c;
+  background-color: hsl(39deg, 56%, 59%);
   cursor: pointer;
   font-family: "Pixel";
   text-transform: uppercase;
@@ -241,14 +251,14 @@ body .App .start-button::after {
   width: 100%;
   height: 1rem;
   rotate: -60deg;
-  background-color: #d1a85c;
+  background-color: hsl(39deg, 56%, 59%);
   mix-blend-mode: overlay;
   transform: translateY(-450%);
   transition: all ease 0.3s;
 }
 body .App .start-button:hover {
   transform: scale(0.9);
-  box-shadow: 0 0 0 0.25rem #c22751, 0 0 0 0.5rem #2a2a37;
+  box-shadow: 0 0 0 0.25rem hsl(344deg, 67%, 46%), 0 0 0 0.5rem hsl(240deg, 13%, 19%);
 }
 body .App .start-button:hover::after {
   transform: translateY(550%);
@@ -276,7 +286,7 @@ body .App .start-section .start .logo-container img {
 body .App .rule-section .rule-title {
   top: 48vh;
   left: 40vw;
-  text-shadow: -0.15rem 0.15rem #d1a85c, -0.3rem 0.3rem #c22751;
+  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem hsl(344deg, 67%, 46%);
 }
 body .App .rule-section .rule-content {
   height: 24rem;
@@ -315,7 +325,7 @@ body .App .board-section .champion-section .board-section-container {
   transform: translate(0, -50%);
 }
 body .App .board-section .champion-section .board-section-container .champion-title {
-  text-shadow: -0.15rem 0.15rem #d1a85c, -0.3rem 0.3rem #c22751;
+  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem hsl(344deg, 67%, 46%);
 }
 body .App .board-section .champion-section .board-section-container .champion-content {
   max-width: 250px;
@@ -332,7 +342,7 @@ body .App .board-section .champion-section .board-section-container .champion-co
      object-fit: cover;
 }
 body .App .board-section .champion-section .board-section-container .champion-content .champions-card .random-button-card {
-  background-color: #d1a85c;
+  background-color: hsl(39deg, 56%, 59%);
 }
 body .App .board-section .champion-section .board-section-container .champion-content .champions-card .random-button-card:hover {
   transform: scale(1.1);
@@ -357,7 +367,7 @@ body .App .footer a {
   transition: all 0.15s ease-out;
 }
 body .App .footer a:hover {
-  color: #d1a85c;
+  color: hsl(39deg, 56%, 59%);
 }
 body .App .footer .footer-wrapper {
   width: 60vw;
@@ -367,7 +377,7 @@ body .App .footer .footer-wrapper {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: #2a2a37;
+  color: hsl(240deg, 13%, 19%);
   /* filter: drop-shadow(.2rem .25rem rgb(0,0,0,.1)); */
 }
 body .App .footer .footer-wrapper .social-link-container {
@@ -402,13 +412,14 @@ body .App .footer .footer-wrapper .footer-link-wrapper .footer-link-container li
 #view {
   position: absolute;
   z-index: -1;
+  filter: drop-shadow(0rem 0.75rem 0 rgba(0, 0, 0, 0.3));
 }
 
 .loading-screen {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: #2a2a37;
+  background: hsl(240deg, 13%, 19%);
   width: 100vw;
   height: 400vh;
   z-index: 10000;
@@ -453,31 +464,106 @@ body .App .footer .footer-wrapper .footer-link-wrapper .footer-link-container li
 }
 .section-title {
   overflow: hidden;
-  width: 100vw;
-  height: 100vh;
-  z-index: 50;
+  pointer-events: none;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: linear-gradient(130deg, rgba(42, 42, 55, 0.9) 20%, rgb(58, 58, 80) 100%);
-  color: #f1ede9;
-  font-family: NewRodin;
-  line-height: 1;
-  font-weight: 600;
-  font-size: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  mix-blend-mode: multiply;
-  -webkit-backdrop-filter: blur(0.5rem) grayscale(1);
-          backdrop-filter: blur(0.5rem) grayscale(1);
-  transition: all ease-in-out 0.5s;
+  padding: 2rem;
+  width: 100vw;
+  height: 100vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  background: transparent;
+  color: hsl(196deg, 61%, 51%);
+  font-family: Pixel;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 4rem;
+  mix-blend-mode: normal;
+  z-index: 50;
+  transition: opacity 0.3s ease-out;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+.section-title.show {
+  opacity: 1;
+  -webkit-animation: title-in ease-in-out forwards;
+          animation: title-in ease-in-out forwards;
+  -webkit-animation-duration: 0s;
+          animation-duration: 0s;
 }
 .section-title.hide {
-  font-size: 12rem;
-  top: 50%;
-  height: 0;
-  -webkit-backdrop-filter: blur(0rem);
-          backdrop-filter: blur(0rem);
+  opacity: 1;
+  -webkit-animation: title-out ease-in-out forwards;
+          animation: title-out ease-in-out forwards;
+  -webkit-animation-duration: 0s;
+          animation-duration: 0s;
+}
+.section-title h3 {
+  text-shadow: -1px 0 #f1ede9, 0px -1px #f1ede9, 1px 0 #f1ede9, 0px 1px #f1ede9, -3px 0 #f1ede9, 0px -3px #f1ede9, 3px 0 #f1ede9, 0px 3px #f1ede9;
+  filter: drop-shadow(-4px 4px hsl(344deg, 67%, 46%));
+  width: 28rem;
+  text-align: center;
+}
+.section-title h3 span {
+  text-overflow: clip;
+}
+
+@-webkit-keyframes title-in {
+  0% {
+    opacity: 0;
+    background: transparent;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes title-in {
+  0% {
+    opacity: 0;
+    background: transparent;
+  }
+  100% {
+    transform: translate(-50%, -50%);
+  }
+}
+@-webkit-keyframes title-out {
+  0% {
+    width: 100vw;
+    height: 100vh;
+  }
+  100% {
+    opacity: 0;
+    background: transparent;
+  }
+}
+@keyframes title-out {
+  0% {
+    width: 100vw;
+    height: 100vh;
+  }
+  100% {
+    opacity: 0;
+    background: transparent;
+  }
+}
+@-webkit-keyframes toYellow {
+  0% {
+    background: inherit;
+  }
+  100% {
+    background: hsl(39deg, 56%, 59%);
+  }
+}
+@keyframes toYellow {
+  0% {
+    background: inherit;
+  }
+  100% {
+    background: hsl(39deg, 56%, 59%);
+  }
 }/*# sourceMappingURL=App.css.map */

@@ -14,7 +14,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 
 const App = () => {
-  const [scrollPos, setScrollPos] = useState(window.screenY)
+  const [scrollPos, setScrollPos] = useState(window.scrollY)
   const [visible, setVisible] = useState(true)
   const [loading, setLoading] = useState(true)
   const [stopAnimation, setStopAnimation] = useState(false)
@@ -26,11 +26,11 @@ const App = () => {
     if (window.scrollY >= 150) {
       if (scrollPos >= window.scrollY) {
         setVisible(true)
-        //setStopAnimation(true)
+        setStopAnimation(true)
       }
       else {
         setVisible(false)
-        //setStopAnimation(false)
+        setStopAnimation(false)
       }
     }
     setScrollPos(window.scrollY)

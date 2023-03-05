@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from '../images/CODERS_extended_logo.svg'
 
-function StartSection() {
+function StartSection(props, ref) {
     return (
-        <header className="start-section fullscreen-section h-screen">
+        <div ref={ref} data-background='#2a2a37' className="start-section fullscreen-section h-screen">
             <div className="start-wrapper">
                 <div className="start text-center flex flex-col justify-around rounded-3xl drop-shadow-lg">
                     <div className='logo-container'>
@@ -16,8 +16,8 @@ function StartSection() {
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     )
 }
 
-export default StartSection;
+export default React.forwardRef(StartSection);
