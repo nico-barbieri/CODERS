@@ -10,6 +10,7 @@ import CollectionAndChampions from "../components/Section3"
 import useCompareScrollOffset from "../hooks/useCompareScrollOffset"
 
 const Home = ({stopAnimation}) => {
+
     const Section0 = useRef(null)
     const Section1 = useRef(null)
     const Section2 = useRef(null)

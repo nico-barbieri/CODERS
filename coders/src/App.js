@@ -12,6 +12,7 @@ import FullscreenSection from './components/FullscreenSection'
 //PAGES
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 const App = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY)
@@ -70,8 +71,9 @@ const App = () => {
       <Header show={visible} handleClick={handleClick}/>
       <ToTop top={visible} />
       <Routes>
-        <Route path="/" element={loading ? <Loading /> : <Home stopAnimation={stopAnimation}/>} />
-        <Route path='login' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
+        <Route path="/home" element={loading ? <Loading /> : <Home stopAnimation={stopAnimation}/>} />
+        <Route path='/' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
+        <Route path='/signup' element={loading ? <Loading /> : <FullscreenSection><Signup /></FullscreenSection>} />
       </Routes>
       <Footer />
     </div>
