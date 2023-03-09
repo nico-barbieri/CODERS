@@ -33,6 +33,7 @@ export const Quiz = () => {
         setShowResult(false)
     }
     return (
+        <div className="wrapper-quiz" >
         <div className="app">
             {showResult?(<QuizResult score={score} CorrectAns={CorrectAns} handlePlayAgain={handlePlayAgain}/>) : (  <>
             <div className="question-section">
@@ -59,12 +60,12 @@ export const Quiz = () => {
                 }) }
             
             <div className="actions">
-                <button onClick={handlePlayAgain}>Quit</button>
-                <button disabled={!clicked} onClick={handleNextOption}>Next</button>
+                <button className="quit" onClick={handlePlayAgain}>Quit</button>
+                <button className="next" disabled={!clicked} onClick={handleNextOption}>Next</button>
             </div> 
             </div>
             </>) }
-          
+        </div>
         </div>
     )
 }

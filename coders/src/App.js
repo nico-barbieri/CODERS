@@ -12,6 +12,7 @@ import FullscreenSection from './components/FullscreenSection'
 //PAGES
 import Home from './pages/Home';
 import Login from './pages/Login';
+import { QuizGame } from './pages/QuizGame';
 
 const App = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY)
@@ -72,6 +73,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={loading ? <Loading /> : <Home stopAnimation={stopAnimation}/>} />
         <Route path='login' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
+        <Route path='quiz' element={<QuizGame/>} />
       </Routes>
       <Footer />
     </div>
