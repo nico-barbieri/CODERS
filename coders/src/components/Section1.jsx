@@ -20,7 +20,7 @@ function WhoAreCoders(props, ref) {
         {
             id: 3,
             title: 'THE CHOSEN ONE',
-            text: <p>you are the first prototype of CODERS ever created, a really really cheap and basic model, you dunno even how you survived the war, it's time for you to be the greatest of them all, and to become the most powerful android on the planet!!!!</p>,
+            text: <p>You are the first prototype of CODERS ever created, a really really cheap and basic model, you dunno even how you survived the war, it's time for you to be the greatest of them all, and to become the most powerful android on the planet!!!!</p>,
         },
     ]
 
