@@ -11,7 +11,7 @@ function StartSection(props, ref) {
                     </div>
                     <div>
                         <a href='./game/game.html'>
-                            <button className= "text-6xl p-7 start-button ">Start</button>
+                            <button className= "text-6xl p-7 start-button">Start</button>
                         </a>
                     </div>
                 </div>
