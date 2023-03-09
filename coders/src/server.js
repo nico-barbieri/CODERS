@@ -2,6 +2,7 @@ const express = require('express');
 const collection = require('./mongo');
 const cors = require('cors');
 const app = express();
+const PORT = 5000
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -51,6 +52,6 @@ app.post('/signup', async(req, res) => {
     }
 })
 
-app.listen(5000, () => {
-    console.log('backend connected')
+app.listen(PORT, () => {
+    console.log(`backend connected to port${PORT}`)
 })

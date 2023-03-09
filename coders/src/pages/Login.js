@@ -50,8 +50,6 @@ function Login() {
             setEmail(e.target.value);
           }}
           placeholder="Email"
-          name=""
-          id=""
         />
         <input
           type="password"

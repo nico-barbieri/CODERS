@@ -22,7 +22,8 @@ function Signup() {
                     alert('user already exists')
                 }
                 else if(res.data ==='notexist'){
-                    history('/home',{state:{id:email}})
+                    history('/home',{state:{id:email}});
+                    console.log('utente creato')
                 }
             })
             .catch(err => {
@@ -52,8 +53,6 @@ function Signup() {
             setPassword(e.target.value);
           }}
           placeholder="Password"
-          name=""
-          id=""
         />
         <input type="submit" onClick={submit} placeholder="invia" / >
         <br />

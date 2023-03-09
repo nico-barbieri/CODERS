@@ -1,6 +1,6 @@
 const mongoose=require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/test", {useUnifiedTopology: true, useNewUrlParser: true})
+mongoose.connect("mongodb+srv://coder:coder-123@coders.e0b5gtc.mongodb.net/main?retryWrites=true&w=majority")
 .then(()=>{
     console.log('mongoose connected');
 })
@@ -19,6 +19,6 @@ const logInSchema=new mongoose.Schema({
     }
 })
 
-const collection = new mongoose.model('collection',logInSchema)
+const collection = new mongoose.model('loginCollections',logInSchema)
 
 module.exports = collection
