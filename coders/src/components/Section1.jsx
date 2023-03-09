@@ -9,22 +9,18 @@ function WhoAreCoders(props, ref) {
     const content = [
         {
             id: 1,
-            title: 'parte storia 1',
-            text: <p style={{textAlign: 'start'}}>Move player pressing WASD or arrows on your keyboard.
-                <br/>
-                <br/>Press Shift to move faster.
-                <br/>
-                <br/>Press SPACE to interact with objects and characters.</p>,
+            title: 'THE BEGINNING',
+            text: <p style={{textAlign: 'start'}}>Long time ago, inside the CODERS Corporation S.p.A, a great mad scientist decided to create an army of dangerous androis called CODERS!! </p>,
         },
         {
             id: 2,
-            title: 'parte storia 2',
-            text: <p>The game is a TBS (turn based strategy), where your robot fights against a foe's one with brutal attacks! Every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! </p>,
+            title: 'THE GREATEST CODING WAR EVER MADE',
+            text: <p>One day, during a machine revolt, the CODERS conquered the building thanks to their unbelievable cybernmetic powers called CHIPz, the roboctic-developers era had begun!!</p>,
         },
         {
             id: 3,
-            title: 'parte storia 3',
-            text: <p>Gain points and get stronger collecting special chips and rare characters from the shop</p>,
+            title: 'THE CHOSEN ONE',
+            text: <p>you are the first prototype of CODERS ever created, a really really cheap and basic model, you dunno even how you survived the war, it's time for you to be the greatest of them all, and to become the most powerful android on the planet!!!!</p>,
         },
     ]
 
