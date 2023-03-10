@@ -47,7 +47,7 @@ const App = () => {
 
   }, [location])
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', handleScroll);
 
@@ -56,7 +56,7 @@ const App = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [scrollPos]); */
+  }, [scrollPos]);
 
   const handleClick = () => {
     setStopAnimation(true)
@@ -69,34 +69,37 @@ const App = () => {
 
   return (
     <div className="App">
+        <Header show={visible} handleClick={handleClick} />
+        <ToTop top={visible} />
       <Routes>
         <Route path="/" element={
-          loading 
-          ? <Loading /> 
-          : <>
-            <Header show={visible} handleClick={handleClick}/>
-            <ToTop top={visible} />
-            <Home stopAnimation={stopAnimation}/>
-            <Footer />
+          loading
+            ? <Loading />
+            : <>
+              {/* <Header show={visible} handleClick={handleClick} />
+              <ToTop top={visible} /> */}
+              <Home stopAnimation={stopAnimation} />
+              {/* <Footer /> */}
             </>
         } />
         <Route path='login' element={
           loading
-          ? <Loading /> 
-          : <>
-            <Header show={visible} handleClick={handleClick}/>
-            <ToTop top={visible} />
-            <FullscreenSection>
-              <Login />
-            </FullscreenSection>
-            <Footer />
+            ? <Loading />
+            : <>
+              {/* <Header show={visible} handleClick={handleClick} />
+              <ToTop top={visible} /> */}
+              <FullscreenSection>
+                <Login />
+              </FullscreenSection>
+              {/* <Footer /> */}
             </>
         } />
         <Route path='start' element={
           <Game />
         } />
-        <Route path='quiz' element={<QuizGame/>} />
+        <Route path='quiz' element={<QuizGame />} />
       </Routes>
+      <Footer />
     </div>
   );
 

@@ -1,4 +1,6 @@
-
+.wrapper-quiz * {
+  transition: all .15s ease-in-out;
+}
 .wrapper-quiz {
   background-color: #7cc6fe;
   display: flex;
@@ -67,15 +69,15 @@
   background-color: #2f922f;
 }
 
-button:hover {
+.wrapper-quiz button:hover {
   background-color: #555e7d;
 }
 
-button:focus {
+.wrapper-quiz button:focus {
   outline: none;
 }
 
-button svg {
+.wrapper-quiz button svg {
   margin-right: 5px;
 }
 .actions {
