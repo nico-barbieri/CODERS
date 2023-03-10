@@ -21,7 +21,7 @@ function Signup() {
           if (res.data === "exist") {
             alert("user already exists");
           } else if (res.data === "notexist") {
-            history("/home", { state: { id: email } });
+            history("/", { state: { id: email } });
             console.log("utente creato");
           }
         })
