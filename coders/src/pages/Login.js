@@ -41,33 +41,34 @@ function Login() {
 
 
   return (
-    <>
+    <div className="login-wrapper">
     <h1>Login</h1>
-      <form action="POST">
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-        />
-        <input
-          type="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Password"
-          name=""
-          id=""
-        />
-        <button type="submit" onClick={submit} >invia</button>
-        <br />
-        <Link to={"/"}>HOME</Link>
-        <p>or</p>
-        <Link to="/signup">Signup Page</Link>
+      <form className="login-form" action="POST">
+        <div className="inputs">
+          <input
+            type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="Email"
+          />
+          <input
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="Password"
+            name=""
+            id=""
+          />
+        </div>
+        <button type="submit" onClick={submit} >login</button>
+        <div className="links">
+          <Link to={"/"}>HOME</Link>
+          <Link to="/signup">First time?</Link>
+        </div>
       </form>
-      <p></p>
-    </>
+    </div>
   );
 }
 

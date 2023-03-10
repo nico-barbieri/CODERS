@@ -53,7 +53,7 @@ function Header({show, handleClick}) {
                     <li onMouseEnter={handleHover}><a href="#rule" onClick={handleClick} >Controls<br/>& Rules</a></li>
                     <li onMouseEnter={handleHover}><a href="#board" onClick={handleClick} >Collection<br/>& Champions</a></li>
                     <li onMouseEnter={handleHover}>
-                        <Link to={'/'}>Login</Link>
+                        <Link to={'/login'}>Login</Link>
                     </li>
                 </ul>
             </div>

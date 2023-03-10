@@ -34,35 +34,36 @@ function Signup() {
     }
   };
   return (
-    <>
+    <div className="signup-wrapper">
       <h1>Signup</h1>
-      <form action="POST" onSubmit={submit}>
-        <input
-          type="email"
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Email"
-          name=""
-          id=""
-        />
-        <input
-          type="password"
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Password"
-        />
+      <form className="signup-form" action="POST" onSubmit={submit}>
+        <div className="inputs">
+          <input
+            type="email"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="Email"
+            name=""
+            id=""
+          />
+          <input
+            type="password"
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="Password"
+          />
+        </div>
         <button type="submit" onClick={submit}>
-          invia
+          Signup
         </button>
-        <br />
-        <Link to={"/"}>HOME</Link>
-        <p>or</p>
-        <Link to="/">Login Page</Link>
+        <div className="links">
+          <Link to={"/"}>HOME</Link>
+          <Link to="/login">Already registered?</Link>
+        </div>
       </form>
-      <p></p>
-    </>
+    </div>
   );
 }
 
