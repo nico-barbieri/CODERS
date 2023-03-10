@@ -3,6 +3,15 @@ const randomPick = (array) => {
     return array[Math.floor(Math.random()*array.length)];
 }
 
+export const getCollision = async (directory, layerName = 'collisions') => {
+    const response = await fetch(directory);
+    const data = await response.json();
+    const collisionLayer = data.layers.filter((layer) => {
+        return layer.name == layerName;
+    })
+    return collisionLayer[0].data;
+}
+
 /**
  * 
  * @param {object} stage an object which must contain two "Background", a background map and a foreground map

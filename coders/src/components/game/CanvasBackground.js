@@ -1,4 +1,5 @@
-import { getCollision } from "./data/collisions.mjs";
+
+import { getCollision } from "../../../public/game/data/collisions.mjs";
 import { Stage, Background, Sprite, Boundary } from "./utilities/gameClasses.js";
 import { keys, setPressed, unsetPressed } from "./utilities/keys.js";
 

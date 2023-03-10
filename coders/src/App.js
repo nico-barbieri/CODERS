@@ -12,6 +12,7 @@ import FullscreenSection from './components/FullscreenSection'
 //PAGES
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Game from './pages/Game';
 
 const App = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY)
@@ -45,7 +46,7 @@ const App = () => {
 
   }, [location])
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', handleScroll);
 
@@ -54,7 +55,7 @@ const App = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [scrollPos]);
+  }, [scrollPos]); */
 
   const handleClick = () => {
     setStopAnimation(true)
@@ -67,13 +68,33 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header show={visible} handleClick={handleClick}/>
-      <ToTop top={visible} />
       <Routes>
-        <Route path="/" element={loading ? <Loading /> : <Home stopAnimation={stopAnimation}/>} />
-        <Route path='login' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
+        <Route path="/" element={
+          loading 
+          ? <Loading /> 
+          : <>
+            <Header show={visible} handleClick={handleClick}/>
+            <ToTop top={visible} />
+            <Home stopAnimation={stopAnimation}/>
+            <Footer />
+            </>
+        } />
+        <Route path='login' element={
+          loading
+          ? <Loading /> 
+          : <>
+            <Header show={visible} handleClick={handleClick}/>
+            <ToTop top={visible} />
+            <FullscreenSection>
+              <Login />
+            </FullscreenSection>
+            <Footer />
+            </>
+        } />
+        <Route path='start' element={
+          <Game />
+        } />
       </Routes>
-      <Footer />
     </div>
   );
 

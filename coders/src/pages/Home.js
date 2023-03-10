@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react"
 
-import Canvas from "../components/utilities/Canvas"
-
 //SECTIONS
 import StartSection from "../components/Section0"
 import WhoAreCoders from "../components/Section1"
