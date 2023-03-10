@@ -101,6 +101,7 @@ p {
 
 //HOME
 body {
+ overflow: hidden;
   width: 100vw;
   overflow: scroll;
   overflow-x: hidden;
@@ -116,6 +117,7 @@ body {
   color: $secondary;
   background: $primary;
   transition: background .3s ease-in-out;
+  &:has(.wrapper-quiz){overflow: hidden;}
 
   /* &:has(.section-title.show){
     animation: toYellow .3s ease forwards;

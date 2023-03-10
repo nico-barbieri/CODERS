@@ -46,7 +46,7 @@ function ControlsAndRules(props, ref) {
         {
             id: 2,
             title: 'a tbs game',
-            text: <p>The game is a TBS (turn based strategy), where your robot fights against a foe's one with brutal attacks!, every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! </p>,
+            text: <p>The game is a TBS (turn based strategy), where your robot fights against a foe's one with brutal attacks! Every turn you can use some enhancements called "CHIP", that allows your robot to perform some special actions, like double damage attacks or status shots! only the toughest will survive!! </p>,
         },
         {
             id: 3,

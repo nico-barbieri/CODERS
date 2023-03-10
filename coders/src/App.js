@@ -12,6 +12,7 @@ import FullscreenSection from './components/FullscreenSection'
 //PAGES
 import Home from './pages/Home';
 import Login from './pages/Login';
+import { QuizGame } from './pages/QuizGame';
 import Game from './pages/Game';
 
 const App = () => {
@@ -94,6 +95,7 @@ const App = () => {
         <Route path='start' element={
           <Game />
         } />
+        <Route path='quiz' element={<QuizGame/>} />
       </Routes>
     </div>
   );
