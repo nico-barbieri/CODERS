@@ -14,6 +14,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import { QuizGame } from './pages/QuizGame';
 import Game from './pages/Game';
+import Signup from './pages/Signup';
 
 const App = () => {
   const [scrollPos, setScrollPos] = useState(window.scrollY)
@@ -82,18 +83,8 @@ const App = () => {
               {/* <Footer /> */}
             </>
         } />
-        <Route path='login' element={
-          loading
-            ? <Loading />
-            : <>
-              {/* <Header show={visible} handleClick={handleClick} />
-              <ToTop top={visible} /> */}
-              <FullscreenSection>
-                <Login />
-              </FullscreenSection>
-              {/* <Footer /> */}
-            </>
-        } />
+        <Route path='/login' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
+        <Route path='/signup' element={loading ? <Loading /> : <FullscreenSection><Signup /></FullscreenSection>} />
         <Route path='start' element={
           <Game />
         } />

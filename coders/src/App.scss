@@ -500,6 +500,130 @@ body {
   }
 }
 
+//only temporary
+body:has(.login-wrapper), body:has(.signup-wrapper) {
+  overflow: hidden;
+}
+.login-wrapper, .signup-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 18rem;
+  width: 40rem;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(130deg,
+          rgb(42, 42, 55, .8) 20%,
+          rgba(42, 42, 55, .8) 49.95%,
+          rgba(42, 42, 55, 1) 50%,
+          rgba(58, 58, 80, 1) 100%);
+  backdrop-filter: invert(1) hue-rotate(180deg);
+  box-shadow: 0px 8px 15px -3px rgba(0,0,0,0.1),0px 10px 40px 0px rgba(0,0,0,0.1);
+  transform: translateY(1rem);
+
+  h1 {
+    color: $tertiary;
+    line-height: 1;
+    font-size: 6rem;
+    text-shadow: 
+    -2px 0 $secondary, 0px -2px $secondary, 2px 0 $secondary, 0px 2px $secondary,
+    -5px 0 $secondary, 0px -5px $secondary, 5px 0 $secondary, 0px 5px $secondary;
+    filter: drop-shadow(-0px 0px $accent-strong); 
+    margin-bottom: 1rem;
+    transition: all ease .3s;
+  }
+
+  &:has(*:focus) h1{
+    filter: drop-shadow(-5px 5px $accent-strong); 
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    .inputs {
+      display: flex;
+      gap: .5rem;
+      input {
+        padding: .5rem;
+        font-size: 1rem;
+        font-family: NewRodin;
+        color: $secondary;
+        outline: transparent;
+        background: transparent;
+        box-shadow: inset 0 0 0 .125rem $secondary;
+        transition: all ease .15s;
+        &::placeholder {
+          color: $secondary;
+          opacity: .8;
+        }
+        &:hover {
+          box-shadow: inset 0 0 0 .25rem $secondary;
+        }
+        &:focus-visible {
+          //background: $tertiary;
+          box-shadow: inset 0 0 0 1.5rem $secondary;
+          color: $primary;
+        }
+      }
+
+    }
+
+    button {
+      overflow: hidden;
+      padding: .5rem;
+      text-align: center;
+      font-size: 1rem;
+      border: 0;
+      outline: 0;
+      background-color: $accent-soft;
+
+      cursor: pointer;
+      font-family: NewRodin;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      will-change: scale;
+      outline: 0rem;
+      transition: all ease 0.3s;
+      box-shadow: inset 0 0 0 .125rem $secondary;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 1rem;
+        rotate: -60deg;
+        background-color: $accent-soft;
+        mix-blend-mode: overlay;
+        transform: translateY(-1500%);
+        transition: all ease .3s;
+      }
+
+      &:hover {
+        box-shadow: inset 0 0 0 .25rem $secondary;
+        //box-shadow: inset 0 0 0 .25rem $accent-strong, inset 0 0 0 .5rem $primary;
+
+        &::after {
+          transform: translateY(1500%);
+        }
+      }
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      font-family: NewRodin;
+      transition: all .3s ease;
+      *:hover {
+        color: $accent-soft;
+      }
+    }
+
+  }
+}
+
+
 //CANVA
 #view {
   position: absolute;
