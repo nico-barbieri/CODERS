@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import './App.css'
 
@@ -17,17 +17,16 @@ import Game from './pages/Game';
 import Signup from './pages/Signup';
 
 const App = () => {
-  const [scrollPos, setScrollPos] = useState(window.scrollY)
   const [visible, setVisible] = useState(true)
   const [loading, setLoading] = useState(true)
   const [stopAnimation, setStopAnimation] = useState(false)
-
+  
   let location = useLocation();
-
+  
+  const scrollPos = useRef(window.scrollY)
   const handleScroll = () => {
-    //console.log(window.scrollY);
     if (window.scrollY >= 150) {
-      if (scrollPos >= window.scrollY) {
+      if (scrollPos.current >= window.scrollY) {
         setVisible(true)
         setStopAnimation(true)
       }
@@ -36,7 +35,7 @@ const App = () => {
         setStopAnimation(false)
       }
     }
-    setScrollPos(window.scrollY)
+    scrollPos.current = window.scrollY;
   }
 
   useEffect(() => {
@@ -66,8 +65,6 @@ const App = () => {
     }, 1500);
   }
 
-
-
   return (
     <div className="App">
         <Header show={visible} handleClick={handleClick} />
@@ -77,18 +74,15 @@ const App = () => {
           loading
             ? <Loading />
             : <>
-              {/* <Header show={visible} handleClick={handleClick} />
-              <ToTop top={visible} /> */}
               <Home stopAnimation={stopAnimation} />
-              {/* <Footer /> */}
             </>
         } />
         <Route path='/login' element={loading ? <Loading /> : <FullscreenSection><Login /></FullscreenSection>} />
         <Route path='/signup' element={loading ? <Loading /> : <FullscreenSection><Signup /></FullscreenSection>} />
-        <Route path='start' element={
+        <Route path='/start' element={loading ? <Loading /> :
           <Game />
         } />
-        <Route path='quiz' element={<QuizGame />} />
+        <Route path='/quiz' element={<QuizGame />} />
       </Routes>
       <Footer />
     </div>

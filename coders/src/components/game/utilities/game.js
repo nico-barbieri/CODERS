@@ -3,14 +3,25 @@ const randomPick = (array) => {
     return array[Math.floor(Math.random()*array.length)];
 }
 
-export const getCollision = async (directory, layerName = 'collisions') => {
+/* export const getCollision = async (directory, layerName = 'collisions') => {
+    console.log(directory);
     const response = await fetch(directory);
+    console.log(response.json());
     const data = await response.json();
     const collisionLayer = data.layers.filter((layer) => {
         return layer.name == layerName;
     })
     return collisionLayer[0].data;
+} */
+
+export const getCollision = async (data, layerName = 'collisions') => {
+    const collisionLayer = data.layers.filter((layer) => {
+        return layer.name == layerName;
+    })
+    return collisionLayer[0].data;
 }
+
+
 
 /**
  * 

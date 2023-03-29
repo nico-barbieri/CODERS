@@ -1,3 +1,4 @@
+import React from "react";
 import GameView from "./GameView"
 
 //import all images
@@ -12,6 +13,9 @@ import walk_up from './data/res/img/sprites/player_0_walk_up.png';
 import walk_down from './data/res/img/sprites/player_0_walk_down.png';
 import walk_right from './data/res/img/sprites/player_0_walk_right.png';
 import walk_left from './data/res/img/sprites/player_0_walk_left.png';
+
+//import collisions
+import collisions from './data/page_bkg_collisions.json'
 
 
 const GameBG = ({numberOfSections=1, bg}) => {
@@ -38,10 +42,10 @@ const GameBG = ({numberOfSections=1, bg}) => {
             },
         }, 
         collisionsSources: {
-            obstacles: './data/page_bkg_collisions.json',
+            obstacles: collisions,
             events: '',
         },
-        numberOfSections: 3, 
+        numberOfSections: numberOfSections, 
     }
     return <>
         <GameView settings={settings} /* ref={canvasRef} */
@@ -49,4 +53,4 @@ const GameBG = ({numberOfSections=1, bg}) => {
     </>
 }
 
-export default GameBG;
+export default React.memo(GameBG);

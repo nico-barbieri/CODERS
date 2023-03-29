@@ -24,7 +24,7 @@ export class View {
 
     init(){
         console.log('Hello coder!');
-        this.c.fillStyle = 'rgb(58,58,80)';
+        this.c.fillStyle = 'transparent';
         this.c.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 }

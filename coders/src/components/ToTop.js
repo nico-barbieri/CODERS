@@ -1,4 +1,4 @@
-// import { useState } from 'react';
+import React, { memo } from 'react';
 import {ReactComponent as ArrowUp} from '../images/arrow_up.svg'
 
 
@@ -44,4 +44,4 @@ const ToTop = ({top}) => {
  </>
 }
 
-export default ToTop
+export default React.memo(ToTop);

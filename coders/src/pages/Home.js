@@ -6,6 +6,7 @@ import WhoAreCoders from "../components/Section1"
 import ControlsAndRules from "../components/Section2"
 import CollectionAndChampions from "../components/Section3"
 import useCompareScrollOffset from "../hooks/useCompareScrollOffset"
+import Game from "./Game"
 
 const Home = ({stopAnimation}) => {
 
@@ -19,13 +20,13 @@ const Home = ({stopAnimation}) => {
     const [visible2] = useCompareScrollOffset(Section2, '.section-title')
     const [visible3] = useCompareScrollOffset(Section3, '.section-title')
 
-    return <div className="body-wrapper">
-        {/* <Canvas /> */}
+    return <>
+        <Game />
         <StartSection ref={Section0} titleVisible={visible0} stopAnimation={stopAnimation}/>
         <WhoAreCoders ref={Section1} titleVisible={visible1} stopAnimation={stopAnimation}/>
         <ControlsAndRules ref={Section2} titleVisible={visible2} stopAnimation={stopAnimation}/>
         <CollectionAndChampions ref={Section3} titleVisible={visible3} stopAnimation={stopAnimation}/>
-    </div>
+    </>
 }
 
 export default Home;

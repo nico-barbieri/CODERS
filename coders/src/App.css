@@ -70,7 +70,7 @@ p {
   background: hsl(39deg, 56%, 59%);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(344deg, 67%, 46%);
+  background: rgb(196, 39, 81);
 }
 
 ::-webkit-scrollbar-track {
@@ -104,7 +104,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   color: #f1ede9;
-  background: hsl(240deg, 13%, 19%);
+  background: rgb(42, 42, 55);
   transition: background 0.3s ease-in-out;
   /* &:has(.section-title.show){
     animation: toYellow .3s ease forwards;
@@ -262,7 +262,7 @@ body .App .start-button::after {
 }
 body .App .start-button:hover {
   transform: scale(0.9);
-  box-shadow: 0 0 0 0.25rem hsl(344deg, 67%, 46%), 0 0 0 0.5rem hsl(240deg, 13%, 19%);
+  box-shadow: 0 0 0 0.25rem rgb(196, 39, 81), 0 0 0 0.5rem rgb(42, 42, 55);
 }
 body .App .start-button:hover::after {
   transform: translateY(550%);
@@ -290,7 +290,7 @@ body .App .start-section .start .logo-container img {
 body .App .rule-section .rule-title {
   top: 48vh;
   left: 40vw;
-  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem hsl(344deg, 67%, 46%);
+  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem rgb(196, 39, 81);
 }
 body .App .rule-section .rule-content {
   height: 24rem;
@@ -329,7 +329,7 @@ body .App .board-section .champion-section .board-section-container {
   transform: translate(0, -50%);
 }
 body .App .board-section .champion-section .board-section-container .champion-title {
-  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem hsl(344deg, 67%, 46%);
+  text-shadow: -0.15rem 0.15rem hsl(39deg, 56%, 59%), -0.3rem 0.3rem rgb(196, 39, 81);
 }
 body .App .board-section .champion-section .board-section-container .champion-content {
   max-width: 250px;
@@ -381,7 +381,7 @@ body .App .footer .footer-wrapper {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  color: hsl(240deg, 13%, 19%);
+  color: rgb(42, 42, 55);
   /* filter: drop-shadow(.2rem .25rem rgb(0,0,0,.1)); */
 }
 body .App .footer .footer-wrapper .social-link-container {
@@ -432,16 +432,16 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   transform: translateY(1rem);
 }
 .login-wrapper h1, .signup-wrapper h1 {
-  color: hsl(196deg, 61%, 51%);
+  color: rgb(54, 166, 206);
   line-height: 1;
   font-size: 6rem;
   text-shadow: -2px 0 #f1ede9, 0px -2px #f1ede9, 2px 0 #f1ede9, 0px 2px #f1ede9, -5px 0 #f1ede9, 0px -5px #f1ede9, 5px 0 #f1ede9, 0px 5px #f1ede9;
-  filter: drop-shadow(0px 0px hsl(344deg, 67%, 46%));
+  filter: drop-shadow(0px 0px rgb(196, 39, 81));
   margin-bottom: 1rem;
   transition: all ease 0.3s;
 }
 .login-wrapper:has(*:focus) h1, .signup-wrapper:has(*:focus) h1 {
-  filter: drop-shadow(-5px 5px hsl(344deg, 67%, 46%));
+  filter: drop-shadow(-5px 5px rgb(196, 39, 81));
 }
 .login-wrapper form, .signup-wrapper form {
   display: flex;
@@ -479,7 +479,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
 }
 .login-wrapper form .inputs input:focus-visible, .signup-wrapper form .inputs input:focus-visible {
   box-shadow: inset 0 0 0 1.5rem #f1ede9;
-  color: hsl(240deg, 13%, 19%);
+  color: rgb(42, 42, 55);
 }
 .login-wrapper form button, .signup-wrapper form button {
   overflow: hidden;
@@ -527,7 +527,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   color: hsl(39deg, 56%, 59%);
 }
 
-#view {
+#view, #game-view {
   position: absolute;
   z-index: -1;
   filter: drop-shadow(0rem 0.75rem 0 rgba(0, 0, 0, 0.3));
@@ -537,7 +537,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: hsl(240deg, 13%, 19%);
+  background: rgb(42, 42, 55);
   width: 100vw;
   height: 400vh;
   z-index: 10000;
@@ -580,6 +580,10 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
     transform: translateY(6.25%);
   }
 }
+body:has(.section-title.show) {
+  overflow: hidden;
+}
+
 .section-title {
   overflow: hidden;
   pointer-events: none;
@@ -595,7 +599,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   transform: translate(-50%, -50%);
   opacity: 0;
   background: transparent;
-  color: hsl(196deg, 61%, 51%);
+  color: rgb(54, 166, 206);
   font-family: Pixel;
   line-height: 1;
   font-weight: 600;
@@ -622,7 +626,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
 }
 .section-title h3 {
   text-shadow: -1px 0 #f1ede9, 0px -1px #f1ede9, 1px 0 #f1ede9, 0px 1px #f1ede9, -3px 0 #f1ede9, 0px -3px #f1ede9, 3px 0 #f1ede9, 0px 3px #f1ede9;
-  filter: drop-shadow(-4px 4px hsl(344deg, 67%, 46%));
+  filter: drop-shadow(-4px 4px rgb(196, 39, 81));
   width: 28rem;
   text-align: center;
 }

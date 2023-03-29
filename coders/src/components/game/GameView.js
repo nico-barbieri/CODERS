@@ -114,14 +114,13 @@ const GameView = ({ settings }) => {
 
     const canvasRef = useRef(null)
 
-    console.log('loading resources...');
     const allImagesLoaded = usePreloader(ObjToArray(imagesSources));
 
     //create images
     //map
     let mapBackground = new Image();
     mapBackground.src = imagesSources.map.background;
-    let mapForeground = new Image();
+    let mapForeground = new Image(); 
     mapForeground.src = imagesSources.map.foreground;
 
     //default player
@@ -163,13 +162,11 @@ const GameView = ({ settings }) => {
 
         if (allImagesLoaded) { 
             console.log('resources loaded');
-            console.log(document.images);
 
             //set ratio after rendering. It will be important as scale factor. 
             const scaleRatio = document.body.scrollHeight / mapBackground.height;
 
             //create view (settings of canvas which will contain the game) 
-            console.log(canvasRef.current);
             const view = new View({
                 canvas: canvasRef.current,
                 //proportions depends on map. In this case, every section is 48*28 tiles
@@ -195,7 +192,7 @@ const GameView = ({ settings }) => {
                 },
                 dimensions: {
                     x: window.innerWidth,
-                    y: document.body.scrollHeight
+                    y: window.innerHeight * numberOfSections
                 },
                 proportions: 48 / (28 * numberOfSections),
                 image: mapBackground,
@@ -209,7 +206,7 @@ const GameView = ({ settings }) => {
                 },
                 dimensions: {
                     x: window.innerWidth,
-                    y: document.body.scrollHeight
+                    y: window.innerHeight * numberOfSections
                 },
                 proportions: 48 / (28 * numberOfSections),
                 image: mapForeground,
@@ -447,7 +444,7 @@ const GameView = ({ settings }) => {
             window.removeEventListener('keyup', handleKeyUp);
         }; 
   
-    }, [canvasRef, loading]);
+    }, [canvasRef, loading, allImagesLoaded]);
 
     return <>
         {err && <h1 style={{ fontSize: '2rem', padding: '1rem' }}>Something went wrong. Please reload the page.</h1>}
@@ -457,7 +454,6 @@ const GameView = ({ settings }) => {
             id="game-view"
             >
         </canvas>
-    <FullscreenSection />
     </>
 }
 

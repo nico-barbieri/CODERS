@@ -1,3 +1,5 @@
+import React, { memo } from 'react'
+
 import {ReactComponent as ShortLogo} from '../images/coders_logo_short_nobkg.svg'
 import {ReactComponent as LogoTitle} from '../images/CODERS_extended_logo-nosub.svg'
 import { PowerGlitch } from 'powerglitch';
@@ -49,9 +51,9 @@ function Header({show, handleClick}) {
                   </div>
                 </Link>
                 <ul className="header-nav flex items-center justify-around ">
-                    <li onMouseEnter={handleHover}><a href="#who-are-coders" onClick={handleClick} >Who are<br/>Coders?</a></li>
-                    <li onMouseEnter={handleHover}><a href="#rule" onClick={handleClick} >Controls<br/>& Rules</a></li>
-                    <li onMouseEnter={handleHover}><a href="#board" onClick={handleClick} >Collection<br/>& Champions</a></li>
+                    <li onMouseEnter={handleHover}><a href="/#who-are-coders" onClick={handleClick} >Who are<br/>Coders?</a></li>
+                    <li onMouseEnter={handleHover}><a href="/#rule" onClick={handleClick} >Controls<br/>& Rules</a></li>
+                    <li onMouseEnter={handleHover}><a href="/#board" onClick={handleClick} >Collection<br/>& Champions</a></li>
                     <li onMouseEnter={handleHover}>
                         <Link to={'/login'}>Login</Link>
                     </li>
@@ -61,4 +63,4 @@ function Header({show, handleClick}) {
     )
 }
 
-export default Header;
+export default React.memo(Header);

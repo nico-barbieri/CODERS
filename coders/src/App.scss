@@ -625,7 +625,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
 
 
 //CANVA
-#view {
+#view, #game-view {
   position: absolute;
   z-index: -1;
   filter: drop-shadow(0rem .75rem 0 rgba(0 ,0 ,0 , .3));
@@ -682,6 +682,9 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   }
 }
 
+body:has(.section-title.show) {
+  overflow: hidden;
+}
 
 .section-title {
   overflow: hidden;

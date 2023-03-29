@@ -37,6 +37,8 @@ const usePreloader = (urls) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    console.log('loading resources...');
+
     const promises = urls.map((url) => {
       return new Promise((resolve, reject) => {
         const img = new Image();
