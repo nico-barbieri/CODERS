@@ -581,7 +581,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
   }
 }
 body:has(.section-title.show) {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .section-title {

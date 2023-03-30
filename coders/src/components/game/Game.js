@@ -57,7 +57,7 @@ export const animate = ({players, playerSettings, frameCount = 0, keys, stage, b
     //at first render, set a random position for every player
     if (frameCount === 0) {
         let uniques = new Set (players.map(player => player.position))
-        while (players.length < uniques.size) {
+        while (players.length > uniques.size) {
             console.log('repositioning players...');
             players.forEach(player =>{
                 player.position = randomPick(walkableTiles)
@@ -226,16 +226,16 @@ export const animate = ({players, playerSettings, frameCount = 0, keys, stage, b
     //MOVING CONTROLLED PLAYER
     if (controlled) {
         //STILL 
-        if (controlled.lastkey == 'right') controlled.image = controlled.sprites.right
-        else if (controlled.lastkey == 'left') controlled.image = controlled.sprites.left
-        else if (controlled.lastkey == 'up') controlled.image = controlled.sprites.up
-        else if (controlled.lastkey == 'down') controlled.image = controlled.sprites.down
+        if (keys.lastkey == 'right') controlled.image = controlled.sprites.right
+        else if (keys.lastkey == 'left') controlled.image = controlled.sprites.left
+        else if (keys.lastkey == 'up') controlled.image = controlled.sprites.up
+        else if (keys.lastkey == 'down') controlled.image = controlled.sprites.down
     }
 
     //Reset obstacle
     controlled.obstacle = false;
 
-    if (keys.right.pressed && (controlled.lastkey == 'right' || controlled.lastkey == '')) {
+    if (keys.right.pressed && keys.lastkey == 'right') {
         controlled.lastkey = 'right';
         controlled.moving = true;
         controlled.image = controlled.sprites.walk.right;
@@ -261,7 +261,7 @@ export const animate = ({players, playerSettings, frameCount = 0, keys, stage, b
         if (!controlled.obstacle){
                 controlled.position.x += playerSpeed;
         }
-    } else if (keys.left.pressed && (controlled.lastkey == 'left' || controlled.lastkey == '')) {
+    } else if (keys.left.pressed && keys.lastkey == 'left') {
         controlled.lastkey = 'left';
         controlled.moving = true;
         controlled.image = controlled.sprites.walk.left;
@@ -288,7 +288,7 @@ export const animate = ({players, playerSettings, frameCount = 0, keys, stage, b
         if (!controlled.obstacle) {
                 controlled.position.x -= playerSpeed;
         }
-    } else if (keys.up.pressed && (controlled.lastkey == 'up' || controlled.lastkey == '')) {
+    } else if (keys.up.pressed && keys.lastkey == 'up') {
         controlled.lastkey = 'up';
         controlled.moving = true;
         controlled.image = controlled.sprites.walk.up;
@@ -315,7 +315,7 @@ export const animate = ({players, playerSettings, frameCount = 0, keys, stage, b
         if (!controlled.obstacle) {
                 controlled.position.y -= playerSpeed;
         }
-    } else if (keys.down.pressed && (controlled.lastkey == 'down' || controlled.lastkey == '')) {
+    } else if (keys.down.pressed && keys.lastkey == 'down') {
         controlled.lastkey = 'down';
         controlled.moving = true;
         controlled.image = controlled.sprites.walk.down;

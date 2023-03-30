@@ -14,7 +14,7 @@ const randomPick = (array) => {
     return collisionLayer[0].data;
 } */
 
-export const getCollision = async (data, layerName = 'collisions') => {
+export const getCollision = (data, layerName = 'collisions') => {
     const collisionLayer = data.layers.filter((layer) => {
         return layer.name == layerName;
     })
