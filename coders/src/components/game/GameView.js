@@ -2,23 +2,32 @@ import React, {
   useRef,
   useEffect,
   useState,
-  useMemo,
   useCallback,
+  useContext,
 } from "react";
 import Loading from "../Loading";
-import { animate } from "./Game";
-import { getCollision } from "./utilities/game";
-import { Boundary, Sprite, Stage, View } from "./utilities/gameClasses";
+import { getCollision } from "./Game";
+import { animate } from "./animate";
+import { Boundary, Sprite, Stage, View, Event } from "./utilities/gameClasses";
 import usePreloader from "../../hooks/usePreloader";
 import { ObjToArray } from "../utilities";
+import { GameContext } from "./utilities/GameContext";
+import Battle from "./card-game/Battle";
+import { Link } from "react-router-dom";
 
 /**
  *
  * @param {object} settings must contain a settings object as a parameter. (more infos about settings will be added)
  * @returns the game within a canvas element
  */
-const GameView = ({ settings }) => {
-  const { numberOfSections = 3, imagesSources, collisionsSources } = settings;
+const GameView = () => {
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
+  const [openBattle, setOpenBattle] = useState(false)
+
+  const { context, setContext } = useContext(GameContext);
+
+  const { numberOfSections = 3, imagesSources, collisionsSources } = context;
 
   //scale of pixel art (400%)
   const globalScale = 4;
@@ -40,48 +49,49 @@ const GameView = ({ settings }) => {
     shift: {
       pressed: false,
     },
+    space: {
+      interactionIsOn: false,
+      pressed: false,
+    },
     lastkey: "",
   });
-
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState(null);
 
   const handleKeyDown = (e) => {
     switch (e.key) {
       case "d":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           right: { pressed: true },
           lastkey: "right",
-        });
+        };
         break;
       case "a":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           left: { pressed: true },
           lastkey: "left",
-        });
+        };
         break;
       case "w":
-        keys.current = ({ 
-            ...keys.current, 
-            up: { pressed: true }, 
-            lastkey: "up" 
-        });
+        keys.current = {
+          ...keys.current,
+          up: { pressed: true },
+          lastkey: "up",
+        };
         break;
       case "s":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           down: { pressed: true },
           lastkey: "down",
-        });
+        };
         break;
       case "Shift":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           shift: { pressed: true },
           lastkey: "shift",
-        });
+        };
         break;
       default:
         break;
@@ -90,40 +100,40 @@ const GameView = ({ settings }) => {
 
   const handleKeyUp = (e) => {
     switch (e.key) {
-        case "d":
-        keys.current = ({
+      case "d":
+        keys.current = {
           ...keys.current,
           right: { pressed: false },
           lastkey: "right",
-        });
+        };
         break;
       case "a":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           left: { pressed: false },
           lastkey: "left",
-        });
+        };
         break;
       case "w":
-        keys.current = ({ 
-            ...keys.current, 
-            up: { pressed: false }, 
-            lastkey: "up" 
-        });
+        keys.current = {
+          ...keys.current,
+          up: { pressed: false },
+          lastkey: "up",
+        };
         break;
       case "s":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           down: { pressed: false },
           lastkey: "down",
-        });
+        };
         break;
       case "Shift":
-        keys.current = ({
+        keys.current = {
           ...keys.current,
           shift: { pressed: false },
           lastkey: "shift",
-        });
+        };
         break;
       default:
         break;
@@ -132,7 +142,7 @@ const GameView = ({ settings }) => {
 
   const canvasRef = useRef(null);
 
-  const [scaleRatio, setScaleRatio] = useState();
+  const [scaleRatio, setScaleRatio] = useState(1);
 
   const allImagesLoaded = useCallback(usePreloader(ObjToArray(imagesSources)));
 
@@ -141,11 +151,12 @@ const GameView = ({ settings }) => {
   let mapBackground = new Image();
   mapBackground.src = imagesSources.map.background;
   mapBackground.onload = () => {
-    setScaleRatio(
+    /* setScaleRatio(
       (window.innerHeight * numberOfSections) / mapBackground.height
-    );
+    ); */
     console.log("Scale ratio: " + scaleRatio);
-  };
+};
+
   let mapForeground = new Image();
   mapForeground.src = imagesSources.map.foreground;
 
@@ -175,65 +186,60 @@ const GameView = ({ settings }) => {
 
   useEffect(() => {
     setLoading(true);
+    setContext((context) => ({
+      ...context,
+      isLoading: true,
+    }));
+    
     let animationFrameId;
-
-    /* //check if something went wrong (just to test)
-        setTimeout(() => {
-            if (loading) setErr(true);
-        }, 10000); */
-
-    /*check if every image is loaded. 
-        After checking, create various elements, set loading to false
-        and start game with render().*/
 
     if (allImagesLoaded && scaleRatio) {
       console.log("resources loaded");
+      setContext((context) => ({
+        ...context,
+        isLoading: false,
+      }));
 
       //create view (settings of canvas which will contain the game)
       const view = new View({
         canvas: canvasRef.current,
         //proportions depends on map. In this case, every section is 48*28 tiles
-        proportions: 48 / (28 * numberOfSections),
+        proportions: context.proportions,
       });
 
       //init view
-      view.setDimensions(window.innerWidth, window.innerHeight * numberOfSections);
+      view.setDimensions(
+        window.innerWidth,
+        window.innerHeight * numberOfSections
+      );
       view.init();
 
       //offset of the map
-      let offset = {
-        x:
-          view.canvas.width / 2 -
-          (window.innerHeight * 48) / (28) / 2,
-        y: 0,
-      };
+      let offset = /* context.gameSettings.offset */ {
+        x: -620,
+        y: -3700,
+    };
 
       //create stage background and foreground. These are images which will be drawn in canvas
-      const stageBackground = new Stage({
+      const stageBackground = new Sprite({
         view: view,
         position: {
           x: offset.x,
-          y: offset.y,
+          y: offset.y, 
         },
-        dimensions: {
-          x: window.innerWidth,
-          y: window.innerHeight * numberOfSections,
-        },
-        proportions: 48 / (28 * numberOfSections),
+        dimensions: context.gameSettings.mapDimensions,
+        proportions: context.proportions,
         image: mapBackground,
       });
 
-      const stageForeground = new Stage({
+      const stageForeground = new Sprite({
         view: view,
         position: {
           x: offset.x,
           y: offset.y,
         },
-        dimensions: {
-          x: window.innerWidth,
-          y: window.innerHeight * numberOfSections,
-        },
-        proportions: 48 / (28 * numberOfSections),
+        dimensions: context.gameSettings.mapDimensions,
+        proportions: context.proportions,
         image: mapForeground,
       });
 
@@ -247,17 +253,28 @@ const GameView = ({ settings }) => {
         "collisions"
       );
 
+      const eventsRAW = getCollision(
+        collisionsSources.obstacles,
+        "events"
+      );
+
       const collisions = {
         obstacles: [],
+        events: [],
       };
 
-      // (48 is the number of tiles of map width)
-      for (let i = 0; i < obstaclesRAW.length; i += 48) {
-        collisions.obstacles.push(obstaclesRAW.slice(i, 48 + i));
+      // (90 is the number of tiles of map width)
+      for (let i = 0; i < obstaclesRAW.length; i += 90) {
+        collisions.obstacles.push(obstaclesRAW.slice(i, 90 + i));
+      }
+
+      for (let i = 0; i < eventsRAW.length; i += 90) {
+        collisions.events.push(eventsRAW.slice(i, 90 + i));
       }
 
       //create boundaries/walkables array and populate it
       let boundaries = [];
+      let events = [];
       let walkableTiles = [];
 
       const setBoundaries = () => {
@@ -373,6 +390,62 @@ const GameView = ({ settings }) => {
         });
       };
 
+      const setEvents = () => {
+        collisions.events.forEach((row, i) => {
+          row.forEach((symbol, j) => {
+            if (symbol !== 0) {
+              const code = collisions.events[0][0];
+              switch (symbol) {
+                case code:
+                  events.push(
+                    new Event({
+                      type: 'battle',
+                      image: defaultPlayerDown,
+                      frames: {
+                                max: 6,
+                                hold: 7,
+                              }, 
+                      scaleRatio,
+                      globalScale,
+                      view: view,
+                      position: {
+                        x: 16 * globalScale * scaleRatio * j + offset.x,
+                        y: 16 * globalScale * scaleRatio * i + offset.y,
+                      },
+                      scale: {
+                        x: 3,
+                        y: 3,
+                      }
+                    })
+                  );
+                  break;
+
+                case code + 1:
+                  
+                  break;
+
+                case code + 2:
+          
+                  break;
+                case code + 3:
+                  
+                  break;
+                case code + 4:
+                  
+                  break;
+
+                default:
+                  
+                  break;
+              }
+            }
+          });
+        });
+      };
+
+      setBoundaries();
+      setEvents();
+
       //default configuration of player (and NPCs)
       const defaultPlayerConfig = {
         view: view,
@@ -399,7 +472,7 @@ const GameView = ({ settings }) => {
           },
         },
         shadow: {
-          active: false,
+          active: true,
           src: playerShadow,
         },
         position: {
@@ -407,113 +480,164 @@ const GameView = ({ settings }) => {
           y: view.canvas.height / 2 - 64,
         },
         obstacle: false,
-        controlled: false
+        controlled: false,
       };
 
       //creation of controlled player: sprites should be set according to user settings
       const controlled = new Sprite({
         ...defaultPlayerConfig,
-        image: defaultPlayerWalkingRight,
+        image: defaultPlayerDown,
         controlled: true,
       });
 
-      //creation of various "NPCs"
-      const player1 = new Sprite({ ...defaultPlayerConfig });
-
-      const player2 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerRight,
-      });
-
-      const player3 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerLeft,
-      });
-
-      const player4 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerUp,
-      });
-
-      const player5 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerWalkingDown,
-      });
-
-      const player6 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerWalkingUp,
-      });
-
-      const player7 = new Sprite({
-        ...defaultPlayerConfig,
-        image: defaultPlayerWalkingLeft,
-      });
-
-      const players = [
-        player1,
-        player2,
-        player3,
-        player4,
-        player5,
-        player6,
-        player7,
-        controlled,
-      ];
+      //create array of movables object
+      const movables = [stageBackground, ...boundaries, ...events, stageForeground]
 
       const stage = {
         stageBackground: stageBackground,
         stageForeground: stageForeground,
       };
 
+      const handleBattle = () => {
+        setOpenBattle(true)
+        console.log('starting battle...')
+      }
       const settings = {
+        player: controlled,
         frameCount: 0,
-        players,
         playerSettings: {
           speed: {
-            walk: 1,
-            run: 2,
+            walk: 5,
+            run: 10,
           },
         },
         keys,
         stage,
         boundaries,
+        events,
         walkableTiles,
-      }; 
+        movables, 
+        actions: {
+          handleBattle,
+        }
+      };
 
+      let frameCount = 0;
       const render = () => {
-        animate({ ...settings, frameCount: settings.frameCount++, keys: keys.current });
+          animate({ ...settings, frameCount: frameCount, keys: keys.current});
+          frameCount++;
         animationFrameId = window.requestAnimationFrame(render);
       };
 
-      setBoundaries();
-
       setLoading(false);
+
       render();
     } else {
       setLoading(true);
     }
 
     //EVENT LISTENERS
-    window.addEventListener("keydown", handleKeyDown);
+    /* window.addEventListener("keydown", handleKeyDown);
 
-    window.addEventListener("keyup", handleKeyUp);
+    window.addEventListener("keyup", handleKeyUp); */
+
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && !e.repeat) {
+        // Toggle the active value only if space is pressed for the first time
+        keys.current.space.interactionIsOn = !keys.current.space.interactionIsOn;
+        console.log('interaction is open:' + keys.current.space.interactionIsOn);
+      }
+      switch (e.key) {
+          case 'd':
+          case 'ArrowRight':
+              keys.current.right.pressed = true;
+              keys.current.lastkey = 'right';
+              break;
+          case 'a':
+          case 'ArrowLeft':
+              keys.current.left.pressed = true;
+              keys.current.lastkey = 'left';
+              break;
+          case 'w':
+          case 'ArrowUp':
+              keys.current.up.pressed = true;
+              keys.current.lastkey = 'up';
+              break;
+          case 's':
+          case 'ArrowDown':
+              keys.current.down.pressed = true;
+              keys.current.lastkey = 'down';
+              break;
+          case 'Shift':
+              keys.current.shift.pressed = true;
+              break;
+          case ' ':
+              keys.current.space.pressed = true;
+              keys.current.lastkey = 'space';
+              break;
+          default: console.log(e);
+              keys.current.lastkey = '';
+              break;
+      }
+  });
+  
+  window.addEventListener('keyup', (e) => {
+    /* if (e.code === 'Space' && keys.current.space.interactionIsOn) {
+      // Toggle the active value on key-up only if it was active before
+      keys.current.space.interactionIsOn = !keys.current.space.interactionIsOn;
+    } */
+      switch (e.key) {
+          case 'd':
+          case 'ArrowRight':
+              keys.current.right.pressed = false;
+              break;
+          case 'a':
+          case 'ArrowLeft':
+              keys.current.left.pressed = false;
+              break;
+          case 'w':
+          case 'ArrowUp':
+              keys.current.up.pressed = false;
+              break;
+          case 's':
+          case 'ArrowDown':
+              keys.current.down.pressed = false;
+              break;
+          case 'Shift':
+              keys.current.shift.pressed = false;
+              break;
+          case ' ':
+            keys.current.space.pressed = false;
+            break;
+          default:
+              break;
+      }
+  });
 
     return () => {
       window.cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
+      /* window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp); */
     };
   }, [canvasRef, allImagesLoaded]);
 
+
+  const handleEndBattle = () => {
+    console.log('ending battle...');
+    setOpenBattle(false)
+  }
+
+
   return (
     <>
+    <Link to={'/'} className={'return'}>RETURN</Link>
       {err && (
         <h1 style={{ fontSize: "2rem", padding: "1rem" }}>
           Something went wrong. Please reload the page.
         </h1>
       )}
-      {loading && !err && <Loading />}
+      {(loading || context.isLoading) && !err && <Loading />}
+      {openBattle && <Battle onEnd={handleEndBattle}/>}
       <canvas
         ref={(el) => {
           canvasRef.current = el;

@@ -536,6 +536,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
 .loading-screen {
   top: 0;
   left: 0;
+  position: absolute;
   overflow: hidden;
   background: rgb(42, 42, 55);
   width: 100vw;
@@ -688,4 +689,15 @@ body:has(.section-title.show) {
   100% {
     background: hsl(39deg, 56%, 59%);
   }
+}
+.return {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  color: black;
+  opacity: 0.5;
+  transition: all 0.3s ease-in-out;
+}
+.return:hover {
+  opacity: 1;
 }/*# sourceMappingURL=App.css.map */

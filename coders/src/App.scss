@@ -635,6 +635,7 @@ body:has(.login-wrapper), body:has(.signup-wrapper) {
 .loading-screen {
   top: 0;
   left: 0;
+  position: absolute;
   overflow: hidden;
   background: $primary;
   width: 100vw;
@@ -780,5 +781,17 @@ body:has(.section-title.show) {
   }
   100% {
     background: $accent-soft;
+  }
+}
+
+.return {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  color: black;
+  opacity: .5;
+  transition: all .3s ease-in-out;
+  &:hover {
+    opacity: 1;
   }
 }

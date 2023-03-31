@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../images/CODERS_extended_logo.svg'
 
 function StartSection(props, ref) {
@@ -10,9 +11,9 @@ function StartSection(props, ref) {
                         {<img src={logo} alt="Logo" />}
                     </div>
                     <div>
-                        <a href='./game/game.html'>
+                        <Link to={"/start"}>
                             <button className= "text-6xl p-7 start-button">Start</button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

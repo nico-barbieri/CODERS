@@ -1,9 +1,16 @@
-import GameBG from "../components/game/GameBG";
+import GameView from "../components/game/GameView";
+import GameViewBackground from "../components/game/GameViewBackground";
 
-const Game = () =>{
-    return <>
-    <GameBG numberOfSections={4.5}/>
-    </>
+const Game = ({isBackground = false}) =>{
+    if (isBackground) {
+        return <>
+        <GameViewBackground />
+        </>
+    } else {
+        return <>
+        <GameView />
+        </>
+    }
 }
 
 export default Game;
