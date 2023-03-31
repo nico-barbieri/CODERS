@@ -377,10 +377,22 @@ body {
 
     //SECTION 3
     .board-section {
+      width: 100%;
+
+      .board-section-container {
+        width: 100%;
+      }
 
       //CARDS 
       .champion-section {
-        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        margin: 2rem 12vw;
+        padding: 2rem;
+        background-color: $accent-strong;
+        box-shadow: inset 0 0 0 1rem $accent-soft;
 
         .board-section-container {
           width: 100%;
@@ -397,13 +409,19 @@ body {
             margin: 0 auto;
 
             .champions-card {
+              display: flex;
+              height: 100%;
+              width: 100%;
               .sprite-wrapper {
-                width: 250px;
-                height: 300px;
+                padding: 1rem;
+                width: 10rem;
+                height: 15rem;
+                flex: 1;
+                overflow: hidden;
 
                 .sprite-img {
-                  width: 250px;
-                  height: 300px;
+                  width: 100%;
+                  height: 100%;
                   object-fit: cover;
                 }
               }
@@ -428,10 +446,38 @@ body {
 
       //TOP PLAYER
       .classification-section {
-        width: 30%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        width: 50%;
+        margin: 2rem 12vw;
+        padding: 2rem;
+        background-color: $accent-strong;
+        box-shadow: inset 0 0 0 1rem $accent-soft;
+
+        .board {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+          font-size: 2rem;
+        }
+
 
         .top-player>ul>* {
-          border-bottom: 1px solid black;
+          padding: 1rem;
+          border-bottom: .25rem solid $secondary;
+          counter-increment: number;
+          display: flex;
+          justify-content: space-between;
+          &:nth-child(-n+3) {
+            background-color: $accent-soft;
+          }
+          &:first-child {
+            background-color: $tertiary;
+          }
+          &::before {
+            content: counter(number);
+          }
         }
       }
     }
@@ -795,3 +841,4 @@ body:has(.section-title.show) {
     opacity: 1;
   }
 }
+

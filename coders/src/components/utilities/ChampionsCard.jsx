@@ -30,7 +30,7 @@ export function ChampionsCard() {
         <div className='champions-card border-2 border-black mb-2 mx'>
             {
                 sprite && (
-                    <div key={sprite.id}>
+                    <div className='sprite-wrapper' key={sprite.id}>
                         <div>
                             <h4>{sprite.name}</h4>
                         </div>
